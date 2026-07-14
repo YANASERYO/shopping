@@ -1,3 +1,5 @@
+//LoginUser.javaなら3項目OK、一旦.bakさせて貰います
+
 package com.example.demo.model;
 
 public class Member {
@@ -9,6 +11,7 @@ public class Member {
     public Member() {
     }
 
+    	
     public int getAccountId() {
         return accountId;
     }
