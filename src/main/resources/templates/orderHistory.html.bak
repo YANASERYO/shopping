@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<title>注文履歴</title>
+
+<link rel="stylesheet"
+      th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<main class="container">
+
+    <h1>注文履歴</h1>
+
+    <p class="lead">
+        これまでに注文した内容を確認できます。
+    </p>
+
+    <p th:if="${#lists.isEmpty(orderList)}"
+       class="message">
+        まだ注文履歴はありません。
+    </p>
+
+    <section th:each="order : ${orderList}"
+             class="order-card">
+
+        <h2>
+            注文番号：
+            <span th:text="${order.orderId}"></span>
+        </h2>
+
+        <p>
+            <strong>購入日：</strong>
+
+            <span th:text="${#temporals.format(
+                    order.orderDate,
+                    'yyyy年MM月dd日 HH:mm')}">
+            </span>
+        </p>
+
+        <h3>注文者情報</h3>
+
+        <dl class="customer-info">
+
+            <dt>氏名</dt>
+            <dd th:text="${order.customerName}"></dd>
+
+            <dt>郵便番号</dt>
+            <dd th:text="${order.postalCode}"></dd>
+
+            <dt>住所</dt>
+            <dd th:text="${order.address}"></dd>
+
+            <dt>電話番号</dt>
+            <dd th:text="${order.phone}"></dd>
+
+            <dt>メールアドレス</dt>
+            <dd th:text="${order.email}"></dd>
+
+            <dt>支払方法</dt>
+            <dd th:text="${order.paymentMethod}"></dd>
+
+        </dl>
+
+        <h3>購入した商品</h3>
+
+        <div th:each="detail : ${order.details}"
+             class="order-detail">
+
+            <p class="product-name"
+               th:text="${detail.productName}">
+            </p>
+
+            <p>
+                価格：
+                <span th:text="${detail.price}"></span>
+                円
+            </p>
+
+            <p>
+                数量：
+                <span th:text="${detail.quantity}"></span>
+                個
+            </p>
+
+            <p>
+                小計：
+                <strong th:text="${detail.subtotal}"></strong>
+                円
+            </p>
+
+        </div>
+
+        <p class="total-price">
+            合計：
+            <span th:text="${order.totalPrice}"></span>
+            円
+        </p>
+
+    </section>
+
+    <a th:href="@{/menu}"
+       class="button">
+        メニューへ戻る
+    </a>
+
+</main>
+
+</body>
+</html>
