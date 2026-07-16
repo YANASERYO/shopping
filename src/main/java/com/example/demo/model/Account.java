@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class Account {
-
+//	AccountIdはStringに変更
     private int account_id;
     private String account_name;
     private String account_pass;
     private int postal_code;
     private String account_address;
     private String account_phone;
+//    誕生日はLocalDateです
     private String birthday;
     private String email;
     private String payment;

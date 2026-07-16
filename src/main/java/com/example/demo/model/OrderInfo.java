@@ -16,7 +16,7 @@ public class OrderInfo {
     private String shippingPayment;
     private LocalDateTime shoppingDate;
     private Integer shoppingTotalPrice;
-    private List<ここに入力> details = new ArrayList<>();
+    private List<Detail> details = new ArrayList<>();
 
     public Integer getShoppingId() {return shoppingId;}
     public void setShoppingId(Integer shoppingId) {this.shoppingId = shoppingId;}
@@ -48,6 +48,6 @@ public class OrderInfo {
     public Integer getShoppingTotalPrice() {return shoppingTotalPrice;}
     public void setShoppingTotalPrice(Integer shoppingTotalPrice) {this.shoppingTotalPrice = shoppingTotalPrice;}
 
-    public List<ここに入力> getDetails() {return details;}
-    public void setDetails(List<ここに入力> details) {this.details = details;}
+    public List<Detail> getDetails() {return details;}
+    public void setDetails(List<Detail> details) {this.details = details;}
 }
