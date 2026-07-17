@@ -14,7 +14,7 @@ public class AccountDAO {
     	
     
     	try(Connection conn = DriverManager.getConnection(
-    		"jdbc:postgresql://localhost:5432/accounts","postgres","psql")){
+    		"jdbc:postgresql://localhost:5432/shopping","postgres","psql")){
     		String sql ="SELECT * FROM accounts "
     		           + "WHERE account_name = ? "
     	               + "AND account_pass = ?";
@@ -28,10 +28,8 @@ public class AccountDAO {
     	ResultSet rs = pStmt.executeQuery();
     	
     	if(rs.next()) {
-    		account = new Account();
-    		
-
-    		account.setAccountId(rs.getInt("account_id"));
+    		account = new Account();		
+    		account.setAccountId(rs.getString("account_id"));
     	    account.setAccountName(rs.getString("account_name"));
     	    account.setAccountPass(rs.getString("account_pass"));
     	    account.setPostalCode(rs.getString("postal_code"));
