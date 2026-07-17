@@ -9,8 +9,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.demo.model.Product;
 
+@Repository
 public class ProductDAO {
 	private static final String URL =
 			"jdbc:postgresql://localhost:5432/shopping";

@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//Lombokを使用するのはOKですが
+//adminがis_admin等で勝手に読むようになるので覚えてください
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -8,8 +8,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.demo.model.Cart;
 
+@Repository
 public class CartDAO {
 	private static final String URL =
 			"jbdc:postgresql://localhost:5432/shopping";
@@ -45,7 +48,7 @@ public class CartDAO {
 					cart.setProductId(rs.getInt("product_id"));
 					cart.setCartQuantity(rs.getInt("cart_quantity"));
 					
-					Timestamp createAt =
+					Timestamp createdAt =
 							rs.getTimestamp("cart_created_at");
 					if(createdAt != null) {
 						cart.setCartCreatedAt(createdAt.toLocalDateTime());
