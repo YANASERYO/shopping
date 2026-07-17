@@ -1,4 +1,5 @@
 package com.example.demo.model;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,10 +14,10 @@ public class Account {
 	private int accountId;
 	private String accountName;
 	private String accountPass;
-	private int postalCode;
+	private String postalCode;
 	private String accountAddress;
 	private String accountPhone;
-	private String birthday;
+	private LocalDate birthday;
 	private String email;
 	private String payment;
 	private boolean admin;
