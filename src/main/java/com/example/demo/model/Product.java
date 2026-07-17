@@ -16,6 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product implements Serializable {
+
 	private int productId; // 商品ID
 	private String productName; // 商品名
 	private int productPrice; // 値段
@@ -23,7 +24,7 @@ public class Product implements Serializable {
 	private String productCategory; // カテゴリー
 	private String productImgPath; // 画像
 	private String productDescription; // 商品説明文
-	private LocalDateTime productCreatedAt; // 登録日時
+	private LocalDateTime productCreatedAt; // 登録日
 	private LocalDateTime productUpdateAt; // 更新日時
 	private boolean productActive; // 販売状態	
 
