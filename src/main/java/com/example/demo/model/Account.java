@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Account {
 
 	private int accountId;
@@ -20,4 +21,5 @@ public class Account {
 	private String payment;
 	private boolean admin;
 	
+
 }
