@@ -32,13 +32,13 @@ public class AccountDAO {
     		
 //    	AccountJavaのフィールドをスネークケースで記述しているからエラー吐いてる
 //    	郵便番号はStringに変更してください（Intだと0123456とかだと0が消える）
+
     		account.setAccountId(rs.getInt("account_id"));
     	    account.setAccountName(rs.getString("account_name"));
     	    account.setAccountPass(rs.getString("account_pass"));
     	    account.setPostalCode(rs.getInt("postal_code"));
     	    account.setAccountAddress(rs.getString("account_address"));
     	    account.setAccountPhone(rs.getString("account_phone"));
-//    	誕生日はLocalDate
     	    account.setBirthday(rs.getString("birthday"));
     	    account.setEmail(rs.getString("email"));
     	    account.setPayment(rs.getString("payment"));
@@ -56,8 +56,9 @@ public class AccountDAO {
     public boolean deleteAccount(String accountId) {
     	
     	boolean result = false;
-    	
+
 //  DB接続はshoppingに接続してください
+
     	try(Connection conn = DriverManager.getConnection(
     			"jdbc:postgresql://localhost:5432/accounts","postgres","psql")){
     		String sql = "DELETE FROM accounts "
