@@ -7,18 +7,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Account {
 
-    private int account_id;
-    private String account_name;
-    private String account_pass;
-    private int postal_code;
-    private String account_address;
-    private String account_phone;
-    private String birthday;
-    private String email;
-    private String payment;
-    private boolean admin;
-
+	private int accountId;
+	private String accountName;
+	private String accountPass;
+	private int postalCode;
+	private String accountAddress;
+	private String accountPhone;
+	private String birthday;
+	private String email;
+	private String payment;
+	private boolean admin;
+	
 }
