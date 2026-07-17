@@ -7,28 +7,31 @@ import java.sql.ResultSet;
 
 import com.example.demo.model.Account;
 
+//accountIdとaccountNameで読むようになってるので修正しました（柳瀬）
+
 //ログイン処理
 public class AccountDAO {
-    public Account login(String accountName,String accountPass) {
+    public Account login(String accountId,String accountPass) {
     	Account account = null;
     	
     
     	try(Connection conn = DriverManager.getConnection(
     		"jdbc:postgresql://localhost:5432/shopping","postgres","psql")){
     		String sql ="SELECT * FROM accounts "
-    		           + "WHERE account_name = ? "
+    		           + "WHERE account_id = ? "
     	               + "AND account_pass = ?";
     
     
     	PreparedStatement pStmt = conn.prepareStatement(sql);
     	
-    	pStmt.setString(1, accountName);
+    	pStmt.setString(1, accountId);
     	pStmt.setString(2, accountPass);
     
     	ResultSet rs = pStmt.executeQuery();
     	
     	if(rs.next()) {
-    		account = new Account();		
+    		account = new Account();
+    		
     		account.setAccountId(rs.getString("account_id"));
     	    account.setAccountName(rs.getString("account_name"));
     	    account.setAccountPass(rs.getString("account_pass"));
