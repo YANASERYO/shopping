@@ -11,6 +11,8 @@ import com.example.demo.util.DBUtil;
 
 //accountNameとaccountPassでログインすることになってたので修正しました（柳瀬）
 
+//accountIdとaccountNameで読むようになってるので修正しました（柳瀬）
+
 //ログイン処理
 public class AccountDAO {
     public Account login(String accountId,String accountPass) {
