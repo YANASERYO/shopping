@@ -65,15 +65,7 @@ public class ProductDAO {
 	}
 	
 	return productList;
-	
-	
-		
-		
-		
-		
-				 
-				 
-		
+
 	}
 
 }

@@ -8,11 +8,11 @@ public class DBUtil {
 	private static final String URL =
 			"jdbc:postgresql://localhost:5432/shopping";
 	private static final String USER = "postgres";
-	private static final String PASSWORD = "postgres";
+	private static final String PASSWORD = "psql";
 	
 	private DBUtil() {}
 
-	private static Connection getConnection() throws SQLException {
+	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(URL,USER,PASSWORD);
 	}
 }
