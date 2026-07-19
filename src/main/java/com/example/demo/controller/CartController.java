@@ -1,0 +1,38 @@
+package com.example.demo.controller;
+
+import jakarta.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.model.Account;
+import com.example.demo.service.CartService;
+
+@Controller
+public class CartController {
+	
+	private final CartService cartService;
+	
+	public CartController(CartService cartService) {
+		this.cartService = cartService;
+		}
+	
+	// 商品をカートに追加
+	@PostMapping("/cart/add")
+	public String addCart(
+			@RequestParam("productId") int productId,
+			@RequestParam("quantity") int quantity,
+			HttpSession session) {
+		
+		Account account = (Account) session.getAttribute("account");
+		
+		// 未ログインの場合
+		if (account == null) {
+			return "redirect:/login";
+			}
+		
+		cartService.addCart(account.getAccountId(),productId,quantity);
+			return "redirect:/Products";
+	}
+}
