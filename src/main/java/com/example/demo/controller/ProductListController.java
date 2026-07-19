@@ -22,7 +22,7 @@ public class ProductListController {
 	}
 	
 //	@GetMapping("/ここをURLに！！")
-	@GetMapping("/ProductLIstServlet")
+	@GetMapping("/products")
 	public String showProductList(HttpSession session, Model model) {
 		// ログインチェック
 		//	ログイン処理ではloginMenberはaccountで作成してました、DBの規則性に準じてaccountにします
@@ -30,7 +30,7 @@ public class ProductListController {
 			return "redirect:/login";
 		}
 		
-		List<Product> productList = productDAO.getAllProducts(); // shoppingDAOクラスで定義した全商品を取得する処理
+		List<Product> productList = productDAO.getAllProducts(); // productDAOクラスで定義した全商品を取得する処理
 		
 		model.addAttribute("productList", productList);
 		
