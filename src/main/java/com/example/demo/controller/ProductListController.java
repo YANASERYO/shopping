@@ -1,33 +1,38 @@
 package com.example.demo.controller;
 
+
 import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
 
-import org .springframework.stereotype.Controller;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.demo.dao.ShoppingDAO;
+import com.example.demo.dao.ProductDAO;
 import com.example.demo.model.Product;
+
+
 @Controller
 public class ProductListController {
-	private final ShoppingDAO shoppingDAO;
+	private final ProductDAO productDAO;
 	
-	public ProductListController(ShoppingDAO shoppingDAO) {
-		this.shoppingDAO = shoppingDAO;
+	public ProductListController(ProductDAO productDAO) {
+		this.productDAO = productDAO;
 	}
 	
-	@GetMapping("/ProductLIstServlet")
+//	@GetMapping("/ここをURLに！！")
+	@GetMapping("/products")
 	public String showProductList(HttpSession session, Model model) {
 		// ログインチェック
-		if (session.getAttribute("loginMember") == null) {
+		//	ログイン処理ではloginMenberはaccountで作成してました、DBの規則性に準じてaccountにします
+		if (session.getAttribute("account") == null) {
 			return "redirect:/login";
 		}
 		
-		List<Product> productList = shoppingDAO.getAllProducts(); // shoppingDAOクラスで定義した全商品を取得する処理
+		List<Product> productList = productDAO.getAllProducts(); // productDAOクラスで定義した全商品を取得する処理
 		
-		model.addAttribute("productLIst", productList);
+		model.addAttribute("productList", productList);
 		
 		return "product-list"; // product-list.jspへ遷移
 	}
