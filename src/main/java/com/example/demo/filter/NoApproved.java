@@ -47,7 +47,6 @@ public class NoApproved implements Filter {
 			return;
 		}
 		
-		chain.doFilter(request,response);
 	}
 	
 	

@@ -14,36 +14,25 @@ import com.example.demo.model.OrderInfo;
 
 @Controller
 public class OrderInfoController {
-
-    private final OrderInfoDAO orderInfoDAO;
-
-    public OrderInfoController(
-            OrderInfoDAO orderInfoDAO) {
-
-        this.orderInfoDAO = orderInfoDAO;
-    }
-
-    @GetMapping("/orders")
-    public String showOrderHistory(
-            HttpSession session,
-            Model model) {
-
-        Account account =
-                (Account) session.getAttribute("account");
-
-        // 未ログインの場合
-        if (account == null) {
-            return "redirect:/login";
-        }
-
-        List<OrderInfo> orderInfoList =
-                orderInfoDAO.findByAccountId(
-                        account.getAccountId());
-
-        model.addAttribute(
-                "orderInfoList",
-                orderInfoList);
-
-        return "order-info";
-    }
+	private final OrderInfoDAO orderInfoDAO;
+    
+	public OrderInfoController(OrderInfoDAO orderInfoDAO) {
+		this.orderInfoDAO = orderInfoDAO;
+		}
+	
+	@GetMapping("/orders")
+	public String showOrderHistory(HttpSession session, Model model) {
+		Account account = (Account) session.getAttribute("account");
+		
+		// 未ログインの場合
+		if (account == null) {
+			return "redirect:/login";
+			}
+		
+		List<OrderInfo> orderInfoList = orderInfoDAO.findByAccountId(account.getAccountId());
+		
+		model.addAttribute("orderInfoList",orderInfoList);
+		
+		return "order-info";
+	}
 }
