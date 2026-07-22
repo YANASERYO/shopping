@@ -38,10 +38,10 @@ public class LoginController {
 	
 	session.setAttribute("account", account); 
 	
-//	accountsのadminがtrueならadminのmenuに
+//	accountsのadminがtrueならAdminControllerに
 //	Lombok使ってるのでisAdmin
 	if(account.isAdmin() == true) {
-		return"admin/admin-menu";
+		return"redirect:/admin";
 	}
 	
 	return "menu";
