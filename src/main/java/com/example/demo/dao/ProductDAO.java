@@ -178,6 +178,30 @@ public class ProductDAO {
 					 }
 			 }
 		 
+		// 商品の論理削除
+		 public boolean delete(Long productId) {
+			 String sql = """
+			 		UPDATE product
+			 		SET
+			 		product_active = false,
+			 		product_update_at = CURRENT_TIMESTAMP
+			 		WHERE product_id = ?
+			 		""";
+			 
+			 try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+					 PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				 
+				 pStmt.setLong(1, productId);
+				 
+				 int count = pStmt.executeUpdate();
+				 
+				 return count > 0;
+				 
+			 } catch (SQLException e) {throw new RuntimeException(
+					 "商品の削除に失敗しました。", e);
+		 	}
+		 }
+		 
 		 	// ResultSetからProductを作成する共通処理
 		 private Product createProduct(ResultSet rs)throws SQLException {
 			 Product product = new Product();
@@ -193,6 +217,40 @@ public class ProductDAO {
 			 product.setProductUpdateAt(rs.getObject("product_update_at",LocalDateTime.class));
 			 product.setProductActive(rs.getBoolean("product_active"));
 			 return product;
-		    }
-		}
+		 }
+		 
+		// 販売中の商品一覧を取得
+		 public List<Product> getActiveProducts() {
+			 List<Product> productList = new ArrayList<>();
+			 String sql = """
+			 		SELECT
+			 		product_id,
+			 		product_name,
+			 		product_price,
+			 		product_stock,
+			 		product_category,
+			 		product_img_path,
+			 		product_description,
+			 		product_created_at,
+			 		product_update_at,
+			 		product_active
+			 		FROM product
+			 		WHERE product_active = true
+			 		ORDER BY product_id
+			 		""";
+			 try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+					 PreparedStatement pStmt = conn.prepareStatement(sql);
+					 ResultSet rs = pStmt.executeQuery()) {
+				 
+				 while (rs.next()) {Product product = createProduct(rs);
+				 productList.add(product);
+				 }
+				 
+			 } catch (SQLException e) {throw new RuntimeException(
+					 "販売中の商品一覧の取得に失敗しました。", e);
+			 }
+			 
+			 return productList;
+			 }
+		 }
 

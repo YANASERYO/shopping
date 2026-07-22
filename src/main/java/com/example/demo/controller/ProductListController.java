@@ -30,7 +30,7 @@ public class ProductListController {
 			return "redirect:/login";
 		}
 		
-		List<Product> productList = productDAO.getAllProducts(); // productDAOクラスで定義した全商品を取得する処理
+		List<Product> productList = productDAO.getActiveProducts(); // productDAOクラスで定義した全商品を取得する処理
 		
 		model.addAttribute("productList", productList);
 		

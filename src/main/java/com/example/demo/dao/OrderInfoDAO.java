@@ -45,7 +45,7 @@ public class OrderInfoDAO {
 					OrderInfo orderInfo = new OrderInfo();
 					
 					orderInfo.setShoppingId(resultSet.getInt("shopping_id"));
-					orderInfo.setShoppingUser(resultSet.getString("shoping_user"));
+					orderInfo.setShoppingUser(resultSet.getString("shopping_user"));
 					orderInfo.setShippingName(resultSet.getString("shipping_name"));
 					orderInfo.setShippingPostalCode(resultSet.getString("shipping_postal_code"));
 					orderInfo.setShippingAddress(resultSet.getString("shipping_address"));
