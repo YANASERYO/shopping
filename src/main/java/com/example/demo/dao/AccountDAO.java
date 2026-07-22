@@ -21,10 +21,11 @@ public class AccountDAO {
     
     	try(Connection conn = DriverManager.getConnection(
     		"jdbc:postgresql://localhost:5432/shopping","postgres","psql")){
-    		String sql ="SELECT * FROM accounts "
-    		           + "WHERE account_id = ? "
-    	               + "AND account_pass = ?";
-    
+    		String sql ="""
+    		        SELECT *
+    		        FROM accounts
+    		        WHERE account_id = ?
+    		        """;
     
     	PreparedStatement pStmt = conn.prepareStatement(sql);
     	

@@ -2,10 +2,12 @@ package com.example.demo.controller;
 
 import jakarta.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.demo.model.Account;
 
+@Controller
 public class ProductCreateController {
 	
 	@GetMapping("/admin/products/create")
@@ -14,7 +16,7 @@ public class ProductCreateController {
 		Account account = (Account) session.getAttribute("account");
 		
 		if(account == null) {
-			return "redirect;/login";
+			return "redirect:/login";
 		}
 		
 		if(!account.isAdmin()) {
@@ -23,5 +25,10 @@ public class ProductCreateController {
 		
 		return "admin/product-create";
 	}
+	
+//	@PostMapping("")
+//	public String createProductCreate(
+//			)
+	
 
 }
