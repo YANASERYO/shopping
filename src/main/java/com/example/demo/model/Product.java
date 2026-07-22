@@ -16,7 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product implements Serializable {
-	private int productId; // 商品ID
+	private Long productId; // 商品ID
 	private String productName; // 商品名
 	private int productPrice; // 値段
 	private int productStock; // 在庫数
