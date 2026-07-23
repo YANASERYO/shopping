@@ -36,12 +36,17 @@ public class CartController {
 			return "redirect:/login";
 			}
 		
+		// 数量が不正な場合
+		if (quantity <= 0) {
+			return "redirect:/products";
+			}
+		
 		cartService.addCart(account.getAccountId(),productId,quantity);
-			return "redirect:/Products";
+			return "redirect:/products";
 	}
 	
 	//	カート一覧表示
-	@GetMapping("/cart")
+	@GetMapping("/showCart")
 		public String showCart(HttpSession session,Model model) {
 		
 		Account account = (Account)session.getAttribute("account");
