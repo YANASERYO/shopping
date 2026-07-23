@@ -47,4 +47,14 @@ public class CartService {
 	public boolean removeCart(long cartId,String accountId) {
 		return cartDAO.delete(cartId, accountId);
 	}
+	
+	// カート内の数量変更
+	public boolean updateQuantity(long cartId, String accountId, int quantity) {
+
+	    if (quantity < 1) {
+	        return false;
+	    }
+
+	    return cartDAO.updateQuantity(cartId, accountId, quantity);
+	}
 }
