@@ -187,5 +187,27 @@ public class CartDAO {
 					e
 					);
 			}
-		}
+	}
+	
+	// 注文確定後にカートを空にする
+	public boolean deleteByAccountId(String accountId) {
+	    String sql = """
+	    			DELETE FROM cart
+	    			WHERE account_id = ?
+	    			""";
+	    try (Connection conn = DBUtil.getConnection();
+	    		PreparedStatement pStmt = conn.prepareStatement(sql)) 
+	    {
+	    	
+	    		pStmt.setString(1, accountId);
+	    		pStmt.executeUpdate();
+	    		return true;
+	    		
+	    } catch (SQLException e) {
+	    		throw new RuntimeException(
+	    		"カート情報の削除に失敗しました。",
+	    		e
+	        );
+	    }
+	}
 }

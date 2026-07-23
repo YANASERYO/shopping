@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.model.Account;
 import com.example.demo.model.Cart;
 import com.example.demo.service.CartService;
+
 @Controller
 public class CartController {
 	
@@ -46,7 +47,7 @@ public class CartController {
 	}
 	
 	//	カート一覧表示
-	@GetMapping("/showCart")
+	@GetMapping("/cart")
 		public String showCart(HttpSession session,Model model) {
 		
 		Account account = (Account)session.getAttribute("account");
@@ -80,4 +81,19 @@ public class CartController {
 		return "redirect:/cart";
 	}
 	
+	// カートから商品削除
+	@PostMapping("/cart/delete")
+	public String deleteCart(
+			@RequestParam long cartId,
+			HttpSession session) {
+		
+		Account account = (Account) session.getAttribute("account");
+		
+		if (account == null) {
+			return "redirect:/login";
+			}
+		
+		cartService.removeCart(cartId, account.getAccountId());
+		return "redirect:/cart";
+	}
 }
