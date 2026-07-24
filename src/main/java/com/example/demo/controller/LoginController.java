@@ -65,7 +65,9 @@ public class LoginController {
 	}
 	
 
-	return "redirect:/Menu";
+
+	return "redirect:/menu";
+
 
 	}
 }
