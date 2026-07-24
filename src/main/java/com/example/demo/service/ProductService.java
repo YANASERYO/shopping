@@ -35,5 +35,16 @@ public class ProductService {
 	public boolean create(Product product) {
 		return productDAO.insert(product);
 	}
+
+// 商品の論理削除
+	public boolean delete(Long productId) {
+		return productDAO.delete(productId);
+	}
 	
+// 販売中の商品一覧を取得
+	public List<Product> getActiveProducts() {
+		return productDAO.getActiveProducts();
+	}
+	
+
 }
