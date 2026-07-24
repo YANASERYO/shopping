@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dao.AccountDAO;
 import com.example.demo.model.Account;
+import com.example.demo.util.PassEncoderUtil;
+
+//処理の不足を修正
 
 //処理の不足を修正
 
@@ -16,7 +19,15 @@ import com.example.demo.model.Account;
 @Controller
 public class LoginController {
 	
+
+	private final AccountDAO accountDAO;
 	
+	public LoginController(AccountDAO accountDAO) {
+		this.accountDAO = accountDAO;
+	}
+	
+	// アカウントIDで取得し、BCryptでパスワードを照合
+
 	@GetMapping("/login")
 	public String showLogin() {
 		return "index";
@@ -28,14 +39,23 @@ public class LoginController {
             @RequestParam String accountPass,
             HttpSession session
 			) {
-	AccountDAO dao = new AccountDAO();
-	Account account = dao.login(accountId, accountPass);
+
+		
+	Account account = accountDAO.findByAccountId(accountId);
+
 	
 //	アカウントがない場合indexに返す
 	if(account == null) {
 		return "index";
 	}
 	
+
+	boolean passwordMatches = PassEncoderUtil.matches(accountPass, account.getAccountPass());
+	if (!passwordMatches) {
+		return "index";
+	}
+	
+
 	session.setAttribute("account", account); 
 	
 //	accountsのadminがtrueならAdminControllerに
@@ -44,6 +64,8 @@ public class LoginController {
 		return"redirect:/admin";
 	}
 	
-	return "menu";
+
+	return "redirect:/Menu";
+
 	}
 }

@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.demo.model.Account;
 import com.example.demo.util.DBUtil;
 
@@ -14,45 +16,105 @@ import com.example.demo.util.DBUtil;
 //accountIdとaccountNameで読むようになってるので修正しました（柳瀬）
 
 //ログイン処理
+
+
+@Repository
 public class AccountDAO {
-    public Account login(String accountId,String accountPass) {
-    	Account account = null;
-    	
-    
-    	try(Connection conn = DriverManager.getConnection(
-    		"jdbc:postgresql://localhost:5432/shopping","postgres","psql")){
-    		String sql ="SELECT * FROM accounts "
-    		           + "WHERE account_id = ? "
-    	               + "AND account_pass = ?";
-    
-    
-    	PreparedStatement pStmt = conn.prepareStatement(sql);
-    	
-    	pStmt.setString(1, accountId);
-    	pStmt.setString(2, accountPass);
-    
-    	ResultSet rs = pStmt.executeQuery();
-    	
-    	if(rs.next()) {
-    		account = new Account();
-    		
-    		account.setAccountId(rs.getString("account_id"));
-    	    account.setAccountName(rs.getString("account_name"));
-    	    account.setAccountPass(rs.getString("account_pass"));
-    	    account.setPostalCode(rs.getString("postal_code"));
-    	    account.setAccountAddress(rs.getString("account_address"));
-    	    account.setAccountPhone(rs.getString("account_phone"));
-    	    account.setBirthday(rs.getDate("birthday").toLocalDate());
-    	    account.setEmail(rs.getString("email"));
-    	    account.setPayment(rs.getString("payment"));
-    	    account.setAdmin(rs.getBoolean("admin"));
-    	    
-    	}
-    	}catch (Exception e) {
-    	    e.printStackTrace();
-    	}
-    	return account;
-    }
+	public Account findByAccountId(String accountId) {
+	    String sql = """
+	    		SELECT
+	    		account_id,
+			account_name,
+			account_pass,
+			postal_code,
+			account_address,
+			account_phone,
+			birthday,
+			email,
+			payment,
+			admin
+			FROM accounts
+			WHERE account_id = ?
+			""";
+	    
+	    try (Connection conn = DBUtil.getConnection();
+	    		PreparedStatement pStmt = conn.prepareStatement(sql))
+	    {
+	    	
+	    	pStmt.setString(1, accountId);
+	    	
+	    	try (ResultSet rs = pStmt.executeQuery()) {
+	    		
+	    		if (rs.next()) {
+	    			Account account = new Account();
+	    			
+				account.setAccountId(rs.getString("account_id"));
+				account.setAccountName(rs.getString("account_name"));
+				account.setAccountPass(rs.getString("account_pass"));
+				account.setPostalCode(rs.getString("postal_code"));
+				account.setAccountAddress(rs.getString("account_address"));
+				account.setAccountPhone(rs.getString("account_phone"));
+				
+				if (rs.getDate("birthday") != null) {
+					account.setBirthday(
+							rs.getDate("birthday").toLocalDate());
+					}
+				
+				account.setEmail(rs.getString("email"));
+				account.setPayment(rs.getString("payment"));
+				account.setAdmin(rs.getBoolean("admin"));
+				
+				return account;
+				}
+	    		}
+	    	
+	    } catch (SQLException e) {
+	    	throw new RuntimeException("アカウント情報の取得に失敗しました。",e);
+	    }
+	    
+	    return null;
+	}
+	
+	
+//    public Account login(String accountId,String accountPass) {
+//    	Account account = null;
+//    	
+//    
+//    	try(Connection conn = DriverManager.getConnection(
+//    		"jdbc:postgresql://localhost:5432/shopping","postgres","psql")){
+//    		String sql ="SELECT * FROM accounts "
+//    		           + "WHERE account_id = ? "
+//    	               + "AND account_pass = ?";
+//    
+//    
+//    	PreparedStatement pStmt = conn.prepareStatement(sql);
+//    	
+//    	pStmt.setString(1, accountId);
+//    	pStmt.setString(2, accountPass);
+//    
+//    	ResultSet rs = pStmt.executeQuery();
+//    	
+//    	if(rs.next()) {
+//    		account = new Account();
+//    		
+//    		account.setAccountId(rs.getString("account_id"));
+//    	    account.setAccountName(rs.getString("account_name"));
+//    	    account.setAccountPass(rs.getString("account_pass"));
+//    	    account.setPostalCode(rs.getString("postal_code"));
+//    	    account.setAccountAddress(rs.getString("account_address"));
+//    	    account.setAccountPhone(rs.getString("account_phone"));
+//    	    account.setBirthday(rs.getDate("birthday").toLocalDate());
+//    	    account.setEmail(rs.getString("email"));
+//    	    account.setPayment(rs.getString("payment"));
+//    	    account.setAdmin(rs.getBoolean("admin"));
+//    	    
+//    	}
+//    	}catch (Exception e) {
+//    	    e.printStackTrace();
+//    	}
+//    	return account;
+//    }
+
     
     //退会処理
     

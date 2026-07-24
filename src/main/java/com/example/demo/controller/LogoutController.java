@@ -15,3 +15,10 @@ public class LogoutController {
 	}
 
 }
+
+
+//ログアウトリンク
+//<a href="${pageContext.request.contextPath}/logout">
+//ログアウト
+//</a>
+
