@@ -18,3 +18,14 @@ public class DBUtil {
 		return DriverManager.getConnection(URL,USER,PASSWORD);
 	}
 }
+
+//テストデータ
+//管理者
+//ID: admin01
+//パスワード: adminpass
+//admin: true
+//
+//一般ユーザー
+//ID: user01
+//パスワード: userpass
+//admin: false
