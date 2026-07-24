@@ -12,6 +12,7 @@
 
 <h2>ショッピングカート</h2>
 
+
 <%List<Cart> cartList =(List<Cart>) request.getAttribute("cartList");
 if (cartList == null || cartList.isEmpty()) 
 {%>
@@ -30,10 +31,12 @@ if (cartList == null || cartList.isEmpty())
 
 <%
 for (Cart cart : cartList) {
+
 %>
 
 <tr>
 	<td><%= cart.getProductId() %></td>
+
 	<td><%= cart.getCartQuantity() %></td>
 	<td>
 	<form action="<%= request.getContextPath() %>/cart/update" method="post">
@@ -58,5 +61,8 @@ for (Cart cart : cartList) {
 %>
 <a href="<%= request.getContextPath() %>/products"> 商品一覧へ戻る </a>
 <a href="<%= request.getContextPath() %>/menu"> メニューへ戻る </a>
+<form action="<%= request.getContextPath() %>/order/buy" method="get">
+    <input type="submit" value="購入する">
+</form>
 </body>
 </html>

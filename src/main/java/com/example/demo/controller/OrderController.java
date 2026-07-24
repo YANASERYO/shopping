@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.model.Account;
 import com.example.demo.service.OrderService;
-
 @Controller
 public class OrderController {
 	private final OrderService orderService;
@@ -41,4 +40,17 @@ public class OrderController {
 		}
 		return "order-complete";
 	}
+
+	//menu.jspからorder-infoへ遷移	
+	@GetMapping("/order/buy")
+	public String showOrderbuy(HttpSession session) {
+
+		Account account = (Account) session.getAttribute("account");
+
+		if (account == null) {
+			return "redirect:/login";
+		}
+
+	return "order-info";
+}
 }

@@ -7,7 +7,9 @@
 </head>
 <body>
 
-<h2>注文内容確認</h2>
+<h2>注文者情報入力</h2>
+
+<form action="<%= request.getContextPath() %>/order/confirm" method="post">
 
 発送先<br>
 <input type="text" name="shippingAddress"><br><br>
@@ -15,7 +17,9 @@
 支払い方法<br>
 <input type="text" name="payment"><br><br>
 
-<input type="submit" value="注文確定">
+<input type="submit" value="注文確認">
+
+</form>
 
 </body>
-</html>tml>
+</html>
