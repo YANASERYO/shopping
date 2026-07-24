@@ -28,7 +28,7 @@ public class OrderInfoDAO {
 				shipping_phone,
 				shipping_email,
 				shipping_payment,
-				order_date
+				shopping_date
 				FROM order_info
 				WHERE shopping_user = ?
 				ORDER BY order_date DESC
@@ -52,8 +52,8 @@ public class OrderInfoDAO {
 					orderInfo.setShippingPhone(resultSet.getString("shipping_phone"));
 					orderInfo.setShippingEmail(resultSet.getString("shipping_email"));
 					orderInfo.setShippingPayment(resultSet.getString("shipping_payment"));
-					if (resultSet.getTimestamp("order_date") != null) {
-						orderInfo.setShoppingDate(resultSet.getTimestamp("order_date").toLocalDateTime());
+					if (resultSet.getTimestamp("shopping_date") != null) {
+						orderInfo.setShoppingDate(resultSet.getTimestamp("shopping_date").toLocalDateTime());
 						}
 					orderInfoList.add(orderInfo);
 					}
@@ -76,7 +76,7 @@ public class OrderInfoDAO {
 		shipping_phone,
 		shipping_email,
 		shipping_payment,
-		order_date
+		shopping_date
 		)
 		VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
 		RETURNING shopping_id
