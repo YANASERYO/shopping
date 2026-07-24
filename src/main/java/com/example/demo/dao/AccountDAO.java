@@ -17,6 +17,7 @@ import com.example.demo.util.DBUtil;
 
 //ログイン処理
 
+
 @Repository
 public class AccountDAO {
 	public Account findByAccountId(String accountId) {
@@ -113,6 +114,7 @@ public class AccountDAO {
 //    	}
 //    	return account;
 //    }
+
     
     //退会処理
     
