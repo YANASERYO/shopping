@@ -77,6 +77,7 @@ public class OrderInfoDAO {
 		shipping_email,
 		shipping_payment,
 		shopping_date
+
 		)
 		VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
 		RETURNING shopping_id
