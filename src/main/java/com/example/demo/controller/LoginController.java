@@ -13,10 +13,13 @@ import com.example.demo.util.PassEncoderUtil;
 
 //処理の不足を修正
 
+//処理の不足を修正
+
 //ログイン
 @Controller
 public class LoginController {
 	
+
 	private final AccountDAO accountDAO;
 	
 	public LoginController(AccountDAO accountDAO) {
@@ -24,7 +27,7 @@ public class LoginController {
 	}
 	
 	// アカウントIDで取得し、BCryptでパスワードを照合
-	
+
 	@GetMapping("/login")
 	public String showLogin() {
 		return "index";
@@ -36,19 +39,23 @@ public class LoginController {
             @RequestParam String accountPass,
             HttpSession session
 			) {
+
 		
 	Account account = accountDAO.findByAccountId(accountId);
+
 	
 //	アカウントがない場合indexに返す
 	if(account == null) {
 		return "index";
 	}
 	
+
 	boolean passwordMatches = PassEncoderUtil.matches(accountPass, account.getAccountPass());
 	if (!passwordMatches) {
 		return "index";
 	}
 	
+
 	session.setAttribute("account", account); 
 	
 //	accountsのadminがtrueならAdminControllerに
@@ -58,7 +65,9 @@ public class LoginController {
 	}
 	
 
+
 	return "redirect:/menu";
+
 
 	}
 }

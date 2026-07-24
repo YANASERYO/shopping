@@ -187,6 +187,7 @@ public class CartDAO {
 					e
 					);
 			}
+
 	}
 	
 	// 注文確定後にカートを空にする
@@ -210,4 +211,5 @@ public class CartDAO {
 	        );
 	    }
 	}
+
 }

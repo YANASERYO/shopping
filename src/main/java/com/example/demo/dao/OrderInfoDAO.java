@@ -65,6 +65,7 @@ public class OrderInfoDAO {
         }
 		return orderInfoList;
 	}
+
 	
 	public int insert(OrderInfo orderInfo) {
 		String sql = """
@@ -104,5 +105,6 @@ public class OrderInfoDAO {
 		}
 		return 0;
 	}
+
 }
 
