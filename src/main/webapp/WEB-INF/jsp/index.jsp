@@ -12,23 +12,22 @@
 
 <body>
 
-<title>ログイン</title>
+<h1>ログイン</h1>
 
 
-<form action="login" method="post">
+<form action="${pageContext.request.contextPath}/login" method="post">
 
     ユーザー名：<br>
-    <input type="text" name="accountName"><br><br>
+    <input type="text" name="accountId"><br><br>
 
     パスワード：<br>
     <input type="password" name="accountPass"><br><br>
 
     <input type="submit" value="ログイン">
     
-     <input type="button" value="新規会員登録"
-           onclick="location.href='account-create'">
-
+    
 </form>
+ <p><a href="${pageContext.request.contextPath}/account-create">新規会員登録</a></p>
 
 </body>
 </html>

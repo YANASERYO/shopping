@@ -28,7 +28,7 @@ public class OrderInfoDAO {
 				shipping_phone,
 				shipping_email,
 				shipping_payment,
-				order_date
+				shopping_date
 				FROM order_info
 				WHERE shopping_user = ?
 				ORDER BY order_date DESC
@@ -52,8 +52,8 @@ public class OrderInfoDAO {
 					orderInfo.setShippingPhone(resultSet.getString("shipping_phone"));
 					orderInfo.setShippingEmail(resultSet.getString("shipping_email"));
 					orderInfo.setShippingPayment(resultSet.getString("shipping_payment"));
-					if (resultSet.getTimestamp("order_date") != null) {
-						orderInfo.setShoppingDate(resultSet.getTimestamp("order_date").toLocalDateTime());
+					if (resultSet.getTimestamp("shopping_date") != null) {
+						orderInfo.setShoppingDate(resultSet.getTimestamp("shopping_date").toLocalDateTime());
 						}
 					orderInfoList.add(orderInfo);
 					}
@@ -64,6 +64,45 @@ public class OrderInfoDAO {
 						"注文履歴の取得に失敗しました。", e);
         }
 		return orderInfoList;
+	}
+	
+	public int insert(OrderInfo orderInfo) {
+		String sql = """
+		INSERT INTO order_info (
+		shopping_user,
+		shipping_name,
+		shipping_postal_code,
+		shipping_address,
+		shipping_phone,
+		shipping_email,
+		shipping_payment,
+		shopping_date
+
+		)
+		VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+		RETURNING shopping_id
+		""";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pStmt = conn.prepareStatement(sql)) 
+		{
+			
+			pStmt.setString(1, orderInfo.getShoppingUser());
+			pStmt.setString(2, orderInfo.getShippingName());
+			pStmt.setString(3, orderInfo.getShippingPostalCode());
+			pStmt.setString(4, orderInfo.getShippingAddress());
+			pStmt.setString(5, orderInfo.getShippingPhone());
+			pStmt.setString(6, orderInfo.getShippingEmail());
+			pStmt.setString(7, orderInfo.getShippingPayment());
+			
+			try (ResultSet rs = pStmt.executeQuery()) {
+				if (rs.next()) {return rs.getInt("shopping_id");
+				}
+				}
+			
+		} catch (SQLException e) {throw new RuntimeException(
+				"注文情報の登録に失敗しました。",e);
+		}
+		return 0;
 	}
 }
 
