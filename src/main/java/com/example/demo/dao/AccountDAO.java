@@ -20,6 +20,7 @@ import com.example.demo.util.DBUtil;
 
 @Repository
 public class AccountDAO {
+
 	public Account findByAccountId(String accountId) {
 	    String sql = """
 	    		SELECT

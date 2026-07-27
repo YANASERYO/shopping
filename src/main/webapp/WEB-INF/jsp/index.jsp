@@ -17,7 +17,8 @@
 
 <form action="${pageContext.request.contextPath}/login" method="post">
 
-    ユーザー名：<br>
+
+    ユーザーID：<br>
     <input type="text" name="accountId"><br><br>
 
     パスワード：<br>

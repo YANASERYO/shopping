@@ -35,7 +35,7 @@ public class ProductService {
 	public boolean create(Product product) {
 		return productDAO.insert(product);
 	}
-	
+
 // 商品の論理削除
 	public boolean delete(Long productId) {
 		return productDAO.delete(productId);
@@ -46,4 +46,5 @@ public class ProductService {
 		return productDAO.getActiveProducts();
 	}
 	
+
 }

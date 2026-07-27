@@ -14,9 +14,8 @@
 
 <p>注文番号：${orderInfo.shoppingId}</p>
 
-<form action="menu" method="get">
-    <input type="submit" value="メニューへ戻る">
-</form>
+<a href="<%= request.getContextPath() %>/menu"> メニューへ戻る </a>
+
 
 </body>
 </html>

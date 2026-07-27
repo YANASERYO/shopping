@@ -12,6 +12,7 @@ import com.example.demo.model.Account;
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
 
+
 @Controller
 public class ProductCreateController {
 	
@@ -31,12 +32,14 @@ public class ProductCreateController {
 			}
 		
 		if (!account.isAdmin()) {
+
 			return "redirect:/Menu";
 		}
 		
 		return "admin/product-create";
 	}
 	
+
 	// 商品登録
 	@PostMapping("/admin/products/create")
 	public String createProduct(
@@ -108,3 +111,4 @@ public class ProductCreateController {
 		return "redirect:/admin/products";
 	}
 }
+
