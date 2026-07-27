@@ -33,7 +33,7 @@ public class ProductCreateController {
 		
 		if (!account.isAdmin()) {
 
-			return "redirect:/Menu";
+			return "redirect:/menu";
 		}
 		
 		return "admin/product-create";
@@ -60,7 +60,7 @@ public class ProductCreateController {
 		}
 		
 		if (!account.isAdmin()) {
-			return "redirect:/Menu";
+			return "redirect:/menu";
 		}
 		
 		// 入力チェック

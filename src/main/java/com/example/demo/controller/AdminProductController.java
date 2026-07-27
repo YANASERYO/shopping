@@ -31,7 +31,7 @@ public class AdminProductController {
 		}
 		
 		if (!account.isAdmin()) {
-			return "redirect:/Menu";
+			return "redirect:/menu";
 		}
 		
 		List<Product> productList =
