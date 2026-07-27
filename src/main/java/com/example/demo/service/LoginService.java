@@ -29,7 +29,7 @@ public class LoginService {
         }
 
         Account account =
-                accountDAO.findById(accountId);
+                accountDAO.findByAccountId(accountId);
 
         if (account == null) {
             return null;

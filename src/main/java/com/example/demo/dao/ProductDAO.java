@@ -13,6 +13,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Product;
+import com.example.demo.util.DBUtil;
 
 @Repository
 public class ProductDAO {
@@ -233,5 +234,34 @@ public class ProductDAO {
 			 
 			 return productList;
 			 }
-		 }
+		 
+
+		public boolean delete(Long productId) {
+		
+		    String sql = """
+		            UPDATE product
+		            SET
+		                product_active = false,
+		                product_update_at = CURRENT_TIMESTAMP
+		            WHERE product_id = ?
+		            """;
+		
+		    try (
+		            Connection conn = DBUtil.getConnection();
+		            PreparedStatement pStmt = conn.prepareStatement(sql)
+		    ) {
+		        pStmt.setLong(1, productId);
+		
+		        int count = pStmt.executeUpdate();
+		
+		        return count > 0;
+		
+		    } catch (SQLException e) {
+		        throw new RuntimeException(
+		                "商品の削除に失敗しました。",
+		                e
+		        );
+		    }
+	}
+}		
 
