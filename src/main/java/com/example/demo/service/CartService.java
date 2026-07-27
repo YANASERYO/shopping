@@ -49,11 +49,13 @@ public class CartService {
 	}
 
 	
+
 	// 注文確定後にカートを空に
 	public boolean clearCart(String accountId) {
 	    return cartDAO.deleteByAccountId(accountId);
 	}
 	
+
 	// カート内の数量変更
 	public boolean updateQuantity(long cartId, String accountId, int quantity) {
 
