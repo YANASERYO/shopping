@@ -22,7 +22,7 @@ public class AdminController {
 		
 		// 一般ユーザーは管理者画面に入れない
 		if (!account.isAdmin()) {
-			return "redirect:/Menu";
+			return "redirect:/menu";
 			}
 		
 		return "admin/admin-menu";

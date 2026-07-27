@@ -17,7 +17,6 @@
 
 <c:forEach var="product" items="${productList}">
 
-```
 <hr>
 
 <p>
@@ -57,27 +56,24 @@
 				   value="1"
 				   min="1"
 				   max="${product.productStock}">
-
-			<input type="submit"
-				   value="カートに追加">
-
+				   
+			<input type="submit" value="カートに追加" onclick="clickEvent()">
 		</form>
-
+		
 	</c:when>
-
+	
 	<c:otherwise>
 		<p>在庫切れ</p>
 	</c:otherwise>
-
+	
 </c:choose>
-```
 
 </c:forEach>
 
 <hr>
 
 <p>
-<a href="${pageContext.request.contextPath}/Menu">
+<a href="${pageContext.request.contextPath}/menu">
 	メニューへ戻る
 </a>
 </p>
@@ -88,5 +84,10 @@
 </a>
 </p>
 
+	<script>
+	function clickEvent(){
+		alert('カートに商品を追加しました');
+		}
+	</script>
 </body>
 </html>

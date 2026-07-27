@@ -73,7 +73,7 @@ public class MenuController {
 		
 		model.addAttribute("orderInfoList",orderInfoList);
 		
-		return "order-info";
+		return "order-history";
 	}
 	
 	// 会員情報の変更→会員情報変更へ

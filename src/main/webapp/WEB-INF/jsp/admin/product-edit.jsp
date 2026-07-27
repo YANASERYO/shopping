@@ -56,14 +56,14 @@
 </p>
 
 <input type="submit" name="action" value="更新">
-<input type="submit" name="action" value="削除">
+<input type="submit" name="delete" value="削除">
 
 </form>
 
 <br>
 
-<form action="menu" method="get">
-    <input type="submit" value="メニューへ戻る">
+<form action="${pageContext.request.contextPath}/admin" method="get">
+<input type="submit" value="管理者メニューへ戻る">
 </form>
 
 </body>
