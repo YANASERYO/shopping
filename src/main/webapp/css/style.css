@@ -100,3 +100,272 @@
 /*        text-align: center;*/
 /*    }*/
 /*}*/
+@charset "UTF-8";
+/* 全画面共通------------------------------------------------------------------------------------*/
+/* 全体 */
+body{
+
+  margin:0;
+  background: #f5f5f5;
+}
+/* タイトル */
+h1 {
+  margin: 0;
+  padding-top: 1.5rem;
+  font-family: "Marcellus", serif;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  color: #ffffff;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.logo {
+  width: 2.2rem;
+  padding-top: 1.5rem;
+}
+
+/* ヘッダー */
+header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  height: 100px;
+  background: #10533e;
+}
+
+/* フッター */
+footer{
+  
+  width: 100%;
+  height:120px;
+  background: #10533e;
+ 
+}
+.copyright{
+  text-align: center;
+  padding: 2rem;
+  color: #030303;
+}
+
+/* ログイン画面 --------------------------------------------------------------------------------------*/
+
+.loginbackground {
+  background-color: #d9d9d9;
+  background-image: url("../images/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 2rem;
+  margin-bottom: 0;
+}
+h2 {
+  margin-top: 0;
+  padding-top: 5rem;
+  text-align: center;
+  
+  font-size: 42px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-container{
+  width: 600px;
+  margin: 70px auto;
+
+  background: #fff;
+
+  padding: 50px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+
+.login-container h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.message {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  font: size 18px;
+}
+
+.inputbox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputbox input {
+  width: 380px;
+  height: 55px;
+  padding-left: 18px;
+  font-size: 18px;
+  border: none;
+  background-color: #e5e5e5;
+  border-radius: 5px;
+}
+
+.login-btn {
+  width: 380px;
+  height:55px;
+  margin-top: 30px;
+  border: none;
+  border-radius: 12px;
+  background: #898989;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-btn:hover{
+  background-color: #aaaaaa;
+}
+
+hr{
+  margin:40px auto 15px;
+  width: 85%;
+}
+
+.register-text {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+.register-area {
+  text-align: center;
+  
+}
+.register-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 380px;
+  height: 55px;
+  border: none;
+  border-radius: 12px;
+  background-color: #a96a4d;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #030303;
+}
+
+.register-btn:hover {
+  background-color: #ad8776;
+}
+
+/*メニュー画面------------------------------------------*/
+.roomimg{
+  background-color: #d9d9d9;
+  background-image: url("../images/roomimg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 2rem;
+  margin-bottom: 0;
+}
+.concept {
+  font-family: "Zen Old Mincho", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.menubackground{
+  margin:0;
+  background: #f5f5f5;
+  }
+  
+.menutitle{
+	margin: 0;
+	  padding-top: 1.5rem;
+	  font-family: "Marcellus", serif;
+	  font-weight: 400;
+	  font-style: normal;
+	  text-align: center;
+	  font-size: 2rem;
+	  color: black;
+	  
+	
+}
+.menutitleja{
+	text-align: center;
+}
+.menutext{
+	max-width: 736px;
+	padding: 0 1.5rem;
+	margin: 1rem auto 0;
+	
+}
+
+
+header{
+	position: relative;
+}
+.user-area{
+	position: absolute;
+	top: 1rem;
+	right: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 0.5rem
+	;
+}
+.username{
+	
+	margin: 0;
+	font-size: 1rem;
+	color: #f5f5f5;
+}
+.logout{
+	display: inline-block;
+	padding: 0.5rem;
+	background-color: #f5f5f5;
+	color: #10533e;
+	text-decoration: none;
+	border-radius: 0.5rem;
+}
+.logout:hover{
+	background-color: rgb(159, 159, 159);	
+}
+.menu-contents {
+margin-top: 0;
+padding-top: 5rem;
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-template-rows: repeat(5, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.menu1 { grid-area: 1 / 2 / 3 / 3; }
+.menu2 { grid-area: 1 / 4 / 3 / 5; }
+.menu3 { grid-area: 3 / 2 / 5 / 3;
+		padding-top: 5rem; }
+.menu4 { grid-area: 3 / 4 / 5 / 5;
+		padding-top: 5rem; }
+
+.menu-contents img {
+	width: 20rem;
+	height: auto;
+	
+}
+	 
+	
+
+
