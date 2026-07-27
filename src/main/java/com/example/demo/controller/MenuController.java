@@ -72,8 +72,9 @@ public class MenuController {
 		List<OrderInfo> orderInfoList = orderInfoDAO.findByAccountId(account.getAccountId());
 		
 		model.addAttribute("orderInfoList",orderInfoList);
-		
+
 		return "order-history";
+
 	}
 	
 	// 会員情報の変更→会員情報変更へ
