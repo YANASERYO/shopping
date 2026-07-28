@@ -36,22 +36,26 @@
     </h2>
 
 </div>
-<h3 class="menutitle">ABOUT</h3>
-<p class="menutitleja">KINARIについて</p>
-<p class="menutext">KINARI（キナリ）は、木の温もりと北欧デザインを大切にした家具・インテリアをお届けするオンラインショップです。<br>
-
-「自然と暮らす、心地よい毎日。」をコンセプトに、毎日の暮らしに寄り添う家具や照明、インテリアをご提案します。
-
-お気に入りの一品との出会いを通して、心豊かで快適な住まいづくりをお手伝いします。</p>
-
-<h4 class="menutitle">MENU</h4>
-<div class="menu-contents">
-
-	<a class="menu1" href="${pageContext.request.contextPath}/products"><img src="images/menu1.png" alt="商品を選択する"></a>
-	<a class="menu2" href="${pageContext.request.contextPath}/cart"><img src="images/menu2.png" alt="ショッピングカートを見る"></a>
-	<a class="menu3" href="${pageContext.request.contextPath}/orders"><img src="images/menu3.png" alt="注文履歴を見る"></a>
-	<a class="menu4" href="${pageContext.request.contextPath}/account-edit"><img src="images/menu4.png" alt="会員情報の変更"></a>
-
+<div id=js-scroll-top>
+	<h3 class="menutitle">ABOUT</h3>
+	<p class="menutitleja">KINARIについて</p>
+	<p class="menutext">KINARI（キナリ）は、木の温もりと北欧デザインを大切にした家具・インテリアをお届けするオンラインショップです。<br>
+	
+	「自然と暮らす、心地よい毎日。」をコンセプトに、毎日の暮らしに寄り添う家具や照明、インテリアをご提案します。
+	
+	お気に入りの一品との出会いを通して、心豊かで快適な住まいづくりをお手伝いします。</p>
+</div>
+<br>
+<div id=js-scroll-top>
+	<h4 class="menutitle">MENU</h4>
+	<div class="menu-contents">
+	
+		<a class="menu1" href="${pageContext.request.contextPath}/products"><img src="images/menu1.png" alt="商品を選択する"></a>
+		<a class="menu2" href="${pageContext.request.contextPath}/cart"><img src="images/menu2.png" alt="ショッピングカートを見る"></a>
+		<a class="menu3" href="${pageContext.request.contextPath}/orders"><img src="images/menu3.png" alt="注文履歴を見る"></a>
+		<a class="menu4" href="${pageContext.request.contextPath}/account-edit"><img src="images/menu4.png" alt="会員情報の変更"></a>
+	
+	</div>
 </div>
 
   </main>
@@ -61,6 +65,6 @@
     </div>
 
 </footer>
-
+<script src="js/main.js"></script>
 </body>
 </html>

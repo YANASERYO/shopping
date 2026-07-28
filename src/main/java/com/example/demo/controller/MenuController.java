@@ -8,20 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.demo.dao.OrderInfoDAO;
+import com.example.demo.dao.DetailDAO;
 import com.example.demo.dao.ProductDAO;
 import com.example.demo.model.Account;
-import com.example.demo.model.OrderInfo;
+import com.example.demo.model.Detail;
 import com.example.demo.model.Product;
 
 @Controller
 public class MenuController {
 	private final ProductDAO productDAO;
-	private final OrderInfoDAO orderInfoDAO;
+	private final DetailDAO detailDAO;
     
-	public MenuController(ProductDAO productDAO,OrderInfoDAO orderInfoDAO) {
+	public MenuController(ProductDAO productDAO,DetailDAO detailDAO) {
 		this.productDAO = productDAO;
-	this.orderInfoDAO = orderInfoDAO;
+		this.detailDAO = detailDAO;
 	}
 	
 	// メニュー画面の表示
@@ -69,9 +69,9 @@ public class MenuController {
 			return "redirect:/login";
 			}
 		
-		List<OrderInfo> orderInfoList = orderInfoDAO.findByAccountId(account.getAccountId());
+		List<Detail> detailList = detailDAO.findByAccountId(account.getAccountId());
 		
-		model.addAttribute("orderInfoList",orderInfoList);
+		model.addAttribute("detailList",detailList);
 
 		return "order-history";
 

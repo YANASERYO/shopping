@@ -17,6 +17,8 @@ import com.example.demo.model.OrderInfo;
 import com.example.demo.model.Product;
 import com.example.demo.service.CartService;
 import com.example.demo.service.OrderService;
+import com.example.demo.util.TaxUtil;
+
 
 @Controller
 public class OrderController {
@@ -57,7 +59,7 @@ public class OrderController {
 		orderInfo.setShippingEmail(shippingEmail);
 		orderInfo.setShippingPayment(shippingPayment);
 		
-		int shoppingId = orderService.createOrder(account);
+		int shoppingId = orderService.createOrder(account, orderInfo);
 		
 		// カートが空、または注文登録失敗
 		if (shoppingId == 0) {
@@ -102,9 +104,17 @@ public class OrderController {
 				}
 		}
 		
+		int taxPrice = TaxUtil.inflictTax(shoppingTotalPrice);
+		int taxAndShoppingPrice = TaxUtil.inflictPriceAndTax(shoppingTotalPrice);
+		
+		
 		model.addAttribute("account", account);
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("shoppingTotalPrice",shoppingTotalPrice);
+		model.addAttribute("taxPrice", taxPrice);
+		model.addAttribute("taxAndShoppingPrice",taxAndShoppingPrice
+		);
+		
 		
 	return "order-info";
 }
