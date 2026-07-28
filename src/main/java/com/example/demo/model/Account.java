@@ -23,4 +23,5 @@ public class Account {
 	private String email;
 	private String payment;
 	private boolean admin;
+	private boolean accountActive;
 }

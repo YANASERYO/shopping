@@ -1,9 +1,5 @@
 package com.example.demo.controller;
 
-
-
-
-
 import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
@@ -73,6 +69,7 @@ public class CartController {
 	@PostMapping("/cart/update")
 	public String updateCart(
 			@RequestParam long cartId,
+			@RequestParam int productId,
 			@RequestParam int quantity,
 			HttpSession session){
 		
@@ -82,7 +79,11 @@ public class CartController {
 		    return "redirect:/login";
 		}
 		
-		cartService.updateQuantity(cartId,account.getAccountId(),quantity);
+		if (quantity <= 0) {
+	        return "redirect:/cart";
+	    }
+		
+		cartService.updateQuantity(cartId,account.getAccountId(),productId,quantity);
 		
 		return "redirect:/cart";
 	}

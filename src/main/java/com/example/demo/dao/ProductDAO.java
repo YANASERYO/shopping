@@ -17,6 +17,7 @@ import com.example.demo.util.DBUtil;
 
 @Repository
 public class ProductDAO {
+	
 	private static final String URL =
 			"jdbc:postgresql://localhost:5432/shopping";
 	private static final String USER = "postgres";
@@ -262,6 +263,30 @@ public class ProductDAO {
 		                e
 		        );
 		    }
-	}
+		
+		}
+		
+		// 注文確定時に在庫を減らす
+		public boolean updateStockAfterOrder(Connection conn,int productId,int quantity)
+				throws SQLException
+		{
+			String sql = """
+					UPDATE product
+					SET product_stock = product_stock - ?,
+					product_update_at = CURRENT_TIMESTAMP
+					WHERE product_id = ?
+					AND product_stock >= ?
+					AND product_active = true
+					""";
+			
+			try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				
+				pStmt.setInt(1, quantity);
+				pStmt.setInt(2, productId);
+				pStmt.setInt(3, quantity);
+				
+				return pStmt.executeUpdate() == 1;
+		    }
+		}
 }		
 

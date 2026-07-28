@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,9 +32,11 @@ public class AccountDAO {
 			birthday,
 			email,
 			payment,
-			admin
+			admin,
+			account_active
 			FROM accounts
 			WHERE account_id = ?
+	    		  	AND account_active = true
 			""";
 	    
 	    try (Connection conn = DBUtil.getConnection();
@@ -117,56 +118,58 @@ public class AccountDAO {
 //    }
 
     
-    //退会処理
-    
-    public boolean deleteAccount(String accountId) {
-    	
-    	boolean result = false;
-
-    	try(Connection conn = DriverManager.getConnection(
-    			"jdbc:postgresql://localhost:5432/shopping","postgres","psql")){
-    		String sql = "DELETE FROM accounts "
-	                   + "WHERE account_id = ?";
-    		
-    		PreparedStatement pStmt = conn.prepareStatement(sql);
-    		
-    		pStmt.setString(1, accountId);
-        
-    		int count = pStmt.executeUpdate();
-    		
-    		if(count>0) {result = true;}
-    		
-    }catch (Exception e) {
-        e.printStackTrace();
-    }
-
-    return result;
-    }
-    
-// // accountsTABLEにaccount_activeを追加し論理削除する退会処理の例
+//    物理削除する退会処理
+//    
 //    public boolean deleteAccount(String accountId) {
 //    	
-//    	String sql = """
-//    			UPDATE accounts
-//    			SET account_active = false
-//    			WHERE account_id = ?
-//    			  AND account_active = true
-//    			""";
-//    	
-//    	try (
-//    			Connection conn = DBUtil.getConnection();
-//    			PreparedStatement pStmt = conn.prepareStatement(sql)
-//    	) {
+//    	boolean result = false;
+//
+//    	try(Connection conn = DriverManager.getConnection(
+//    			"jdbc:postgresql://localhost:5432/shopping","postgres","psql")){
+//    		String sql = "DELETE FROM accounts "
+//	                   + "WHERE account_id = ?";
+//    		
+//    		PreparedStatement pStmt = conn.prepareStatement(sql);
+//    		
 //    		pStmt.setString(1, accountId);
+//        
 //    		int count = pStmt.executeUpdate();
 //    		
-//    		return count == 1;
+//    		if(count>0) {result = true;}
 //    		
-//    	} catch (SQLException e) {
-//    		e.printStackTrace();
-//    		return false;
-//    		}
+//    }catch (Exception e) {
+//        e.printStackTrace();
 //    }
+//
+//    return result;
+//    }
+    
+ // accountsTABLEにaccount_activeを追加し論理削除する退会処理の例
+    public boolean deleteAccount(String accountId) {
+    	
+    	String sql = """
+    			UPDATE accounts
+    			SET account_active = false
+    			WHERE account_id = ?
+    			  AND account_active = true
+    			""";
+    	
+    	try (
+    			Connection conn = DBUtil.getConnection();
+    			PreparedStatement pStmt = conn.prepareStatement(sql)
+    	) {
+    		pStmt.setString(1, accountId);
+    		int count = pStmt.executeUpdate();
+    		
+    		return count == 1;
+    		
+    	} catch (SQLException e) {
+    		throw new RuntimeException(
+    		        "退会処理に失敗しました。",
+    		        e
+    		);
+    		}
+    }
     
 //    会員登録
     public boolean insert(Account account) {
