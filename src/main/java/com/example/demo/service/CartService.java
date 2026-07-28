@@ -1,19 +1,25 @@
 package com.example.demo.service;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.CartDAO;
+import com.example.demo.dao.ProductDAO;
 import com.example.demo.model.Cart;
+import com.example.demo.model.Product;
 
 @Service
 public class CartService {
 	
 	private final CartDAO cartDAO;
+	private final ProductDAO productDAO;
 	
-	public CartService(CartDAO cartDAO) {
+	public CartService(CartDAO cartDAO,ProductDAO productDAO) {
 		this.cartDAO = cartDAO;
+		this.productDAO = productDAO;
 		}
 	
 	public List<Cart> getCartList(String accountId) {
@@ -24,11 +30,20 @@ public class CartService {
 		if (quantity < 1) {
 			return false;
 			}
+		Product product = productDAO.findById((long) productId);
+		
+		if (product == null) {
+	        return false;
+	    }
 		
 		Cart existingCart = cartDAO.findByAccountIdAndProductId(accountId,productId);
 		
+		
 		// 同じ商品がない場合
 		if (existingCart == null) {
+			if (quantity > product.getProductStock()) {
+				return false;
+	        }
 			Cart newCart = new Cart();
 			
 			newCart.setAccountId(accountId);
@@ -40,7 +55,10 @@ public class CartService {
 		
 		// 同じ商品がある時は数量を追加
 		int newQuantity = existingCart.getCartQuantity() + quantity;
-			return cartDAO.updateQuantity(existingCart.getCartId(),accountId,newQuantity);
+		if (newQuantity > product.getProductStock()) {
+			return false;
+		}
+		return cartDAO.updateQuantity(existingCart.getCartId(),accountId,newQuantity);
 	}
 	
 	// カートから商品を削除
@@ -55,15 +73,31 @@ public class CartService {
 	    return cartDAO.deleteByAccountId(accountId);
 	}
 	
+	public boolean clearCart(Connection conn,String accountId)
+			throws SQLException {
+		return cartDAO.deleteByAccountId(conn, accountId);
+  	}
+	
 
 	// カート内の数量変更
-	public boolean updateQuantity(long cartId, String accountId, int quantity) {
-
-	    if (quantity < 1) {
-	        return false;
-	    }
-
-	    return cartDAO.updateQuantity(cartId, accountId, quantity);
+	public boolean updateQuantity(long cartId, String accountId, int productId,int quantity) {
+		
+		if (quantity <= 0) {
+			return false;
+		}
+		
+		Product product = productDAO.findById((long) productId);
+		
+		if (product == null) {
+			return false;
+		}
+		
+		if (quantity > product.getProductStock()) {
+			return false;
+		}
+		
+		return cartDAO.updateQuantity(cartId,accountId,quantity);
 	}
+	
 
 }
