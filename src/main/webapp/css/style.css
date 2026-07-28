@@ -136,6 +136,26 @@ header{
   padding: 0;
   height: 100px;
   background: #10533e;
+  padding-left: 2rem;
+}
+
+.logotitle{
+	margin-right: auto;
+	display: flex;
+	align-items: center;
+}
+
+.header-menu{
+	display: flex;
+	gap: 2rem;
+	margin-right: 2rem;
+	
+}
+.header-menu a {
+	border: none;
+	text-decoration: none;
+	color: #e5e5e5;
+	
 }
 
 /* フッター */
@@ -315,16 +335,14 @@ hr{
 
 header{
 	position: relative;
+	padding-right: 2rem;
 }
 .user-area{
-	position: absolute;
-	top: 1rem;
-	right: 2rem;
 	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	gap: 0.5rem
-	;
+	align-items: center;
+	gap: 1rem; 
+	flex-direction: row;
+	
 }
 .username{
 	
@@ -365,7 +383,46 @@ grid-row-gap: 0px;
 	height: auto;
 	
 }
+
+/*商品一覧--------------------------------------------*/
+
+.product-img {
+	width:20rem;
+	height:auto;
+	padding-left: 2rem;
+}
+
+.category-menu {
+	display: flex;
+	justify-content: space-around;
+}
+
+.product-detail {
+	display: flex;
+	align-items: flex-start;
+	gap: 3rem;
+	justify-content: center;
+}
+
+.product-description {
+	display: flex;
+	flex-direction: column;
+}
 	 
+
+.category-name {
+	padding-left: 2rem;
+}
+.subtitle {
+	margin: 0;
+	padding-top: 1.5rem;
+	font-family: "Marcellus", serif;
+	font-weight: 200;
+	font-style: normal;
+	padding-left: 2rem;
+	font-size: 1.5rem;
+	color: black;
 	
+}
 
 

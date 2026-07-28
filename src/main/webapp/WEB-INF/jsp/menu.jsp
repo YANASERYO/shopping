@@ -18,8 +18,10 @@
 </head>
 <body>
     <header>
+    <div class="logotitle">
     <img class="logo" src="images/logo.png">
     <h1>KINARI</h1>
+    </div>
     <%Account account = (Account) session.getAttribute("account");%>
  	<div class="user-area">
 	<p class="username">ようこそ <%= account.getAccountName() %> さん</p>
