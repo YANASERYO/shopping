@@ -12,8 +12,8 @@
 
 <p>ご注文ありがとうございました。</p>
 
-<p>注文番号：${orderInfo.shoppingId}</p>
 
+<a href="<%= request.getContextPath() %>/orders"> 注文履歴を確認 </a><br>
 <a href="<%= request.getContextPath() %>/menu"> メニューへ戻る </a>
 
 
