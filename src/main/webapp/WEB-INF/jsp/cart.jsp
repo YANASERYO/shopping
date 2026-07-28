@@ -23,11 +23,13 @@ if (cartList == null || cartList.isEmpty())
 
 <table border="1">
     <tr>
-        <th>商品ID</th>
-        <th>数量</th>
-        <th>変更</th>
-        <th>削除</th>
-    </tr>
+		<th>画像</th>
+		<th>商品ID</th>
+		<th>商品名</th>
+		<th>数量</th>
+		<th>変更</th>
+	<th>削除</th>
+</tr>
 
 <%
 for (Cart cart : cartList) {
@@ -35,12 +37,32 @@ for (Cart cart : cartList) {
 %>
 
 <tr>
+	<td>
+		<%
+		if (cart.getProductImgPath() != null
+				&& !cart.getProductImgPath().isBlank()) {
+		%>
+			<img
+				src="<%= request.getContextPath() %><%= cart.getProductImgPath() %>"
+				alt="<%= cart.getProductName() %>"
+				width="100">
+		<%
+		} else {
+		%>
+			画像なし
+		<%
+		}
+		%>
+	</td>
 	<td><%= cart.getProductId() %></td>
+	
+	<td><%= cart.getProductName() %></td>
 
 	<td><%= cart.getCartQuantity() %></td>
 	<td>
 	<form action="<%= request.getContextPath() %>/cart/update" method="post">
 		<input type="hidden" name="cartId" value="<%= cart.getCartId() %>">
+		<input type="hidden" name="productId" value="<%= cart.getProductId() %>">
 		<input type="number" name="quantity" value="<%= cart.getCartQuantity() %>" min="1" required>
 		<input type="submit" value="更新">
 	</form>

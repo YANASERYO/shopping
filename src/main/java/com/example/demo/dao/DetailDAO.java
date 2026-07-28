@@ -42,4 +42,31 @@ public class DetailDAO {
         				"注文明細の登録に失敗しました。",e);
         }
     }
+	
+	public boolean insert(Connection conn, Detail detail)
+			throws SQLException {
+			String sql = """
+			INSERT INTO detail (
+				shopping_id,
+				product_id,
+				product_name,
+				product_price,
+				product_pieces,
+				product_total
+				)
+				VALUES (?, ?, ?, ?, ?, ?)
+				""";
+			
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+			
+				pStmt.setInt(1, detail.getShoppingId());
+				pStmt.setInt(2, detail.getProductId());
+				pStmt.setString(3, detail.getProductName());
+				pStmt.setInt(4, detail.getProductPrice());
+				pStmt.setInt(5, detail.getProductPieces());
+				pStmt.setInt(6, detail.getProductTotal());
+				
+				return pStmt.executeUpdate() == 1;
+		}
+	}
 }
