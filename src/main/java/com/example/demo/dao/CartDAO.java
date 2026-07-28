@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,10 +15,6 @@ import com.example.demo.util.DBUtil;
 
 @Repository
 public class CartDAO {
-	private static final String URL =
-			"jdbc:postgresql://localhost:5432/shopping";
-	private static final String USER = "postgres";
-	private static final String PASSWORD = "psql";
 	
 //	アカウントのカート一覧を取得
 	public List<Cart>findByAccountId(String accountId){
@@ -27,17 +22,21 @@ public class CartDAO {
 		
 		String sql = """
 				SELECT
-				cart_id,
-				account_id,
-				product_id,
-				cart_quantity,
-				cart_created_at
-				FROM cart
-				WHERE account_id = ?
-				ORDER BY cart_created_at
+				c.cart_id,
+				c.account_id,
+				c.product_id,
+				c.cart_quantity,
+				c.cart_created_at,
+				p.product_name,
+				p.product_img_path
+				FROM cart c
+				INNER JOIN product p
+				ON c.product_id = p.product_id
+				WHERE c.account_id = ?
+				ORDER BY c.cart_created_at
 				""";
 		
-		try(Connection conn = DriverManager.getConnection(URL,USER,PASSWORD);
+		try (Connection conn = DBUtil.getConnection();
 			PreparedStatement pStmt = conn.prepareStatement(sql)
 		){
 			pStmt.setString(1,accountId);
@@ -49,7 +48,8 @@ public class CartDAO {
 					cart.setAccountId(rs.getString("account_id"));
 					cart.setProductId(rs.getInt("product_id"));
 					cart.setCartQuantity(rs.getInt("cart_quantity"));
-					
+					cart.setProductName(rs.getString("product_name"));
+					cart.setProductImgPath(rs.getString("product_img_path"));
 					Timestamp createdAt =
 							rs.getTimestamp("cart_created_at");
 					if(createdAt != null) {
@@ -123,7 +123,7 @@ public class CartDAO {
 				VALUES (?, ?, ?, CURRENT_TIMESTAMP)
 				""";
 
-		try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+		try (Connection conn = DBUtil.getConnection();
 				PreparedStatement pStmt = conn.prepareStatement(sql)) {
 			pStmt.setString(1, cart.getAccountId());
 			pStmt.setInt(2, cart.getProductId());
@@ -187,6 +187,7 @@ public class CartDAO {
 					e
 					);
 			}
+
 	}
 	
 	// 注文確定後にカートを空にする
@@ -210,4 +211,21 @@ public class CartDAO {
 	        );
 	    }
 	}
+	
+	public boolean deleteByAccountId(Connection conn,String accountId) 
+		throws SQLException {
+		String sql = """
+				DELETE FROM cart
+				WHERE account_id = ?
+				""";
+		
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+			
+			pStmt.setString(1, accountId);
+			pStmt.executeUpdate();
+			
+			return true;
+			}
+		}
+
 }

@@ -28,10 +28,11 @@ public class OrderInfoDAO {
 				shipping_phone,
 				shipping_email,
 				shipping_payment,
-				shopping_date
+				shopping_date,
+				shopping_total_price
 				FROM order_info
 				WHERE shopping_user = ?
-				ORDER BY order_date DESC
+				ORDER BY shopping_date DESC
 				""";
 		try(Connection connection = DBUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sql)
@@ -56,8 +57,9 @@ public class OrderInfoDAO {
 						orderInfo.setShoppingDate(resultSet.getTimestamp("shopping_date").toLocalDateTime());
 						}
 					orderInfoList.add(orderInfo);
-					}
+					orderInfo.setShoppingTotalPrice(resultSet.getInt("shopping_total_price"));
 				}
+			}
 			
 			} catch (SQLException e) {
 				throw new RuntimeException(
@@ -65,6 +67,7 @@ public class OrderInfoDAO {
         }
 		return orderInfoList;
 	}
+
 	
 	public int insert(OrderInfo orderInfo) {
 		String sql = """
@@ -76,10 +79,11 @@ public class OrderInfoDAO {
 		shipping_phone,
 		shipping_email,
 		shipping_payment,
-		shopping_date
+		shopping_date,
+		shopping_total_price
 
 		)
-		VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+		VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?)
 		RETURNING shopping_id
 		""";
 		try (Connection conn = DBUtil.getConnection();
@@ -93,6 +97,7 @@ public class OrderInfoDAO {
 			pStmt.setString(5, orderInfo.getShippingPhone());
 			pStmt.setString(6, orderInfo.getShippingEmail());
 			pStmt.setString(7, orderInfo.getShippingPayment());
+			pStmt.setInt(8, orderInfo.getShoppingTotalPrice());
 			
 			try (ResultSet rs = pStmt.executeQuery()) {
 				if (rs.next()) {return rs.getInt("shopping_id");
@@ -104,5 +109,45 @@ public class OrderInfoDAO {
 		}
 		return 0;
 	}
+	
+	public int insert(Connection conn, OrderInfo orderInfo)
+			throws SQLException {
+			String sql = """
+					INSERT INTO order_info (
+					shopping_user,
+					shipping_name,
+					shipping_postal_code,
+					shipping_address,
+					shipping_phone,
+					shipping_email,
+					shipping_payment,
+					shopping_date,
+					shopping_total_price
+					)
+					VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP,?)
+					RETURNING shopping_id
+					""";
+			
+			try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				
+			pStmt.setString(1, orderInfo.getShoppingUser());
+			pStmt.setString(2, orderInfo.getShippingName());
+			pStmt.setString(3, orderInfo.getShippingPostalCode());
+			pStmt.setString(4, orderInfo.getShippingAddress());
+			pStmt.setString(5, orderInfo.getShippingPhone());
+			pStmt.setString(6, orderInfo.getShippingEmail());
+			pStmt.setString(7, orderInfo.getShippingPayment());
+			pStmt.setInt(8, orderInfo.getShoppingTotalPrice());
+			
+			try (ResultSet rs = pStmt.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt("shopping_id");
+				}
+			}
+		}
+			
+		return 0;
+	}
+
 }
 

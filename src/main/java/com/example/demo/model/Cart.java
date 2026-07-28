@@ -7,7 +7,9 @@ public class Cart {
 	private String accountId;
 	private Integer productId;
 	private Integer cartQuantity;
-	private LocalDateTime cartCreatedAt; 
+	private LocalDateTime cartCreatedAt;
+	private String productName;
+	private String productImgPath;
 	
 	public Cart() {}
 	
@@ -34,4 +36,9 @@ public class Cart {
 	public LocalDateTime getCartCreatedAt() {return cartCreatedAt;}
 	public void setCartCreatedAt(LocalDateTime cartCreatedAt) {this.cartCreatedAt = cartCreatedAt;}
 	
+	public String getProductName() {return productName;}
+	public void setProductName(String productName) {this.productName = productName;}
+
+	public String getProductImgPath() {return productImgPath;}
+	public void setProductImgPath(String productImgPath) {this.productImgPath = productImgPath;}
 }

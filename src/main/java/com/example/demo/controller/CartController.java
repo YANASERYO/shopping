@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.model.Account;
 import com.example.demo.model.Cart;
 import com.example.demo.service.CartService;
-
 @Controller
 public class CartController {
 	
@@ -45,9 +44,12 @@ public class CartController {
 		cartService.addCart(account.getAccountId(),productId,quantity);
 			return "redirect:/products";
 	}
+
 	
 	//	カート一覧表示
+
 	@GetMapping("/cart")
+
 		public String showCart(HttpSession session,Model model) {
 		
 		Account account = (Account)session.getAttribute("account");
@@ -67,6 +69,7 @@ public class CartController {
 	@PostMapping("/cart/update")
 	public String updateCart(
 			@RequestParam long cartId,
+			@RequestParam int productId,
 			@RequestParam int quantity,
 			HttpSession session){
 		
@@ -76,11 +79,15 @@ public class CartController {
 		    return "redirect:/login";
 		}
 		
-		cartService.updateQuantity(cartId,account.getAccountId(),quantity);
+		if (quantity <= 0) {
+	        return "redirect:/cart";
+	    }
+		
+		cartService.updateQuantity(cartId,account.getAccountId(),productId,quantity);
 		
 		return "redirect:/cart";
 	}
-	
+
 	// カートから商品削除
 	@PostMapping("/cart/delete")
 	public String deleteCart(
@@ -96,4 +103,5 @@ public class CartController {
 		cartService.removeCart(cartId, account.getAccountId());
 		return "redirect:/cart";
 	}
+
 }

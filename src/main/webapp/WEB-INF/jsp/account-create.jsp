@@ -24,11 +24,17 @@
 			    <option value="銀行振込">銀行振込</option>
 			</select>
 		</p>
-		<input type="submit" value="登録する">
+		<input type="submit" value="登録する" onclick="clickEvent()">
 	</form>
 	<br>
 	<form action="${pageContext.request.contextPath}/login" method="get">
 	    <input type="submit" value="ログイン画面へ戻る">
 	</form>
+	
+	<script>
+	function clickEvent(){
+		alert('会員登録しました');
+		}
+	</script>
 </body>
 </html>

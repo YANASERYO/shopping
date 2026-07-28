@@ -6,28 +6,56 @@
 
 <head>
 <meta charset="UTF-8">
-
 <title>ログイン画面</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<!-- フォント -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
 </head>
 
 <body>
+ <header>
+    <img class="logo" src="images/logo.png">
+    <h1>KINARI</h1>
+  </header>
 
-<h1>ログイン</h1>
+  <main class="loginbackground">
 
+    <h2>ログイン</h2>
+
+<p class="message">
+  オンラインストアを利用するにはアカウントにログインしてください。
+</p>
 
 <form action="${pageContext.request.contextPath}/login" method="post">
 
-    ユーザー名：<br>
-    <input type="text" name="accountId"><br><br>
+    <div class="inputbox">
+    <input type="text" name="accountId" placeholder="会員ID">
 
-    パスワード：<br>
-    <input type="password" name="accountPass"><br><br>
+    
+    <input type="password" name="accountPass" placeholder="パスワード">
+    </div>
 
-    <input type="submit" value="ログイン">
-    
-    
+    <input class="login-btn" type="submit" value="ログイン">
+  
+    <hr>
+    <p class="register-text">
+      未登録のお客様はこちらから
+    </p>
+
 </form>
- <p><a href="${pageContext.request.contextPath}/account-create">新規会員登録</a></p>
 
+     <p class="register-area">
+      <a class="register-btn" href="${pageContext.request.contextPath}/account-create">新規会員登録</a></p>
+          
+  </main>
+  <footer>
+    <div class="copyright">
+      <small>&copy; 2026 KINARI</small>
+    </div>
+
+  </footer>
 </body>
 </html>
