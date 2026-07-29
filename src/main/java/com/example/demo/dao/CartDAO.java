@@ -29,6 +29,7 @@ public class CartDAO {
 				c.cart_created_at,
 				p.product_name,
 				p.product_img_path
+				p.product_price
 				FROM cart c
 				INNER JOIN product p
 				ON c.product_id = p.product_id
@@ -50,6 +51,7 @@ public class CartDAO {
 					cart.setCartQuantity(rs.getInt("cart_quantity"));
 					cart.setProductName(rs.getString("product_name"));
 					cart.setProductImgPath(rs.getString("product_img_path"));
+					cart.setProductPrice(rs.getInt("product_price"));
 					Timestamp createdAt =
 							rs.getTimestamp("cart_created_at");
 					if(createdAt != null) {

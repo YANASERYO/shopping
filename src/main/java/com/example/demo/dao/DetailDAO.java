@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Detail;
 import com.example.demo.util.DBUtil;
+import com.example.demo.util.TaxUtil;
 
 @Repository
 public class DetailDAO {
@@ -112,6 +113,13 @@ public class DetailDAO {
 					detail.setProductPrice(resultSet.getInt("product_price"));
 					detail.setProductPieces(resultSet.getInt("product_pieces"));
 					detail.setProductTotal(resultSet.getInt("product_total"));	
+
+					
+					int productTaxAndPrice = TaxUtil.inflictPriceAndTax(detail.getProductTotal());
+					
+					detail.setProductTaxAndPrice(productTaxAndPrice);
+					
+
 					detailList.add(detail);
 				}
 			}

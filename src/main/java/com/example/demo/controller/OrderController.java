@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dao.ProductDAO;
 import com.example.demo.model.Account;
@@ -41,7 +42,8 @@ public class OrderController {
 			@RequestParam String shippingPhone,
 			@RequestParam String shippingEmail,
 			@RequestParam String shippingPayment,
-			HttpSession session) {
+			HttpSession session,
+			RedirectAttributes redirectAttributes) {
 		
 		Account account = (Account) session.getAttribute("account");
 		
@@ -65,6 +67,8 @@ public class OrderController {
 		if (shoppingId == 0) {
 			return "redirect:/cart";
 		}
+		
+		redirectAttributes.addFlashAttribute("shoppingId",shoppingId);
 		
 		return "redirect:/order/complete";
 	}

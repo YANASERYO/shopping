@@ -34,9 +34,10 @@
     <h2 class="concept">
         －自然と暮らす、心地よい毎日－
     </h2>
-
 </div>
-<div id=js-scroll-top>
+
+<div class="js-scroll-item">
+
 	<h3 class="menutitle">ABOUT</h3>
 	<p class="menutitleja">KINARIについて</p>
 	<p class="menutext">KINARI（キナリ）は、木の温もりと北欧デザインを大切にした家具・インテリアをお届けするオンラインショップです。<br>
@@ -46,7 +47,9 @@
 	お気に入りの一品との出会いを通して、心豊かで快適な住まいづくりをお手伝いします。</p>
 </div>
 <br>
-<div id=js-scroll-top>
+
+<div class="js-scroll-item">
+
 	<h4 class="menutitle">MENU</h4>
 	<div class="menu-contents">
 	
@@ -65,6 +68,8 @@
     </div>
 
 </footer>
-<script src="js/main.js"></script>
+
+<script src="${pageContext.request.contextPath}/js/main.js"></script>
+
 </body>
 </html>

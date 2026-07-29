@@ -1,15 +1,18 @@
-//スクロールで表示
+const scrollItems = document.querySelectorAll(".js-scroll-item");
+const observer = new IntersectionObserver(
+	(entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add("is-show");
+				observer.unobserve(entry.target);
+			}
+		});
+	},
+	{
+		threshold: 0.2
+	}
+);
+scrollItems.forEach((item) => {
+	observer.observe(item);
 
-const pageTopBtn = document.getElementById('js-scroll-top');
-window.addEventListener("scroll", () => {
-  const currentY = window.pageYOffset;
-  if ( currentY > 100){
-    setTimeout(function(){
-      pageTopBtn.style.opacity = 1;
-    }, 1);
-  } else {
-    setTimeout(function(){
-      pageTopBtn.style.opacity = 0;
-    }, 1);
-  }
 });
