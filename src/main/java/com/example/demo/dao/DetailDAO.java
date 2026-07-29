@@ -119,6 +119,7 @@ public class DetailDAO {
 					
 					detail.setProductTaxAndPrice(productTaxAndPrice);
 
+
 					detailList.add(detail);
 				}
 			}
