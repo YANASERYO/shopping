@@ -34,6 +34,7 @@
     <h2 class="concept">
         －自然と暮らす、心地よい毎日－
     </h2>
+
 </div>
 
 <div class="js-scroll-item">

@@ -118,7 +118,7 @@ public class DetailDAO {
 					int productTaxAndPrice = TaxUtil.inflictPriceAndTax(detail.getProductTotal());
 					
 					detail.setProductTaxAndPrice(productTaxAndPrice);
-					
+
 
 					detailList.add(detail);
 				}

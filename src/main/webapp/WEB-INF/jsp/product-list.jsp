@@ -95,8 +95,10 @@ Storage<br>
 	${product.productName}
 </p>
 
-<p class="product-price">
-	￥${product.formattedProductPrice}
+
+<p>
+	価格：${product.formattedProductPrice}円
+
 </p>
 
 <p>
