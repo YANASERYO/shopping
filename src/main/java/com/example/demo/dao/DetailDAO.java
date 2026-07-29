@@ -113,11 +113,13 @@ public class DetailDAO {
 					detail.setProductPrice(resultSet.getInt("product_price"));
 					detail.setProductPieces(resultSet.getInt("product_pieces"));
 					detail.setProductTotal(resultSet.getInt("product_total"));	
+
 					
 					int productTaxAndPrice = TaxUtil.inflictPriceAndTax(detail.getProductTotal());
 					
 					detail.setProductTaxAndPrice(productTaxAndPrice);
 					
+
 					detailList.add(detail);
 				}
 			}
