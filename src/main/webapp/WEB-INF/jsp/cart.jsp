@@ -4,6 +4,8 @@
 <%@ page import="com.example.demo.model.Cart" %>
 <%@ page import="com.example.demo.util.PriceUtil" %>
 <%@ page import="com.example.demo.model.Account" %>
+<%@ page import="com.example.demo.util.TaxUtil" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -116,9 +118,26 @@ for (Cart cart : cartList) {
 %>
 </table>
 <p>
-	合計金額：
+	小計：
 	<strong>
 		<%= PriceUtil.formatWithCommas(cartTotalPrice) %>円
+	</strong>
+</p>
+<%
+	int salesTax = TaxUtil.inflictTax(cartTotalPrice);
+	int priceAndTax = TaxUtil.inflictPriceAndTax(cartTotalPrice);
+%>
+<p>
+	消費税（10％）：
+	<strong>
+		<%= PriceUtil.formatWithCommas(salesTax) %>円
+	</strong>
+</p>
+
+<p>
+	税込合計：
+	<strong>
+		<%= PriceUtil.formatWithCommas(priceAndTax) %>円
 	</strong>
 </p>
 <%

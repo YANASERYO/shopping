@@ -28,7 +28,7 @@ public class CartDAO {
 				c.cart_quantity,
 				c.cart_created_at,
 				p.product_name,
-				p.product_img_path
+				p.product_img_path,
 				p.product_price
 				FROM cart c
 				INNER JOIN product p
