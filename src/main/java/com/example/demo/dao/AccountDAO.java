@@ -56,7 +56,6 @@ public class AccountDAO {
 				account.setPostalCode(rs.getString("postal_code"));
 				account.setAccountAddress(rs.getString("account_address"));
 				account.setAccountPhone(rs.getString("account_phone"));
-				
 				if (rs.getDate("birthday") != null) {
 					account.setBirthday(
 							rs.getDate("birthday").toLocalDate());
@@ -65,7 +64,7 @@ public class AccountDAO {
 				account.setEmail(rs.getString("email"));
 				account.setPayment(rs.getString("payment"));
 				account.setAdmin(rs.getBoolean("admin"));
-				
+				account.setAccountActive(rs.getBoolean("account_active"));
 				return account;
 				}
 	    		}

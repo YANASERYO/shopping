@@ -86,7 +86,15 @@ public class DetailDAO {
 				d.product_name,
 				d.product_price,
 				d.product_pieces,
-				d.product_total
+				d.product_total,
+				o.shopping_date,
+				o.shopping_total_price,
+				o.shipping_name,
+				o.shipping_postal_code,
+				o.shipping_address,
+				o.shipping_phone,
+				o.shipping_email,
+				o.shipping_payment
 				FROM detail d
 				INNER JOIN order_info o
 					ON d.shopping_id = o.shopping_id
@@ -114,13 +122,28 @@ public class DetailDAO {
 					detail.setProductPieces(resultSet.getInt("product_pieces"));
 					detail.setProductTotal(resultSet.getInt("product_total"));	
 
-					
+					if (resultSet.getTimestamp("shopping_date") != null) {
+						detail.setShoppingDate(
+								resultSet.getTimestamp("shopping_date").toLocalDateTime()
+						);
+					}
+					detail.setShoppingTotalPrice(
+						resultSet.getInt("shopping_total_price")
+					);
+
 					int productTaxAndPrice = TaxUtil.inflictPriceAndTax(detail.getProductTotal());
 					
 					detail.setProductTaxAndPrice(productTaxAndPrice);
 
 
 					detailList.add(detail);
+					
+					detail.setShippingName(resultSet.getString("shipping_name"));
+					detail.setShippingPostalCode(resultSet.getString("shipping_postal_code"));
+					detail.setShippingAddress(resultSet.getString("shipping_address"));
+					detail.setShippingPhone(resultSet.getString("shipping_phone"));
+					detail.setShippingEmail(resultSet.getString("shipping_email"));
+					detail.setShippingPayment(resultSet.getString("shipping_payment"));
 				}
 			}
 			

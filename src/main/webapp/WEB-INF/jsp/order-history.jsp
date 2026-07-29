@@ -27,6 +27,41 @@
                 <h3>
                     注文番号：${detail.shoppingId}
                 </h3>
+                <p>
+					購入日：${detail.shoppingDate}
+				</p>
+				<p>
+					注文合計：
+						<fmt:formatNumber
+							value="${detail.shoppingTotalPrice}"
+							pattern="#,###" />円
+					<br>
+					税込み金額：
+						<fmt:formatNumber
+						value="${detail.shoppingTaxAndPrice}"
+						pattern="#,###" />円
+				</p>
+				<div>
+					<h4>発送先情報</h4>
+					<p>
+						発送先氏名：${detail.shippingName}
+					</p>
+					<p>
+						郵便番号：〒${detail.shippingPostalCode}
+					</p>
+					<p>
+						住所：${detail.shippingAddress}
+					</p>
+					<p>
+						電話番号：${detail.shippingPhone}
+					</p>
+					<p>
+						メールアドレス：${detail.shippingEmail}
+					</p>
+					<p>
+						支払い方法：${detail.shippingPayment}
+					</p>
+				</div>
                 <table border="1">
                     <thead>
                         <tr>
@@ -34,7 +69,6 @@
                             <th>価格</th>
                             <th>数量</th>
                             <th>小計</th>
-                            <th>税込金額</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,11 +88,6 @@
                 <td>
                     <fmt:formatNumber value="${detail.productTotal}" pattern="#,###" />円
                 </td>
-                <td>
-					<fmt:formatNumber
-						value="${detail.productTaxAndPrice}"
-						pattern="#,###" />円
-				</td>
             </tr>
         </c:forEach>
         </tbody>
