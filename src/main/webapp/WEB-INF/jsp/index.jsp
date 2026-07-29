@@ -51,7 +51,8 @@
       <a class="register-btn" href="${pageContext.request.contextPath}/account-create">新規会員登録</a></p>
           
   </main>
-  <footer>
+ 	<footer>
+ 	<a href="${pageContext.request.contextPath}/recruit">採用情報</a>
     <div class="copyright">
       <small>&copy; 2026 KINARI</small>
     </div>

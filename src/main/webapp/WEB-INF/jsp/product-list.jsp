@@ -66,7 +66,7 @@ Dining Table<br>
 </p>
 
 <p>
-	価格：${product.productPrice}円
+	価格：${product.formattedProductPrice}円
 </p>
 
 <p>

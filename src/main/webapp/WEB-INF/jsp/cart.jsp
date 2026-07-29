@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.demo.model.Cart" %>
+<%@ page import="com.example.demo.util.PriceUtil" %>
 
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,7 @@ if (cartList == null || cartList.isEmpty())
 <p>カートに商品はありません。</p>
 <%
 } else {
+	int cartTotalPrice = 0;
 %>
 
 <table border="1">
@@ -26,14 +28,17 @@ if (cartList == null || cartList.isEmpty())
 		<th>画像</th>
 		<th>商品ID</th>
 		<th>商品名</th>
+		<th>単価</th>
 		<th>数量</th>
+		<th>小計</th>
 		<th>変更</th>
 	<th>削除</th>
 </tr>
 
 <%
 for (Cart cart : cartList) {
-
+	int productTotal = cart.getProductTotal();
+	cartTotalPrice += productTotal;
 %>
 
 <tr>
@@ -55,10 +60,10 @@ for (Cart cart : cartList) {
 		%>
 	</td>
 	<td><%= cart.getProductId() %></td>
-	
 	<td><%= cart.getProductName() %></td>
-
+	<td><%= cart.getFormattedProductPrice() %>円</td>
 	<td><%= cart.getCartQuantity() %></td>
+	<td><%= cart.getFormattedProductTotal() %>円</td>
 	<td>
 	<form action="<%= request.getContextPath() %>/cart/update" method="post">
 		<input type="hidden" name="cartId" value="<%= cart.getCartId() %>">
@@ -78,6 +83,12 @@ for (Cart cart : cartList) {
 }
 %>
 </table>
+<p>
+	合計金額：
+	<strong>
+		<%= PriceUtil.formatWithCommas(cartTotalPrice) %>円
+	</strong>
+</p>
 <%
 }
 %>

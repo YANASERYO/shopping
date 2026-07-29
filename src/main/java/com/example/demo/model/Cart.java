@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import java.time.LocalDateTime;
 
+import com.example.demo.util.PriceUtil;
+
 public class Cart {
 	private Long cartId;
 	private String accountId;
@@ -10,6 +12,8 @@ public class Cart {
 	private LocalDateTime cartCreatedAt;
 	private String productName;
 	private String productImgPath;
+	
+	private Integer productPrice;
 	
 	public Cart() {}
 	
@@ -41,4 +45,11 @@ public class Cart {
 
 	public String getProductImgPath() {return productImgPath;}
 	public void setProductImgPath(String productImgPath) {this.productImgPath = productImgPath;}
+	
+	public Integer getProductPrice() {return productPrice;}
+	public void setProductPrice(Integer productPrice) {this.productPrice = productPrice;}
+	
+	public String getFormattedProductPrice() {return PriceUtil.formatWithCommas(productPrice);}
+	public int getProductTotal() {return productPrice * cartQuantity;}
+	public String getFormattedProductTotal() {return PriceUtil.formatWithCommas(getProductTotal());}
 }

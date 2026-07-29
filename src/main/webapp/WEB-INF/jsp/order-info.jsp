@@ -53,9 +53,15 @@
 		</select>
 	</p>
 	<p>
-		注文合計金額：
-		<strong>${shoppingTotalPrice}円</strong>
+		商品小計：${shoppingTotalPrice}円
 	</p>
+	<p>
+		消費税：${taxPrice}円
+	</p>
+	<p>
+		税込合計：<strong>${taxAndShoppingPrice}円</strong>
+	</p>
+
 	<input type="submit" value="注文確定">
 </form>
 <p>

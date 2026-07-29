@@ -11,9 +11,6 @@ import com.example.demo.dao.AccountDAO;
 import com.example.demo.model.Account;
 import com.example.demo.util.PassEncoderUtil;
 
-//処理の不足を修正
-
-//処理の不足を修正
 
 //ログイン
 @Controller

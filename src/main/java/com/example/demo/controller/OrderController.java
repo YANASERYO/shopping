@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dao.ProductDAO;
 import com.example.demo.model.Account;
@@ -17,6 +18,8 @@ import com.example.demo.model.OrderInfo;
 import com.example.demo.model.Product;
 import com.example.demo.service.CartService;
 import com.example.demo.service.OrderService;
+import com.example.demo.util.TaxUtil;
+
 
 @Controller
 public class OrderController {
@@ -39,7 +42,8 @@ public class OrderController {
 			@RequestParam String shippingPhone,
 			@RequestParam String shippingEmail,
 			@RequestParam String shippingPayment,
-			HttpSession session) {
+			HttpSession session,
+			RedirectAttributes redirectAttributes) {
 		
 		Account account = (Account) session.getAttribute("account");
 		
@@ -57,12 +61,14 @@ public class OrderController {
 		orderInfo.setShippingEmail(shippingEmail);
 		orderInfo.setShippingPayment(shippingPayment);
 		
-		int shoppingId = orderService.createOrder(account);
+		int shoppingId = orderService.createOrder(account, orderInfo);
 		
 		// カートが空、または注文登録失敗
 		if (shoppingId == 0) {
 			return "redirect:/cart";
 		}
+		
+		redirectAttributes.addFlashAttribute("shoppingId",shoppingId);
 		
 		return "redirect:/order/complete";
 	}
@@ -102,9 +108,17 @@ public class OrderController {
 				}
 		}
 		
+		int taxPrice = TaxUtil.inflictTax(shoppingTotalPrice);
+		int taxAndShoppingPrice = TaxUtil.inflictPriceAndTax(shoppingTotalPrice);
+		
+		
 		model.addAttribute("account", account);
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("shoppingTotalPrice",shoppingTotalPrice);
+		model.addAttribute("taxPrice", taxPrice);
+		model.addAttribute("taxAndShoppingPrice",taxAndShoppingPrice
+		);
+		
 		
 	return "order-info";
 }
