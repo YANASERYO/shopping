@@ -9,6 +9,8 @@ public class Detail {
 	private Integer productPieces;
 	private Integer productTotal;
 	
+	private Integer productTaxAndPrice;
+	
 	public Detail() {}
 	
 	public Detail(Long detailId, Integer shoppingId,Integer productId,String productName,
@@ -43,4 +45,6 @@ public class Detail {
 	public Integer getProductTotal() {return productTotal;}
 	public void setProductTotal(Integer productTotal) {this.productTotal = productTotal;}
 	
+	public Integer getProductTaxAndPrice() {return productTaxAndPrice;}
+	public void setProductTaxAndPrice(Integer productTaxAndPrice) {this.productTaxAndPrice = productTaxAndPrice;}
 }

@@ -3,6 +3,8 @@ package com.example.demo.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.example.demo.util.PriceUtil;
+
 //Lombokのimport文を追加/柳瀬
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,5 +28,8 @@ public class Product implements Serializable {
 	private LocalDateTime productCreatedAt; // 登録日
 	private LocalDateTime productUpdateAt; // 更新日時
 	private boolean productActive; // 販売状態	
-
+	
+	public String getFormattedProductPrice() {
+		return PriceUtil.formatWithCommas(productPrice);
+	}
 }
