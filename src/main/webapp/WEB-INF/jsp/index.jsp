@@ -6,7 +6,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>ログイン画面</title>
+<title>LOGIN｜KINARI</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <!-- フォント -->
@@ -23,7 +23,7 @@
 
   <main class="loginbackground">
 
-    <h2>ログイン</h2>
+    <h2>LOGIN</h2>
 
 <p class="message">
   オンラインストアを利用するにはアカウントにログインしてください。
