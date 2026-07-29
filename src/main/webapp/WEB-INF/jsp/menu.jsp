@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>メニュー画面</title>
+<title>MENU｜KINARI</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <!-- フォント -->
@@ -60,7 +60,10 @@
 	
 	</div>
 </div>
-
+<div class="recruit-link"></div>
+<hr>
+<a class="recruit-linktext" href="${pageContext.request.contextPath}/recruit">営業職採用情報<p>社員インタビュー、募集要項などはこちらから</p></a>
+<hr>
   </main>
 <footer>
     <div class="copyright">
