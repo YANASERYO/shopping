@@ -28,14 +28,17 @@
     <a class="logout" href="${pageContext.request.contextPath}/logout">ログアウト</a>
     </div>
   </header>
-  <main class="munubackground">
+  <main class="menubackground">
 
-<div class="roomimg">
-    <h2 class="concept">
-        －自然と暮らす、心地よい毎日－
-    </h2>
+	<div class="roomimg">
+		<div class="js-scroll-item">
+	    <h2 class="concept">
+	        －自然と暮らす、心地よい毎日－
+	    </h2>
+	    </div>
+	</div>
 
-</div>
+
 
 <div class="js-scroll-item">
 
@@ -67,10 +70,12 @@
 <hr>
   </main>
 <footer>
+	<div class="recruit">
+		<a href="${pageContext.request.contextPath}/recruit">採用情報</a>
+    </div>
     <div class="copyright">
       <small>&copy; 2026 KINARI</small>
     </div>
-
 </footer>
 
 <script src="${pageContext.request.contextPath}/js/main.js"></script>

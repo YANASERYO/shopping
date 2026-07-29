@@ -1,5 +1,9 @@
 package com.example.demo.model;
 
+import java.time.LocalDateTime;
+
+import com.example.demo.util.TaxUtil;
+
 public class Detail {
 	private Long detailId;
 	private Integer shoppingId;
@@ -9,7 +13,18 @@ public class Detail {
 	private Integer productPieces;
 	private Integer productTotal;
 	
+//	表示用
+	private LocalDateTime shoppingDate;
+	private Integer shoppingTotalPrice;
 	private Integer productTaxAndPrice;
+	
+//	発送内容の表示
+	private String shippingName;
+	private String shippingPostalCode;
+	private String shippingAddress;
+	private String shippingPhone;
+	private String shippingEmail;
+	private String shippingPayment;
 	
 	public Detail() {}
 	
@@ -45,6 +60,42 @@ public class Detail {
 	public Integer getProductTotal() {return productTotal;}
 	public void setProductTotal(Integer productTotal) {this.productTotal = productTotal;}
 	
+//	表示用
+	public LocalDateTime getShoppingDate() {return shoppingDate;}
+	public void setShoppingDate(LocalDateTime shoppingDate) {this.shoppingDate = shoppingDate;}
+
+	public Integer getShoppingTotalPrice() {return shoppingTotalPrice;}
+	public void setShoppingTotalPrice(Integer shoppingTotalPrice) {this.shoppingTotalPrice = shoppingTotalPrice;}
+	
 	public Integer getProductTaxAndPrice() {return productTaxAndPrice;}
 	public void setProductTaxAndPrice(Integer productTaxAndPrice) {this.productTaxAndPrice = productTaxAndPrice;}
+	
+//	shoppingIdごとの税込み金額
+	public Integer getShoppingTaxAndPrice() {
+
+		if (shoppingTotalPrice == null) {
+			return 0;
+		}
+
+		return TaxUtil.inflictPriceAndTax(shoppingTotalPrice);
+	}
+	
+//	order-historyにorder-infoの表示
+	public String getShippingName() {return shippingName;}
+	public void setShippingName(String shippingName) {this.shippingName = shippingName;}
+	
+	public String getShippingPostalCode() {return shippingPostalCode;}
+	public void setShippingPostalCode(String shippingPostalCode) {this.shippingPostalCode = shippingPostalCode;}
+
+	public String getShippingAddress() {return shippingAddress;}
+	public void setShippingAddress(String shippingAddress) {this.shippingAddress = shippingAddress;}
+
+	public String getShippingPhone() {return shippingPhone;}
+	public void setShippingPhone(String shippingPhone) {this.shippingPhone = shippingPhone;}
+
+	public String getShippingEmail() {return shippingEmail;}
+	public void setShippingEmail(String shippingEmail) {this.shippingEmail = shippingEmail;}
+
+	public String getShippingPayment() {return shippingPayment;}
+	public void setShippingPayment(String shippingPayment) {this.shippingPayment = shippingPayment;}
 }
