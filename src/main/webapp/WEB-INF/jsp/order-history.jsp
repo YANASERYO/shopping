@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,6 +10,7 @@
 </head>
 <body>
 <h2>購入履歴</h2>
+
 <c:choose>
     <c:when test="${empty detailList}">
         <p>購入履歴はありません。</p>
@@ -68,5 +70,6 @@
         メニューへ戻る
     </a>
 </p>
+
 </body>
 </html>

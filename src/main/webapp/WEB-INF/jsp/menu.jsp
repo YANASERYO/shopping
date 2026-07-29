@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>メニュー画面</title>
+<title>MENU｜KINARI</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <!-- フォント -->
@@ -34,8 +34,11 @@
     <h2 class="concept">
         －自然と暮らす、心地よい毎日－
     </h2>
+
 </div>
+
 <div class="js-scroll-item">
+
 	<h3 class="menutitle">ABOUT</h3>
 	<p class="menutitleja">KINARIについて</p>
 	<p class="menutext">KINARI（キナリ）は、木の温もりと北欧デザインを大切にした家具・インテリアをお届けするオンラインショップです。<br>
@@ -45,7 +48,9 @@
 	お気に入りの一品との出会いを通して、心豊かで快適な住まいづくりをお手伝いします。</p>
 </div>
 <br>
+
 <div class="js-scroll-item">
+
 	<h4 class="menutitle">MENU</h4>
 	<div class="menu-contents">
 	
@@ -56,7 +61,10 @@
 	
 	</div>
 </div>
-
+<div class="recruit-link"></div>
+<hr>
+<a class="recruit-linktext" href="${pageContext.request.contextPath}/recruit">営業職採用情報<p>社員インタビュー、募集要項などはこちらから</p></a>
+<hr>
   </main>
 <footer>
     <div class="copyright">
@@ -64,6 +72,8 @@
     </div>
 
 </footer>
+
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
+
 </body>
 </html>

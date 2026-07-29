@@ -14,4 +14,5 @@ const observer = new IntersectionObserver(
 );
 scrollItems.forEach((item) => {
 	observer.observe(item);
+
 });

@@ -383,18 +383,43 @@ grid-row-gap: 0px;
 	height: auto;
 	
 }
+.recruit-link {
+	padding-left: 2rem;
+}
+.recruit-linktext {
+	color: #030303;
+	border: none;
+	font-size: 1.5rem;
+	padding-left: 7rem;
+	text-decoration: none;
+	font-weight: bold;
+}
+.recruit-linktext p {
+	padding-left: 7rem;
+	font-size: 1rem;
+	font-weight: normal;
+}
+	
+	
+
 
 /*商品一覧--------------------------------------------*/
 
 .product-img {
 	width:20rem;
 	height:auto;
-	padding-left: 2rem;
+	
 }
-
 .category-menu {
 	display: flex;
 	justify-content: space-around;
+}
+
+.category-menu a {
+	
+	border: none;
+	text-decoration: none;
+	color: #030303;
 }
 
 .product-detail {
@@ -424,6 +449,70 @@ grid-row-gap: 0px;
 	color: black;
 	
 }
+.product-name {
+	font-family: "Marcellus", serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 2rem;
+	color: #030303;
+	
+}
+.product-price {
+	font-family: "Marcellus", serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 1.3rem;
+	color: #030303;
+	text-align: right;
+	
+}
+.quantity {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding-right: 15rem;
+}
+.cart-btn {
+	width: 15rem;
+	height: 2rem;
+	background-color: #030303;
+	color: #e5e5e5;
+	margin-left: 2rem ;
+
+}
+.cart-btn:hover{
+  background-color: #aaaaaa;
+  color: #030303;
+}
+
+/*注文完了画面----------------------------------------*/
+.thankyou {
+	text-align: center;
+	font-size: 2rem;
+}
+.order-complete-main {
+	min-height: 80vh;
+	width: 100%;
+}
+.link-btn {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+}
+.link-btn a {
+	border: none;
+	text-decoration: none;
+	color: #e5e5e5;
+	background-color: rgb(105, 66, 22);
+	margin: 2rm;
+	padding: 1rem;
+	
+	
+}
+.link-btn a:hover {
+	background-color: rgb(200, 152, 130);
+}
+
 
 /*JS用のcss*/
 .js-scroll-item {
@@ -438,4 +527,30 @@ grid-row-gap: 0px;
 	opacity: 1;
 	transform: translateY(0);
 }
+
+
+/*管理者ページ用*/
+.admin-title{
+    color: black;
+    text-align: center;
+    font-size: 40px;
+    margin:10px 0px 20px;
+}
+.admin-tags{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
+}
+.admin-table {
+    border-collapse: collapse;
+}
+
+.admin-table,
+.admin-table th,
+.admin-table td {
+    border: 3px solid rgb(192, 192, 192);
+}
+
 
