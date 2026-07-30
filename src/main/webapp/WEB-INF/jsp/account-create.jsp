@@ -8,10 +8,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
+<title>アカウント作成</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="images/favicon.png">
+=======
 <title>アカウント作成 | KINARI</title>
 <link rel="stylesheet"
       href="${pageContext.request.contextPath}/css/style.css">
 <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/favicon.png">
+>>>>>>> origin/main
 <!-- フォント -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
