@@ -4,6 +4,8 @@
 <%@ page import="com.example.demo.model.Cart" %>
 <%@ page import="com.example.demo.util.PriceUtil" %>
 <%@ page import="com.example.demo.model.Account" %>
+<%@ page import="com.example.demo.util.TaxUtil" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -49,12 +51,12 @@
 <%List<Cart> cartList =(List<Cart>) request.getAttribute("cartList");
 if (cartList == null || cartList.isEmpty()) 
 {%>
-<p>カートに商品はありません。</p>
+<p class="not-in-the-cart">カートに商品はありません。</p>
 <%
 } else {
 	int cartTotalPrice = 0;
 %>
-
+<div class= "cart-list">
 <table border="1">
     <tr>
 		<th>画像</th>
@@ -115,20 +117,47 @@ for (Cart cart : cartList) {
 }
 %>
 </table>
+</div>
+<div class="cart-price">
 <p>
-	合計金額：
+	小計：
 	<strong>
 		<%= PriceUtil.formatWithCommas(cartTotalPrice) %>円
 	</strong>
 </p>
 <%
+	int salesTax = TaxUtil.inflictTax(cartTotalPrice);
+	int priceAndTax = TaxUtil.inflictPriceAndTax(cartTotalPrice);
+%>
+<p>
+	消費税（10％）：
+	<strong>
+		<%= PriceUtil.formatWithCommas(salesTax) %>円
+	</strong>
+</p>
+
+<p>
+	税込合計：
+	<strong>
+		<%= PriceUtil.formatWithCommas(priceAndTax) %>円
+	</strong>
+</p>
+</div>
+
+
+<form action="<%= request.getContextPath() %>/order/buy" method="get">
+    <input class="buy-btn" type="submit" value="購入する">
+</form>
+
+
+<%
 }
 %>
+<div class="link-btn">
 <a href="<%= request.getContextPath() %>/products"> 商品一覧へ戻る </a>
 <a href="<%= request.getContextPath() %>/menu"> メニューへ戻る </a>
-<form action="<%= request.getContextPath() %>/order/buy" method="get">
-    <input type="submit" value="購入する">
-</form>
+</div>
+
 </main>
 
 <footer>
