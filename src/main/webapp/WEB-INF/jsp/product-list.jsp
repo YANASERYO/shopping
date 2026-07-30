@@ -96,8 +96,8 @@ Storage<br>
 </p>
 
 
-<p>
-	価格：${product.formattedProductPrice}円
+<p class="product-price">
+	￥${product.formattedProductPrice}
 
 </p>
 
@@ -148,7 +148,7 @@ Storage<br>
 </c:forEach>
 
 <hr>
-
+<div class="link-btn">
 <p>
 <a href="${pageContext.request.contextPath}/menu">
 	メニューへ戻る
@@ -160,6 +160,7 @@ Storage<br>
 	カートを見る
 </a>
 </p>
+</div>
 
 	<script>
 	function clickEvent(){

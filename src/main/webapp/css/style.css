@@ -383,6 +383,26 @@ grid-row-gap: 0px;
   background-color: #aaaaaa;
   color: #030303;
 }
+/*カート----------------------------------------------*/
+.not-in-the-cart {
+	text-align: center;
+	font-size: 2rem;
+}
+.cart-list table {
+	margin: 2rem auto;
+	
+}
+
+.cart-price {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+}
+.buy-btn, .edit-btn {
+	background-color: #030303;
+	color: #e5e5e5;
+	padding: 1rem;
+}
 
 /*注文完了画面----------------------------------------*/
 .thankyou {
@@ -397,6 +417,8 @@ grid-row-gap: 0px;
 	display: flex;
 	justify-content: center;
 	gap: 2rem;
+	margin-bottom: 2rem;
+	margin-top: 2rem;
 }
 .link-btn a {
 	border: none;
@@ -426,7 +448,6 @@ grid-row-gap: 0px;
 	opacity: 1;
 	transform: translateY(0);
 }
-
 
 
 /*管理者ページ用*/
@@ -459,4 +480,5 @@ grid-row-gap: 0px;
 .recruit{
 	display: flex;
 }
+
 
