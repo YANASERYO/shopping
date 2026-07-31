@@ -142,12 +142,14 @@ for (Cart cart : cartList) {
 		<%= PriceUtil.formatWithCommas(priceAndTax) %>円
 	</strong>
 </p>
+
 </div>
 
 
 <form action="<%= request.getContextPath() %>/order/buy" method="get">
     <input class="buy-btn" type="submit" value="購入する">
 </form>
+
 
 
 <%

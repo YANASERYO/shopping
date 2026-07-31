@@ -44,11 +44,20 @@
 	</p>
 	<p>
 		郵便番号<br>
-		<input type="text" name="shippingPostalCode" value="${account.postalCode}" required>
+		<input type="text" id="shippingPostalCode" name="shippingPostalCode" value="${account.postalCode}" maxlength="8" required>
 	</p>
+	<button type="button"
+		class="postal-code-search-button"
+		data-postal-code-id="shippingPostalCode"
+		data-address-id="shippingAddress"
+		data-message-id="shippingPostalCodeMessage"
+		data-context-path="${pageContext.request.contextPath}">
+		住所検索
+	</button>
+	<p id="shippingPostalCodeMessage"></p>
 	<p>
 		発送先住所<br>
-		<input type="text" name="shippingAddress" value="${account.accountAddress}" size="50" required>
+		<input type="text" id="shippingAddress" name="shippingAddress" value="${account.accountAddress}" size="50" required>
 	</p>
 	<p>
 		電話番号<br>
@@ -107,5 +116,8 @@
     </div>
 
 </footer>
+
+<script src="${pageContext.request.contextPath}/js/postal-code.js"></script>
+
 </body>
 </html>
