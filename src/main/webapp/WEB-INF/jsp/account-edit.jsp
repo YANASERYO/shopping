@@ -41,26 +41,82 @@
 
 <h2>アカウント編集</h2>
 
-<form action="accountEdit" method="post">
+<c:if test="${not empty accountEditError}">
+		<p>${accountEditError}</p>
+	</c:if>
 
-氏名<br>
-<input type="text" name="accountName"><br><br>
+	<form action="${pageContext.request.contextPath}/accountEdit" method="post">
 
-郵便番号<br>
-<input type="text" name="postalCode"><br><br>
+		<p>アカウントID<br>
+			<input type="text" value="${account.accountId}" readonly>
+		</p>
 
-住所<br>
-<input type="text" name="accountAddress"><br><br>
+		<p>氏名<br>
+			<input type="text" name="accountName"
+				value="${account.accountName}" required>
+		</p>
 
-電話番号<br>
-<input type="text" name="accountPhone"><br><br>
+		<p>郵便番号<br>
+			<input type="text" id="postalCode" name="postalCode"
+				value="${account.postalCode}" maxlength="8" required>
+		</p>
 
-メールアドレス<br>
-<input type="text" name="email"><br><br>
+		<button type="button"
+			class="postal-code-search-button"
+			data-postal-code-id="postalCode"
+			data-address-id="accountAddress"
+			data-message-id="postalCodeMessage"
+			data-context-path="${pageContext.request.contextPath}">
+			住所検索
+		</button>
 
-<input class="edit-btn" type="submit" value="更新">
+		<p id="postalCodeMessage"></p>
 
-</form>
+		<p>住所<br>
+			<input type="text" id="accountAddress" name="accountAddress"
+				value="${account.accountAddress}" required>
+		</p>
+
+		<p>電話番号<br>
+			<input type="text" name="accountPhone"
+				value="${account.accountPhone}" required>
+		</p>
+
+		<p>生年月日<br>
+			<input type="date" name="birthday"
+				value="${account.birthday}" required>
+		</p>
+
+		<p>メールアドレス<br>
+			<input type="email" name="email"
+				value="${account.email}" required>
+		</p>
+
+		<p>支払い方法<br>
+			<select name="payment" required>
+				<option value="">選択してください</option>
+				<option value="クレジットカード"
+					${account.payment == 'クレジットカード' ? 'selected' : ''}>
+					クレジットカード
+				</option>
+				<option value="代金引換"
+					${account.payment == '代金引換' ? 'selected' : ''}>
+					代金引換
+				</option>
+				<option value="銀行振込"
+					${account.payment == '銀行振込' ? 'selected' : ''}>
+					銀行振込
+				</option>
+			</select>
+		</p>
+
+		<p>新しいパスワード<br>
+			<input type="password" name="accountPass">
+		</p>
+		<p>変更しない場合は空欄にしてください。</p>
+
+		<input class="edit-btn" type="submit" value="更新">
+	</form>
 
 </main>
 
@@ -70,6 +126,6 @@
     </div>
 
 </footer>
-
+<script src="${pageContext.request.contextPath}/js/postal-code.js"></script>
 </body>
 </html>

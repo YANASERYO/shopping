@@ -51,7 +51,6 @@
 	お気に入りの一品との出会いを通して、心豊かで快適な住まいづくりをお手伝いします。</p>
 </div>
 <br>
-
 <div class="js-scroll-item">
 
 	<h4 class="menutitle">MENU</h4>
@@ -64,15 +63,20 @@
 	
 	</div>
 </div>
-<div class="recruit-link"></div>
-<hr>
-<a class="recruit-linktext" href="${pageContext.request.contextPath}/recruit">営業職採用情報<p>社員インタビュー、募集要項などはこちらから</p></a>
-<hr>
+<div class="recruit-link">
+	<hr>
+		<th>
+			<a class="recruit-linktext" href="${pageContext.request.contextPath}/company">会社概要<p>会社概要/代表からの御挨拶は<strong>こちら</strong>から</p></a>
+		</th>
+	</hr>
+	<hr>
+		<th>
+			<a class="recruit-linktext" href="${pageContext.request.contextPath}/recruit">営業職採用情報<p>社員インタビュー、募集要項などは<strong>こちら</strong>から</p></a>
+		</th>
+	</hr>
+</div>
   </main>
 <footer>
-	<div class="recruit">
-		<a href="${pageContext.request.contextPath}/recruit">採用情報</a>
-    </div>
     <div class="copyright">
       <small>&copy; 2026 KINARI</small>
     </div>
