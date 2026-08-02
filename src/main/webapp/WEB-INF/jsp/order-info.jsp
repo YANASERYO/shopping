@@ -116,6 +116,8 @@
     </div>
 
 </footer>
+
 <script src="${pageContext.request.contextPath}/js/postal-code.js"></script>
+
 </body>
 </html>

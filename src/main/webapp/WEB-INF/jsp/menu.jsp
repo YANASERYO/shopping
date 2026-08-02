@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MENU｜KINARI</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/favicon.png">
@@ -31,11 +32,14 @@
   <main class="menubackground">
 
 	<div class="roomimg">
-		<div class="js-scroll-item">
-	    <h2 class="concept">
+		<img alt="部屋の写真" src="images/roomimg.jpg">
+		
+		<div class="hero-text">
+	    <h2 class="js-scroll-item">
 	        －自然と暮らす、心地よい毎日－
 	    </h2>
 	    </div>
+	    
 	</div>
 
 

@@ -70,12 +70,16 @@
 			住所検索
 		</button>
 
+
+<input class="edit-btn" type="submit" value="更新">
+
 		<p id="postalCodeMessage"></p>
 
 		<p>住所<br>
 			<input type="text" id="accountAddress" name="accountAddress"
 				value="${account.accountAddress}" required>
 		</p>
+
 
 		<p>電話番号<br>
 			<input type="text" name="accountPhone"
@@ -118,6 +122,7 @@
 		<input class="edit-btn" type="submit" value="更新">
 	</form>
 
+
 </main>
 
 <footer>
@@ -126,6 +131,8 @@
     </div>
 
 </footer>
+
 <script src="${pageContext.request.contextPath}/js/postal-code.js"></script>
+
 </body>
 </html>

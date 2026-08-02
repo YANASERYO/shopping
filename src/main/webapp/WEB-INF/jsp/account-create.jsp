@@ -1,6 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="com.example.demo.model.Account" %>
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+=======
+>>>>>>> main
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,13 +65,23 @@
 	<form action="${pageContext.request.contextPath}/login" method="get">
 	    <input type="submit" value="ログイン画面へ戻る">
 	</form>
+
+	<script>
+	function clickEvent(){
+		alert('会員登録しました');
+		}
+	</script>
 	</main>
+
+
 <footer>
     <div class="copyright">
       <small>&copy; 2026 KINARI</small>
     </div>
 
 </footer>
+
 <script src="${pageContext.request.contextPath}/js/postal-code.js"></script>
+
 </body>
 </html>
