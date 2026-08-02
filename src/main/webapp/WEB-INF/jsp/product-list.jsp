@@ -6,6 +6,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ITEMS｜KINARI</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/favicon.png">
@@ -96,8 +97,8 @@ Storage<br>
 </p>
 
 
-<p>
-	価格：${product.formattedProductPrice}円
+<p class="product-price">
+	￥${product.formattedProductPrice}
 
 </p>
 
@@ -133,7 +134,7 @@ Storage<br>
 				   min="1"
 				   max="${product.productStock}">
 				   
-			<input class="cart-btn" type="submit" value="カートに追加" onclick="clickEvent()">
+			<input class="cart-btn" type="submit" value="カートに追加">
 			</div>
 		</form>
 		
@@ -148,7 +149,7 @@ Storage<br>
 </c:forEach>
 
 <hr>
-
+<div class="link-btn">
 <p>
 <a href="${pageContext.request.contextPath}/menu">
 	メニューへ戻る
@@ -160,12 +161,8 @@ Storage<br>
 	カートを見る
 </a>
 </p>
+</div>
 
-	<script>
-	function clickEvent(){
-		alert('カートに商品を追加しました');
-		}
-	</script>
 </main>
 <footer>
     <div class="copyright">

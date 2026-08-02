@@ -51,12 +51,12 @@
 <%List<Cart> cartList =(List<Cart>) request.getAttribute("cartList");
 if (cartList == null || cartList.isEmpty()) 
 {%>
-<p>カートに商品はありません。</p>
+<p class="not-in-the-cart">カートに商品はありません。</p>
 <%
 } else {
 	int cartTotalPrice = 0;
 %>
-
+<div class= "cart-list">
 <table border="1">
     <tr>
 		<th>画像</th>
@@ -117,6 +117,8 @@ for (Cart cart : cartList) {
 }
 %>
 </table>
+</div>
+<div class="cart-price">
 <p>
 	小計：
 	<strong>
@@ -140,14 +142,24 @@ for (Cart cart : cartList) {
 		<%= PriceUtil.formatWithCommas(priceAndTax) %>円
 	</strong>
 </p>
+
+
+</div>
+
+
+<form action="<%= request.getContextPath() %>/order/buy" method="get">
+    <input class="buy-btn" type="submit" value="購入する">
+</form>
+
+
 <%
 }
 %>
+<div class="link-btn">
 <a href="<%= request.getContextPath() %>/products"> 商品一覧へ戻る </a>
 <a href="<%= request.getContextPath() %>/menu"> メニューへ戻る </a>
-<form action="<%= request.getContextPath() %>/order/buy" method="get">
-    <input type="submit" value="購入する">
-</form>
+</div>
+
 </main>
 
 <footer>
