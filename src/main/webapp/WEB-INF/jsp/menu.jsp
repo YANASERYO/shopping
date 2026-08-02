@@ -32,6 +32,7 @@
   <main class="menubackground">
 
 	<div class="roomimg">
+
 		<img alt="部屋の写真" src="images/roomimg.jpg">
 		
 		<div class="hero-text">
@@ -39,7 +40,7 @@
 	        －自然と暮らす、心地よい毎日－
 	    </h2>
 	    </div>
-	    
+
 	</div>
 
 
@@ -81,6 +82,9 @@
 </div>
   </main>
 <footer>
+	<div class="recruit">
+		<a href="${pageContext.request.contextPath}/recruit">採用情報</a>
+    </div>
     <div class="copyright">
       <small>&copy; 2026 KINARI</small>
     </div>

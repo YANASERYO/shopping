@@ -1,20 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="com.example.demo.model.Account" %>
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-=======
->>>>>>> main
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
+
+
 <title>アカウント作成 | KINARI</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/favicon.png">
+
 
 <!-- フォント -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

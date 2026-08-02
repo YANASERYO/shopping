@@ -486,6 +486,7 @@ grid-row-gap: 0px;
 }
 
 
+
 /*管理者ページ用*/
 .admin-title{
     color: black;
@@ -516,6 +517,7 @@ grid-row-gap: 0px;
 .recruit{
 	display: flex;
 }
+
 
 /*デスクトップ版---------------------------------------*/
 
@@ -618,3 +620,4 @@ grid-row-gap: 0px;
 }
 
 }
+

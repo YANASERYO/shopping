@@ -1,4 +1,4 @@
-package com.example.demo;
+//package com.example.demo;
 //
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //
@@ -9,6 +9,5 @@ package com.example.demo;
 //
 //        System.out.println("adminpass: " + encoder.encode("adminpass"));
 //        System.out.println("userpass: " + encoder.encode("userpass"));
-//        System.out.println("notadminpass: " + encoder.encode("notadminpass"));
 //    }
 //}
