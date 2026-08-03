@@ -44,7 +44,8 @@
     		<p class="input-error"><c:out value="${accountIdError}" /></p>
     </c:if>
     
-    <input type="password" name="accountPass" placeholder="パスワード">
+    <input type="password" name="accountPass" id="inputPassword" placeholder="パスワード">
+    <label for="inputCheckbox"><input id="inputCheckbox" type="checkbox"> パスワードを表示する</label>
 	<c:if test="${not empty accountPassError}">
     		<p class="input-error"><c:out value="${accountPassError}" /></p>
     </c:if>
@@ -64,11 +65,27 @@
           
   </main>
  	<footer>
- 	<a href="${pageContext.request.contextPath}/recruit">採用情報</a>
+ 	
     <div class="copyright">
       <small>&copy; 2026 KINARI</small>
     </div>
 
   </footer>
+  <script>
+  document.addEventListener('DOMContentLoaded', function(event) {
+
+	  const targetElement = document.getElementById('inputPassword');
+	  const triggerElement = document.getElementById('inputCheckbox');
+
+	  triggerElement.addEventListener('change', function(event) {
+	    if ( this.checked ) {
+	      targetElement.setAttribute('type', 'text');
+	    } else {
+	      targetElement.setAttribute('type', 'password');
+	    }
+	  }, false);
+
+	}, false);
+  </script>
 </body>
 </html>
