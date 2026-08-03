@@ -40,9 +40,7 @@ public class PostalCodeController {
 		}
 
 		String address =
-				valueOrEmpty(result.getPrefecture())
-				+ valueOrEmpty(result.getCity())
-				+ valueOrEmpty(result.getTown());
+				valueOrEmpty(result.getPrefecture()) + valueOrEmpty(result.getCity()) + valueOrEmpty(result.getTown());
 
 		response.put("found", true);
 		response.put("address", address);

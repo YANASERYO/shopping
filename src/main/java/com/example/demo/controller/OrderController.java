@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dao.ProductDAO;
 import com.example.demo.model.Account;
@@ -33,17 +31,11 @@ public class OrderController {
 	    this.productDAO = productDAO;
 		}
 	
-	// 注文確定
+	// 次へ
 	@PostMapping("/order/confirm")
 	public String confirmOrder(
-			@RequestParam String shippingName,
-			@RequestParam String shippingPostalCode,
-			@RequestParam String shippingAddress,
-			@RequestParam String shippingPhone,
-			@RequestParam String shippingEmail,
-			@RequestParam String shippingPayment,
 			HttpSession session,
-			RedirectAttributes redirectAttributes) {
+			Model model) {
 		
 		Account account = (Account) session.getAttribute("account");
 		
@@ -52,63 +44,49 @@ public class OrderController {
 			return "redirect:/login";
 		}
 		
-		if (shippingName == null || shippingName.isBlank()
-				|| shippingPostalCode == null || shippingPostalCode.isBlank()
-				|| shippingAddress == null || shippingAddress.isBlank()
-				|| shippingPhone == null || shippingPhone.isBlank()
-				|| shippingEmail == null || shippingEmail.isBlank()
-				|| shippingPayment == null || shippingPayment.isBlank()) {
-			redirectAttributes.addFlashAttribute("orderError","未入力の項目があります。");
-			
-		    return "redirect:/order/buy";
-		}
-		
-		if (!shippingPostalCode.matches("\\d{3}-?\\d{4}")) {
-			
-			redirectAttributes.addFlashAttribute("orderError","郵便番号は123-4567の形式で入力してください。");
-			return "redirect:/order/buy";
-		}
-		
-		if (!shippingPhone.matches("[0-9-]{10,13}")) {
-			
-			redirectAttributes.addFlashAttribute("orderError","電話番号を正しい形式で入力してください。");
-			return "redirect:/order/buy";
-		}
-		
-		OrderInfo orderInfo = new OrderInfo();
-		orderInfo.setShoppingUser(account.getAccountId());
-		orderInfo.setShippingName(shippingName);
-		orderInfo.setShippingPostalCode(shippingPostalCode);
-		orderInfo.setShippingAddress(shippingAddress);
-		orderInfo.setShippingPhone(shippingPhone);
-		orderInfo.setShippingEmail(shippingEmail);
-		orderInfo.setShippingPayment(shippingPayment);
-		
-		int shoppingId;
-		try {
-		    shoppingId = orderService.createOrder(account,orderInfo);
-		} catch (RuntimeException e) {
-		    redirectAttributes.addFlashAttribute("orderError","注文を確定できませんでした。在庫状況をご確認のうえ、もう一度お試しください。"
-		    		);
-		    return "redirect:/order/buy";
-		}
-		
-		if (shoppingId == 0) {
-			redirectAttributes.addFlashAttribute("cartError","カートに商品がありません。");
-			return "redirect:/cart";
-		}
-		
-		redirectAttributes.addFlashAttribute("shoppingId",shoppingId);
-		return "redirect:/order/complete";
+
+		List<Cart> cartList =
+	            cartService.getCartList(account.getAccountId());
+
+	    if (cartList == null || cartList.isEmpty()) {
+	        return "redirect:/cart";
+	    }
+
+	    model.addAttribute("account", account);
+	    model.addAttribute("cartList", cartList);
+
+	    return "order-confirm";
+
 	}
 	
 	// 注文完了画面
+	@PostMapping("/order/complete")
+	public String completeOrder(HttpSession session,OrderInfo orderInfo) {
+		Account account = (Account) session.getAttribute("account");
+
+	    if (account == null) {
+	        return "redirect:/login";
+	    }
+	    
+	    orderInfo.setShoppingUser(account.getAccountId());
+
+	    int shoppingId = orderService.createOrder(account,orderInfo);
+
+	    if (shoppingId == 0) {
+	        return "redirect:/cart";
+	    }
+
+	    return "redirect:/order/complete";
+	}
+	
 	@GetMapping("/order/complete")
 	public String showComplete(HttpSession session) {
-		if (session.getAttribute("account") == null) {
-			return "redirect:/login";
-		}
-		return "order-complete";
+
+	    if (session.getAttribute("account") == null) {
+	        return "redirect:/login";
+	    }
+
+	    return "order-complete";
 	}
 
 	//menu.jspからorder-infoへ遷移	

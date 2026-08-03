@@ -204,6 +204,10 @@ hr{
   background-color: #ad8776;
 }
 
+input[type="checkbox"] {
+  transform: scale(0.4); /* 0.4倍のサイズ */
+}
+
 /*メニュー画面------------------------------------------*/
 
 .roomimg{
