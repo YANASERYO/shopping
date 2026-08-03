@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CART｜KINARI</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/favicon.png">
@@ -68,6 +69,7 @@ if (cartList == null || cartList.isEmpty())
 } else {
 	int cartTotalPrice = 0;
 %>
+<div class="cart-wrapper">
 <div class= "cart-list">
 <table border="1">
     <tr>
@@ -115,13 +117,13 @@ for (Cart cart : cartList) {
 		<input type="hidden" name="cartId" value="<%= cart.getCartId() %>">
 		<input type="hidden" name="productId" value="<%= cart.getProductId() %>">
 		<input type="number" name="quantity" value="<%= cart.getCartQuantity() %>" min="1" required>
-		<input type="submit" value="更新">
+		<input class="cart-edit-btn" type="submit" value="更新">
 	</form>
     </td>
     <td>
     <form action="<%= request.getContextPath() %>/cart/delete" method="post">
 	    <input type="hidden" name="cartId" value="<%= cart.getCartId() %>">
-	    <input type="submit" value="削除">
+	    <input class="cart-edit-btn" type="submit" value="削除">
     </form>
 	</td>
 </tr>
@@ -156,6 +158,7 @@ for (Cart cart : cartList) {
 </p>
 
 
+</div>
 </div>
 
 

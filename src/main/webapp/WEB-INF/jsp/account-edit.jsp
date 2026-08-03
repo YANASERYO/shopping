@@ -121,7 +121,11 @@
 
 		<input class="edit-btn" type="submit" value="更新">
 	</form>
-
+	<div class="link-btn">
+		<a href="${pageContext.request.contextPath}/menu">
+		メニューへ戻る
+		</a>
+	</div>
 
 </main>
 

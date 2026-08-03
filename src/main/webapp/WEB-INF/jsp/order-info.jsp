@@ -100,12 +100,15 @@
 		税込合計：<strong>${taxAndShoppingPrice}円</strong>
 	</p>
 
-	<input type="submit" value="注文確定">
+	<input type="submit" value="次へ">
 </form>
 <div class="link-btn">
 <p>
 	<a href="${pageContext.request.contextPath}/cart">
 		カートへ戻る
+	</a>
+	<a href="${pageContext.request.contextPath}/menu">
+	メニューへ戻る
 	</a>
 </p>
 </div>
