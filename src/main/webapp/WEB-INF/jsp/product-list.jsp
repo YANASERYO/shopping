@@ -38,6 +38,18 @@
   </header>
   <main>
 
+<c:if test="${not empty cartMessage}">
+	<p class="message success-message">
+		<c:out value="${cartMessage}" />
+	</p>
+</c:if>
+
+<c:if test="${not empty cartError}">
+	<p class="message error-message">
+		<c:out value="${cartError}" />
+	</p>
+</c:if>
+
 <h2 class="menutitle">ITEMS</h2>
 <h3 class="subtitle">CATEGORY</h3>
 <div class="category-menu">

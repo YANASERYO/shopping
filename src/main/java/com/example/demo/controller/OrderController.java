@@ -52,6 +52,29 @@ public class OrderController {
 			return "redirect:/login";
 		}
 		
+		if (shippingName == null || shippingName.isBlank()
+				|| shippingPostalCode == null || shippingPostalCode.isBlank()
+				|| shippingAddress == null || shippingAddress.isBlank()
+				|| shippingPhone == null || shippingPhone.isBlank()
+				|| shippingEmail == null || shippingEmail.isBlank()
+				|| shippingPayment == null || shippingPayment.isBlank()) {
+			redirectAttributes.addFlashAttribute("orderError","未入力の項目があります。");
+			
+		    return "redirect:/order/buy";
+		}
+		
+		if (!shippingPostalCode.matches("\\d{3}-?\\d{4}")) {
+			
+			redirectAttributes.addFlashAttribute("orderError","郵便番号は123-4567の形式で入力してください。");
+			return "redirect:/order/buy";
+		}
+		
+		if (!shippingPhone.matches("[0-9-]{10,13}")) {
+			
+			redirectAttributes.addFlashAttribute("orderError","電話番号を正しい形式で入力してください。");
+			return "redirect:/order/buy";
+		}
+		
 		OrderInfo orderInfo = new OrderInfo();
 		orderInfo.setShoppingUser(account.getAccountId());
 		orderInfo.setShippingName(shippingName);
@@ -61,15 +84,21 @@ public class OrderController {
 		orderInfo.setShippingEmail(shippingEmail);
 		orderInfo.setShippingPayment(shippingPayment);
 		
-		int shoppingId = orderService.createOrder(account, orderInfo);
+		int shoppingId;
+		try {
+		    shoppingId = orderService.createOrder(account,orderInfo);
+		} catch (RuntimeException e) {
+		    redirectAttributes.addFlashAttribute("orderError","注文を確定できませんでした。在庫状況をご確認のうえ、もう一度お試しください。"
+		    		);
+		    return "redirect:/order/buy";
+		}
 		
-		// カートが空、または注文登録失敗
 		if (shoppingId == 0) {
+			redirectAttributes.addFlashAttribute("cartError","カートに商品がありません。");
 			return "redirect:/cart";
 		}
 		
 		redirectAttributes.addFlashAttribute("shoppingId",shoppingId);
-		
 		return "redirect:/order/complete";
 	}
 	
