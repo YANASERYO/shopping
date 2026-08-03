@@ -110,7 +110,7 @@ Storage<br>
 
 
 <p class="product-price">
-	￥${product.formattedProductPrice}
+	￥${product.formattedProductPrice}(税抜)
 
 </p>
 

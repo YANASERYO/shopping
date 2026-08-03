@@ -107,6 +107,9 @@
 	<a href="${pageContext.request.contextPath}/cart">
 		カートへ戻る
 	</a>
+	<a href="${pageContext.request.contextPath}/menu">
+	メニューへ戻る
+	</a>
 </p>
 </div>
 </main>
