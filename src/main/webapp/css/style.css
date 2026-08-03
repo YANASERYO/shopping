@@ -1,112 +1,20 @@
-/*body {*/
-/*    margin: 0;*/
-/*    font-family: "Yu Gothic", "Meiryo", sans-serif;*/
-/*    font-size: 18px;*/
-/*    line-height: 1.7;*/
-/*    color: #111;*/
-/*    background-color: #fff;*/
-/*}*/
 
-/*.container {*/
-/*    width: min(900px, 92%);*/
-/*    margin: 0 auto;*/
-/*    padding: 32px 0 60px;*/
-/*}*/
-
-/*h1 {*/
-/*    font-size: 36px;*/
-/*}*/
-
-/*h2 {*/
-/*    font-size: 26px;*/
-/*}*/
-
-/*h3 {*/
-/*    margin-top: 28px;*/
-/*    font-size: 22px;*/
-/*}*/
-
-/*.lead {*/
-/*    font-size: 20px;*/
-/*}*/
-
-/*.order-card {*/
-/*    margin: 28px 0;*/
-/*    padding: 28px;*/
-/*    border: 3px solid #333;*/
-/*    border-radius: 12px;*/
-/*}*/
-
-/*.customer-info {*/
-/*    display: grid;*/
-/*    grid-template-columns: 180px 1fr;*/
-/*    gap: 10px;*/
-/*}*/
-
-/*.customer-info dt {*/
-/*    font-weight: bold;*/
-/*}*/
-
-/*.customer-info dd {*/
-/*    margin: 0;*/
-/*}*/
-
-/*.order-detail {*/
-/*    margin: 18px 0;*/
-/*    padding: 20px;*/
-/*    border: 2px solid #777;*/
-/*    border-radius: 10px;*/
-/*}*/
-
-/*.product-name {*/
-/*    font-size: 22px;*/
-/*    font-weight: bold;*/
-/*}*/
-
-/*.total-price {*/
-/*    padding-top: 18px;*/
-/*    border-top: 3px solid #222;*/
-/*    font-size: 26px;*/
-/*    font-weight: bold;*/
-/*}*/
-
-/*.button {*/
-/*    display: inline-block;*/
-/*    padding: 14px 24px;*/
-/*    border: 2px solid #111;*/
-/*    border-radius: 8px;*/
-/*    color: #111;*/
-/*    text-decoration: none;*/
-/*    font-weight: bold;*/
-/*}*/
-
-/*.message {*/
-/*    padding: 20px;*/
-/*    border: 2px solid #333;*/
-/*}*/
-
-/*@media (max-width: 600px) {*/
-
-/*    .customer-info {*/
-/*        grid-template-columns: 1fr;*/
-/*    }*/
-
-/*    .customer-info dd {*/
-/*        margin-bottom: 12px;*/
-/*    }*/
-
-/*    .button {*/
-/*        display: block;*/
-/*        text-align: center;*/
-/*    }*/
-/*}*/
 @charset "UTF-8";
 /* 全画面共通------------------------------------------------------------------------------------*/
 /* 全体 */
 body{
-
+  font-family: "Zen Old Mincho", serif;
   margin:0;
+  color: rgb(46, 26, 1);
   background: #f5f5f5;
+}
+
+a { 
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
 }
 /* タイトル */
 h1 {
@@ -127,16 +35,17 @@ h1 {
 }
 
 /* ヘッダー */
-header{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-  height: 100px;
-  background: #10533e;
-  padding-left: 2rem;
+
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: auto;
+	padding: 1rem;
+	justify-content: center;
+	  gap: 1rem;
+	  margin: 0;
+	  background: #10533e;
 }
 
 .logotitle{
@@ -144,11 +53,17 @@ header{
 	display: flex;
 	align-items: center;
 }
+.logotitle {
+	margin:0;
+}
 
-.header-menu{
+
+.header-menu {
+	margin-top: 1rem;
 	display: flex;
-	gap: 2rem;
-	margin-right: 2rem;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
 	
 }
 .header-menu a {
@@ -157,6 +72,7 @@ header{
 	color: #e5e5e5;
 	
 }
+
 
 /* フッター */
 footer{
@@ -180,7 +96,8 @@ footer{
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  background-position: 30% center;
+  min-height: 80vh;
   width: 100%;
   padding-bottom: 2rem;
   margin-bottom: 0;
@@ -288,21 +205,30 @@ hr{
 }
 
 /*メニュー画面------------------------------------------*/
+
 .roomimg{
-  background-color: #d9d9d9;
-  background-image: url("../images/roomimg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-  width: 100%;
-  padding-bottom: 2rem;
-  margin-bottom: 0;
+	position: relative;
+	
 }
-.concept {
-  font-family: "Zen Old Mincho", serif;
-  font-weight: 400;
-  font-style: normal;
+
+.roomimg img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.hero-text {
+	position: absolute;
+	top:30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: #4b2e1f;
+	text-align: center;
+	white-space: nowrap;
+	
+}
+.hero-text h2 {
+	font-size: 1.5rem;
 }
 
 .menubackground{
@@ -383,30 +309,63 @@ grid-row-gap: 0px;
 	height: auto;
 	
 }
+.recruit-link {
+	padding-left: 1rem;
+}
+.recruit-linktext {
+	color: #030303;
+	border: none;
+	font-size: 1.5rem;
+	padding-left: 1rem;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+
+.recruit-linktext p {
+	padding-left: 1rem;
+
+	font-size: 1rem;
+	font-weight: normal;
+}
+	
+	
+
 
 /*商品一覧--------------------------------------------*/
 
 .product-img {
-	width:20rem;
+	width:80%;
 	height:auto;
-	padding-left: 2rem;
+	
 }
-
 .category-menu {
 	display: flex;
 	justify-content: space-around;
 }
 
+.category-menu a {
+	
+	border: none;
+	text-decoration: none;
+	color: #030303;
+}
+
+
 .product-detail {
-	display: flex;
-	align-items: flex-start;
-	gap: 3rem;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.5rem;
+	text-align: center;
+	margin: 2rem;
 }
 
 .product-description {
 	display: flex;
 	flex-direction: column;
+}
+.product-description {
+	width:90%;
 }
 	 
 
@@ -424,6 +383,93 @@ grid-row-gap: 0px;
 	color: black;
 	
 }
+.product-name {
+	font-family: "Marcellus", serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 2rem;
+	color: #030303;
+	
+}
+.product-price {
+	font-family: "Marcellus", serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 1.3rem;
+	color: #030303;
+	text-align: right;
+	
+}
+
+.quantity {
+	
+	justify-content: center;
+	
+	padding-right: 0;
+}
+.cart-btn {
+	width: 15rem;
+	height: 2rem;
+	background-color: #030303;
+	color: #e5e5e5;
+	margin-left: 2rem ;
+
+}
+.cart-btn:hover{
+  background-color: #aaaaaa;
+  color: #030303;
+}
+/*カート----------------------------------------------*/
+.not-in-the-cart {
+	text-align: center;
+	font-size: 2rem;
+}
+.cart-list table {
+	margin: 2rem auto;
+	
+}
+
+.cart-price {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+}
+.buy-btn, .edit-btn {
+	background-color: #030303;
+	color: #e5e5e5;
+	padding: 1rem;
+}
+
+/*注文完了画面----------------------------------------*/
+.thankyou {
+	text-align: center;
+	font-size: 2rem;
+}
+.order-complete-main {
+	min-height: 80vh;
+	width: 100%;
+}
+.link-btn {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+	margin-bottom: 2rem;
+	margin-top: 2rem;
+}
+.link-btn a {
+	border: none;
+	text-decoration: none;
+	color: #e5e5e5;
+	background-color: rgb(105, 66, 22);
+	margin: 2rm;
+	padding: 1rem;
+	
+	
+}
+.link-btn a:hover {
+	background-color: rgb(200, 152, 130);
+}
+
 
 /*JS用のcss*/
 .js-scroll-item {
@@ -437,5 +483,141 @@ grid-row-gap: 0px;
 .js-scroll-item.is-show {
 	opacity: 1;
 	transform: translateY(0);
+}
+
+
+
+/*管理者ページ用*/
+.admin-title{
+    color: black;
+    text-align: center;
+    font-size: 40px;
+    margin:10px 0px 20px;
+}
+.admin-tags{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
+}
+.admin-table {
+    border-collapse: collapse;
+}
+
+.admin-table,
+.admin-table th,
+.admin-table td {
+    border: 3px solid rgb(192, 192, 192);
+}
+
+
+
+/*リクルート*/
+.recruit{
+	display: flex;
+}
+
+
+/*デスクトップ版---------------------------------------*/
+
+@media (min-width: 600px) {
+	
+
+
+/* メニュー*/
+.roomimg{
+  background-position: 40% center;
+  min-height: 100vh;
+}
+
+.hero-text h2 {
+	font-size: 2rem;
+}
+
+.recruit-linktext {
+	
+	font-size: 2rem;
+	padding-left: 7rem;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+
+.recruit-linktext p {
+	padding-left: 7rem;
+
+	font-size: 1rem;
+	font-weight: normal;
+}
+/*商品一覧*/
+.product-img {
+	width: 50%;
+	height: auto;
+}
+
+.product-detail {
+	flex-direction: initial;
+	display: flex;
+	align-items: flex-start;
+	gap: 3rem;
+	justify-content: center;
+}
+.product-description {
+	display: flex;
+	flex-direction: column;
+}
+
+.quantity {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding-right: 15rem;
+}
+
+}
+@media (min-width: 900px) {
+	
+	
+	/*ヘッダー*/
+	header{
+	  display: flex;
+	  align-items: center;
+	  padding: 0;
+	  height: 100px;
+	  flex-direction: row;
+	  padding-left: 2rem;
+	  padding-right: 2rem;
+	}
+	.header-menu{
+		display: flex;
+		justify-content: flex-end;
+		gap: 2rem;
+		margin-right: 2rem;
+		flex-direction: initial;
+		padding-bottom: 1rem;
+		white-space: nowrap;
+		
+	}
+
+	.logotitle {
+		margin-right: auto;
+		
+		
+	}
+/* メニュー*/
+.roomimg{
+  background-position: 60% center;
+  min-height: 100vh;
+}
+.hero-text h2 {
+	font-size: 2.5rem;
+}
+/*商品一覧*/
+.product-img {
+	width: 40%;
+	height: auto;
+}
+
 }
 

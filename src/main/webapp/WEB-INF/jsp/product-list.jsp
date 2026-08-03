@@ -6,7 +6,8 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>商品一覧</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITEMS｜KINARI</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <!-- フォント -->
@@ -37,15 +38,33 @@
   </header>
   <main>
 
+<c:if test="${not empty cartMessage}">
+	<p class="message success-message">
+		<c:out value="${cartMessage}" />
+	</p>
+</c:if>
+
+<c:if test="${not empty cartError}">
+	<p class="message error-message">
+		<c:out value="${cartError}" />
+	</p>
+</c:if>
+
 <h2 class="menutitle">ITEMS</h2>
 <h3 class="subtitle">CATEGORY</h3>
 <div class="category-menu">
-<p>Dining Table<br>ダイニングテーブル</p>
-<p>Dining Chair<br>ダイニングチェア</p>
-<p>Sofa<br>ソファ</p>
-<p>Low Table<br>ローテーブル</p>
-<p>Storage<br>収納</p>
-<p>TV Board<br>テレビボード</p>
+<a href="#table">
+Dining Table<br>ダイニングテーブル
+</a>
+<a href="#chair">
+Dining Chair<br>ダイニングチェア
+</a>
+<a href="#sofa">
+Sofa<br>ソファ
+</a>
+<a href="#storage">
+Storage<br>収納
+</a>
 </div>
 
 <c:if test="${empty productList}"> <p>現在、販売中の商品はありません。</p>
@@ -54,19 +73,45 @@
 <c:forEach var="product" items="${productList}">
 
 <hr>
-<p class="category-name">
+<c:if test="${product.productCategory == 'テーブル' }">
+<p class="category-name" id="table">
 Dining Table<br>
 ダイニングテーブル
 </p>
+</c:if>
+
+<c:if test="${product.productCategory == 'チェア' }">
+<p class="category-name" id="chair">
+Dining Chair<br>
+ダイニングチェア
+</p>
+</c:if>
+
+<c:if test="${product.productCategory == 'ソファ' }">
+<p class="category-name" id="sofa">
+Sofa<br>
+ソファ
+</p>
+</c:if>
+
+<c:if test="${product.productCategory == '収納家具' }">
+<p class="category-name" id="storage">
+Storage<br>
+収納
+</p>
+</c:if>
+
 <div class="product-detail">
 	<img class="product-img" src="${product.productImgPath}">
 <div class="product-description">
-<p>
-	商品名：${product.productName}
+<p class="product-name">
+	${product.productName}
 </p>
 
-<p>
-	価格：${product.formattedProductPrice}円
+
+<p class="product-price">
+	￥${product.formattedProductPrice}
+
 </p>
 
 <p>
@@ -93,7 +138,7 @@ Dining Table<br>
 			<input type="hidden"
 				   name="productId"
 				   value="${product.productId}">
-
+			<div class="quantity">
 			数量：
 			<input type="number"
 				   name="quantity"
@@ -101,7 +146,8 @@ Dining Table<br>
 				   min="1"
 				   max="${product.productStock}">
 				   
-			<input type="submit" value="カートに追加" onclick="clickEvent()">
+			<input class="cart-btn" type="submit" value="カートに追加">
+			</div>
 		</form>
 		
 	</c:when>
@@ -115,7 +161,7 @@ Dining Table<br>
 </c:forEach>
 
 <hr>
-
+<div class="link-btn">
 <p>
 <a href="${pageContext.request.contextPath}/menu">
 	メニューへ戻る
@@ -127,12 +173,8 @@ Dining Table<br>
 	カートを見る
 </a>
 </p>
+</div>
 
-	<script>
-	function clickEvent(){
-		alert('カートに商品を追加しました');
-		}
-	</script>
 </main>
 <footer>
     <div class="copyright">

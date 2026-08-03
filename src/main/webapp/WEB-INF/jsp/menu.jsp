@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>メニュー画面</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MENU｜KINARI</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <!-- フォント -->
@@ -28,13 +29,21 @@
     <a class="logout" href="${pageContext.request.contextPath}/logout">ログアウト</a>
     </div>
   </header>
-  <main class="munubackground">
+  <main class="menubackground">
 
-<div class="roomimg">
-    <h2 class="concept">
-        －自然と暮らす、心地よい毎日－
-    </h2>
-</div>
+	<div class="roomimg">
+
+		<img alt="部屋の写真" src="images/roomimg.jpg">
+		
+		<div class="hero-text">
+	    <h2 class="js-scroll-item">
+	        －自然と暮らす、心地よい毎日－
+	    </h2>
+	    </div>
+
+	</div>
+
+
 
 <div class="js-scroll-item">
 
@@ -47,7 +56,6 @@
 	お気に入りの一品との出会いを通して、心豊かで快適な住まいづくりをお手伝いします。</p>
 </div>
 <br>
-
 <div class="js-scroll-item">
 
 	<h4 class="menutitle">MENU</h4>
@@ -60,13 +68,26 @@
 	
 	</div>
 </div>
-
+<div class="recruit-link">
+	<hr>
+		<th>
+			<a class="recruit-linktext" href="${pageContext.request.contextPath}/company">会社概要<p>会社概要/代表からの御挨拶は<strong>こちら</strong>から</p></a>
+		</th>
+	</hr>
+	<hr>
+		<th>
+			<a class="recruit-linktext" href="${pageContext.request.contextPath}/recruit">営業職採用情報<p>社員インタビュー、募集要項などは<strong>こちら</strong>から</p></a>
+		</th>
+	</hr>
+</div>
   </main>
 <footer>
+	<div class="recruit">
+		<a href="${pageContext.request.contextPath}/recruit">採用情報</a>
+    </div>
     <div class="copyright">
       <small>&copy; 2026 KINARI</small>
     </div>
-
 </footer>
 
 <script src="${pageContext.request.contextPath}/js/main.js"></script>
