@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,9 +8,13 @@
 </head>
 <body>
 
+<c:if test="${not empty errorMessage}">
+    <p><c:out value="${errorMessage}" /></p>
+</c:if>
+
 <h2>商品編集・削除</h2>
 
-<form action="product-edit" method="post">
+<form action="${pageContext.request.contextPath}/admin/products/edit" method="post">
 
 <p>
 商品ID<br>
@@ -50,13 +54,13 @@
 <p>
 販売状態<br>
 <select name="productActive">
-    <option value="true">販売中</option>
-    <option value="false">販売停止</option>
+<option value="true"${product.productActive ? 'selected' : ''}>販売中</option>
+<option value="false"${!product.productActive ? 'selected' : ''}>販売停止</option>
 </select>
 </p>
 
 <input type="submit" name="action" value="更新">
-<input type="submit" name="delete" value="削除">
+<input type="submit" name="action" value="削除">
 
 </form>
 

@@ -32,7 +32,7 @@ public class CartService {
 			}
 		Product product = productDAO.findById((long) productId);
 		
-		if (product == null) {
+		if (product == null || !product.isProductActive()) {
 	        return false;
 	    }
 		
@@ -88,7 +88,7 @@ public class CartService {
 		
 		Product product = productDAO.findById((long) productId);
 		
-		if (product == null) {
+		if (product == null || !product.isProductActive()) {
 			return false;
 		}
 		
