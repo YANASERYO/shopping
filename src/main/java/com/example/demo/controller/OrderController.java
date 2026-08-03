@@ -44,6 +44,7 @@ public class OrderController {
 			return "redirect:/login";
 		}
 		
+
 		List<Cart> cartList =
 	            cartService.getCartList(account.getAccountId());
 
@@ -55,6 +56,7 @@ public class OrderController {
 	    model.addAttribute("cartList", cartList);
 
 	    return "order-confirm";
+
 	}
 	
 	// 注文完了画面

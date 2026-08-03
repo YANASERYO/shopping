@@ -44,8 +44,10 @@
     		<p class="input-error"><c:out value="${accountIdError}" /></p>
     </c:if>
     
+
     <input type="password" name="accountPass" id="inputPassword" placeholder="パスワード">
     <label for="inputCheckbox"><input id="inputCheckbox" type="checkbox"> パスワードを表示する</label>
+
 	<c:if test="${not empty accountPassError}">
     		<p class="input-error"><c:out value="${accountPassError}" /></p>
     </c:if>
