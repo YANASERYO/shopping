@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.example.demo.dao.ProductDAO;
 import com.example.demo.model.Account;
@@ -39,7 +41,9 @@ public class OrderController {
 	// 次へ
 	@PostMapping("/order/confirm")
 	public String confirmOrder(
+
 			@ModelAttribute OrderInfo orderInfo,
+
 			HttpSession session,
 			Model model) {
 		
@@ -53,6 +57,7 @@ public class OrderController {
 
 		List<Cart> cartList =
 	            cartService.getCartList(account.getAccountId());
+
 		
 		if (cartList == null || cartList.isEmpty()) {
 	        return "redirect:/cart";
@@ -81,14 +86,16 @@ public class OrderController {
 	
 	// 注文完了画面
 	@PostMapping("/order/complete")
+
 	public String completeOrder(HttpSession session,OrderInfo orderInfo,RedirectAttributes redirectAttributes) {
+
 		Account account = (Account) session.getAttribute("account");
 
 	    if (account == null) {
 	        return "redirect:/login";
 	    }
 	    
-	    
+
 	    orderInfo.setShoppingUser(account.getAccountId());
 
 	    int shoppingId = orderService.createOrder(account,orderInfo);
@@ -96,12 +103,13 @@ public class OrderController {
 	    if (shoppingId == 0) {
 	        return "redirect:/cart";
 	    }
+
 	    boolean mailSent =mailService.sendOrderCompleteMail(orderInfo);
 	    
 	    redirectAttributes.addFlashAttribute("mailSent",mailSent);
 	    redirectAttributes.addFlashAttribute("shippingEmail",orderInfo.getShippingEmail());
 	    redirectAttributes.addFlashAttribute("shoppingId",shoppingId);
-	    
+
 	    return "redirect:/order/complete";
 	}
 	
