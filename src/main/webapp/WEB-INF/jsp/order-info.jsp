@@ -25,6 +25,8 @@
     </div>
     <%Account account = (Account) session.getAttribute("account");%>
  	<div class="header-menu">
+ 	<a href="${pageContext.request.contextPath}/products">
+	商品一覧へ戻る</a>
  	<a href="${pageContext.request.contextPath}/menu">
 	メニューへ戻る</a>
 	<a href="${pageContext.request.contextPath}/cart">

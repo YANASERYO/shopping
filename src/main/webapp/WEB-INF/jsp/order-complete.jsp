@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=M+PLUS+Rounded+1c:wght@900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Zen+Old+Mincho:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<header >
+<header>
 	<div class="logotitle">
     <img class="logo" src="${pageContext.request.contextPath}/images/logo.png">
     <h1>KINARI</h1>
@@ -49,7 +49,21 @@
 <c:if test="${not empty shoppingId}">
 	<p>注文番号：<c:out value="${shoppingId}" /></p>
 </c:if>
+<c:choose>
+    <c:when test="${mailSent}">
+        <p class="mail-message">
+            <c:out value="${shippingEmail}" /> 宛に
+            注文確認メールを送信しました。
+        </p>
+    </c:when>
 
+    <c:otherwise>
+        <p class="mail-error">
+            注文は完了しましたが、
+            注文確認メールを送信できませんでした。
+        </p>
+    </c:otherwise>
+</c:choose>
 
 <div class="link-btn">
 
