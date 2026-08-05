@@ -7,6 +7,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>購入履歴 | KINARI</title>
 <link rel="stylesheet"
       href="${pageContext.request.contextPath}/css/style.css">
@@ -37,7 +38,7 @@
     <a class="logout" href="${pageContext.request.contextPath}/logout">ログアウト</a>
     </div>
   </header>
-  <main>
+  <main  class="order-history">
 <h2>購入履歴</h2>
 
 <c:choose>

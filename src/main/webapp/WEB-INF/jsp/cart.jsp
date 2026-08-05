@@ -24,6 +24,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=M+PLUS+Rounded+1c:wght@900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Zen+Old+Mincho:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
 <header >
 	<div class="logotitle">
     <img class="logo" src="images/logo.png">
