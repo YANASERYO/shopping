@@ -9,10 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.example.demo.dao.CartDAO;
 import com.example.demo.dao.ProductDAO;
 import com.example.demo.model.Account;
 import com.example.demo.model.Cart;
@@ -23,20 +22,23 @@ import com.example.demo.service.MailService;
 import com.example.demo.service.OrderService;
 import com.example.demo.util.TaxUtil;
 
+
 @Controller
 public class OrderController {
 	private final OrderService orderService;
 	private final CartService cartService;
 	private final ProductDAO productDAO;
 	private final MailService mailService;
+	private final CartDAO cartDAO;
 
 
 	public OrderController(OrderService orderService, CartService cartService, ProductDAO productDAO,
-			MailService mailService) {
+			MailService mailService, CartDAO cartDAO) {
 		this.orderService = orderService;
 		this.cartService = cartService;
 		this.productDAO = productDAO;
 		this.mailService = mailService;
+		this.cartDAO = cartDAO;
 	}
 	// 次へ
 	@PostMapping("/order/confirm")
@@ -102,49 +104,95 @@ public class OrderController {
 
 	// 注文完了画面
 	@PostMapping("/order/complete")
-
-
-	public String completeOrder(HttpSession session,OrderInfo orderInfo,RedirectAttributes redirectAttributes) {
+	public String completeOrder(
+			HttpSession session,
+			@ModelAttribute OrderInfo orderInfo,
+			RedirectAttributes redirectAttributes) {
 
 		Account account = (Account) session.getAttribute("account");
 
-	    if (account == null) {
-	        return "redirect:/login";
-	    }
-	    
-
-	    orderInfo.setShoppingUser(account.getAccountId());
-
+		if (account == null) {
+			return "redirect:/login";
+		}
 
 		try {
-			int shoppingId = orderService.createOrder(account, orderInfo);
+			/*
+			 * createOrder()でカートが削除されるため、
+			 * 注文登録前にメール用の商品情報を取得する
+			 */
+			List<Cart> cartList =
+			        cartDAO.findByAccountId(account.getAccountId());
 
-			if (shoppingId == 0) {
-				redirectAttributes.addFlashAttribute("cartError", "カートに商品がありません。");
+			if (cartList == null || cartList.isEmpty()) {
+				redirectAttributes.addFlashAttribute(
+						"cartError",
+						"カートに商品がありません。");
 
 				return "redirect:/cart";
 			}
-			boolean mailSent = mailService.sendOrderCompleteMail(orderInfo);
 
-			redirectAttributes.addFlashAttribute("mailSent", mailSent);
-			redirectAttributes.addFlashAttribute("shippingEmail", orderInfo.getShippingEmail());
-			redirectAttributes.addFlashAttribute("shoppingId", shoppingId);
+			/*
+			 * MailServiceで使用するアカウントIDを設定
+			 */
+			orderInfo.setShoppingUser(account.getAccountId());
+
+			/*
+			 * メールの小計・消費税・合計金額に使用するため、
+			 * カートの商品価格から小計を再計算する
+			 */
+			int shoppingTotalPrice = 0;
+
+			for (Cart cart : cartList) {
+				shoppingTotalPrice += cart.getProductPrice()
+						* cart.getCartQuantity();
+			}
+
+			orderInfo.setShoppingTotalPrice(
+					shoppingTotalPrice);
+
+			/*
+			 * 注文登録、明細登録、在庫更新、カート削除
+			 */
+			int shoppingId = orderService.createOrder(account, orderInfo);
+
+			if (shoppingId == 0) {
+				redirectAttributes.addFlashAttribute(
+						"cartError",
+						"注文を登録できませんでした。");
+
+				return "redirect:/cart";
+			}
+
+			/*
+			 * 注文登録前に取得したcartListを使ってメール送信
+			 */
+			boolean mailSent = mailService.sendOrderCompleteMail(
+					orderInfo,
+					cartList);
+
+			redirectAttributes.addFlashAttribute(
+					"mailSent",
+					mailSent);
+
+			redirectAttributes.addFlashAttribute(
+					"shippingEmail",
+					orderInfo.getShippingEmail());
+
+			redirectAttributes.addFlashAttribute(
+					"shoppingId",
+					shoppingId);
 
 			return "redirect:/order/complete";
+
 		} catch (RuntimeException e) {
-			redirectAttributes.addFlashAttribute("cartError", "注文処理中にエラーが発生しました。");
+			e.printStackTrace();
+
+			redirectAttributes.addFlashAttribute(
+					"cartError",
+					"注文処理中にエラーが発生しました。");
+
 			return "redirect:/cart";
 		}
-
-
-	    boolean mailSent =mailService.sendOrderCompleteMail(orderInfo);
-	    
-	    redirectAttributes.addFlashAttribute("mailSent",mailSent);
-	    redirectAttributes.addFlashAttribute("shippingEmail",orderInfo.getShippingEmail());
-	    redirectAttributes.addFlashAttribute("shoppingId",shoppingId);
-
-	    return "redirect:/order/complete";
-
 	}
 
 	@GetMapping("/order/complete")

@@ -66,7 +66,7 @@ public class AccountService {
 //		if(isBlank(accountId) || isBlank(newPassword)) {
 //			return false;
 //		}
-//		
+		
 ////		エンコード
 //		String encodePassword =
 //				PassEncoderUtil.encode(newPassword);

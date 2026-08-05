@@ -263,6 +263,7 @@ public class AccountDAO {
     		try (Connection conn = DBUtil.getConnection();
     		    	PreparedStatement pStmt = conn.prepareStatement(sql)
     		    	){
+    			pStmt.setString(8, account.getAccountId());
     			pStmt.setString(1, account.getAccountName());
     			pStmt.setString(2, account.getPostalCode());
     			pStmt.setString(3, account.getAccountAddress());
@@ -276,7 +277,6 @@ public class AccountDAO {
     			}
     			pStmt.setString(6, account.getEmail());
     			pStmt.setString(7, account.getPayment());
-    			pStmt.setString(8, account.getAccountId());
     			
     			int count = pStmt.executeUpdate();
     			

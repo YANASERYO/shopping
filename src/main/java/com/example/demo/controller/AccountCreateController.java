@@ -43,6 +43,8 @@ public class AccountCreateController {
 			@RequestParam String email,
 			@RequestParam String payment,
 			Model model) {
+//		テスト
+		System.out.println("birthday受信値：" + birthday);
 		
 		accountId = accountId.trim();
 		
