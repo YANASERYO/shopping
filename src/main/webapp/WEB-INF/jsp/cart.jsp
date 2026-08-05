@@ -108,8 +108,15 @@ for (Cart cart : cartList) {
 		%>
 	</td>
 	<td><%= cart.getProductId() %></td>
-	<td><%= cart.getProductName() %></td>
-	<td><%= cart.getFormattedProductPrice() %>円</td>
+	<td><%=cart.getProductName()%> <%
+		if (cart.isProductUpdatedAfterCart()) {
+		%>
+		<p class="product-update-warning">
+		商品情報が更新されています。<br> 価格が変更された可能性があります。
+		</p> <%
+		}%>
+	</td>
+	<td><%=cart.getFormattedProductPrice()%>円</td>
 	<td><%= cart.getCartQuantity() %></td>
 	<td><%= cart.getFormattedProductTotal() %>円</td>
 	<td>
