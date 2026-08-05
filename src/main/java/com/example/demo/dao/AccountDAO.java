@@ -218,7 +218,33 @@ public class AccountDAO {
 	    	}
 	    		
     }
-    
+
+//    	IDの重複に関して確認するメソッド
+	public boolean existsByAccountId(String accountId) {
+
+		String sql = """
+				SELECT 1
+				FROM accounts
+				WHERE account_id = ?
+				""";
+
+		try (
+				Connection conn = DBUtil.getConnection();
+				PreparedStatement pStmt = conn.prepareStatement(sql)) {
+
+			pStmt.setString(1, accountId);
+
+			try (ResultSet rs = pStmt.executeQuery()) {
+				return rs.next();
+			}
+
+		} catch (SQLException e) {
+			throw new RuntimeException(
+					"アカウントIDの確認に失敗しました。",
+					e);
+		}
+	}
+
 //    会員情報更新
     public boolean update(Account account) {
     		String sql = """

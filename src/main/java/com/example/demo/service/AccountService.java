@@ -1,14 +1,17 @@
 package com.example.demo.service;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.dao.AccountDAO;
 import com.example.demo.model.Account;
 import com.example.demo.util.PassEncoderUtil;
 
+@Service
 public class AccountService {
 	private final AccountDAO accountDAO;
 	
-	public AccountService() {
-		this.accountDAO =new AccountDAO();
+	public AccountService(AccountDAO accountDAO) {
+		this.accountDAO = accountDAO;
 	}
 	
 //	会員の登録
@@ -23,6 +26,12 @@ public class AccountService {
 			return false;
 		}
 		
+		if (accountDAO.existsByAccountId(
+				account.getAccountId())) {
+			
+			return false;
+		}
+		
 //		エンコード
 		String encodePassword =
 				PassEncoderUtil.encode(account.getAccountPass());
@@ -30,6 +39,16 @@ public class AccountService {
 		account.setAccountPass(encodePassword);
 		
 		return accountDAO.insert(account);
+	}
+
+	public boolean existsByAccountId(String accountId) {
+
+		if (isBlank(accountId)) {
+			return false;
+		}
+
+		return accountDAO.existsByAccountId(
+				accountId.trim());
 	}
 	
 //	会員情報更新

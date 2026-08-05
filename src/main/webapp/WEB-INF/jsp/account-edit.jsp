@@ -71,7 +71,6 @@
 		</button>
 
 
-<input class="edit-btn" type="submit" value="更新">
 
 		<p id="postalCodeMessage"></p>
 

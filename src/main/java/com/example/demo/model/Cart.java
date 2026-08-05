@@ -15,6 +15,9 @@ public class Cart {
 	
 	private Integer productPrice;
 	
+	private LocalDateTime productUpdateAt;
+	private boolean productUpdatedAfterCart;
+	
 	public Cart() {}
 	
 	public Cart(Long cartId,String accountId,Integer productId,Integer cartQuantity,LocalDateTime cartCreatedAt) {
@@ -52,4 +55,12 @@ public class Cart {
 	public String getFormattedProductPrice() {return PriceUtil.formatWithCommas(productPrice);}
 	public int getProductTotal() {return productPrice * cartQuantity;}
 	public String getFormattedProductTotal() {return PriceUtil.formatWithCommas(getProductTotal());}
+	
+	public LocalDateTime getProductUpdateAt() {return productUpdateAt;}
+	public void setProductUpdateAt(LocalDateTime productUpdateAt) {this.productUpdateAt = productUpdateAt;}
+
+	public boolean isProductUpdatedAfterCart() {return productUpdatedAfterCart;}
+	public void setProductUpdatedAfterCart(boolean productUpdatedAfterCart) {this.productUpdatedAfterCart = productUpdatedAfterCart;}
+
+
 }

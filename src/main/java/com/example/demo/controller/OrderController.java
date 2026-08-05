@@ -23,21 +23,21 @@ import com.example.demo.service.MailService;
 import com.example.demo.service.OrderService;
 import com.example.demo.util.TaxUtil;
 
-
 @Controller
 public class OrderController {
 	private final OrderService orderService;
 	private final CartService cartService;
 	private final ProductDAO productDAO;
 	private final MailService mailService;
-	
-	public OrderController(OrderService orderService,CartService cartService,ProductDAO productDAO,MailService mailService){
+
+	public OrderController(OrderService orderService, CartService cartService, ProductDAO productDAO,
+			MailService mailService) {
 		this.orderService = orderService;
 		this.cartService = cartService;
-	    this.productDAO = productDAO;
-	    this.mailService = mailService;
-		}
-	
+		this.productDAO = productDAO;
+		this.mailService = mailService;
+	}
+
 	// 次へ
 	@PostMapping("/order/confirm")
 	public String confirmOrder(
@@ -46,121 +46,175 @@ public class OrderController {
 
 			HttpSession session,
 			Model model) {
-		
+
 		Account account = (Account) session.getAttribute("account");
-		
+
 		// 未ログインの場合
 		if (account == null) {
 			return "redirect:/login";
 		}
-		
 
+<<<<<<< HEAD
 		List<Cart> cartList =
 	            cartService.getCartList(account.getAccountId());
 
 		
+=======
+		List<Cart> cartList = cartService.getCartList(account.getAccountId());
+
+>>>>>>> 38fed0b (不具合の修正)
 		if (cartList == null || cartList.isEmpty()) {
-	        return "redirect:/cart";
-	    }
+			return "redirect:/cart";
+		}
 
-	    int shoppingTotalPrice = 0;
-		
+		int shoppingTotalPrice = 0;
+
 		for (Cart cart : cartList) {
-	        shoppingTotalPrice +=
-	                cart.getProductPrice() * cart.getCartQuantity();
-	    }
+			shoppingTotalPrice += cart.getProductPrice() * cart.getCartQuantity();
+		}
 
-	    int taxPrice = TaxUtil.inflictTax(shoppingTotalPrice);
-	    int taxAndShoppingPrice =
-	            TaxUtil.inflictPriceAndTax(shoppingTotalPrice);
+		int taxPrice = TaxUtil.inflictTax(shoppingTotalPrice);
+		int taxAndShoppingPrice = TaxUtil.inflictPriceAndTax(shoppingTotalPrice);
 
-	    model.addAttribute("cartList", cartList);
-	    model.addAttribute("orderInfo", orderInfo);
-	    model.addAttribute("shoppingTotalPrice", shoppingTotalPrice);
-	    model.addAttribute("taxPrice", taxPrice);
-	    model.addAttribute("taxAndShoppingPrice", taxAndShoppingPrice);
+		model.addAttribute("cartList", cartList);
+		model.addAttribute("orderInfo", orderInfo);
+		model.addAttribute("shoppingTotalPrice", shoppingTotalPrice);
+		model.addAttribute("taxPrice", taxPrice);
+		model.addAttribute("taxAndShoppingPrice", taxAndShoppingPrice);
 
-	    return "order-confirm";
+		String shippingAddress = orderInfo.getShippingAddress();
+
+		if (shippingAddress != null) {
+			shippingAddress = shippingAddress.trim();
+			orderInfo.setShippingAddress(shippingAddress);
+		}
+
+		if (shippingAddress == null || shippingAddress.isBlank()) {
+			model.addAttribute("shippingAddressError", "発送先住所を入力してください。");
+			return "order-info";
+		}
+
+		boolean hasNumber = shippingAddress.matches(".*[0-9０-９].*");
+		if (!hasNumber) {
+			model.addAttribute("shippingAddressError", "番地まで含めた住所を入力してください。");
+			return "order-info";
+		}
+		
+		return "order-confirm";
 
 	}
-	
+
 	// 注文完了画面
 	@PostMapping("/order/complete")
 
-	public String completeOrder(HttpSession session,OrderInfo orderInfo,RedirectAttributes redirectAttributes) {
-
+	public String completeOrder(HttpSession session, OrderInfo orderInfo, RedirectAttributes redirectAttributes) {
 		Account account = (Account) session.getAttribute("account");
 
-	    if (account == null) {
-	        return "redirect:/login";
-	    }
-	    
+		if (account == null) {
+			return "redirect:/login";
+		}
 
-	    orderInfo.setShoppingUser(account.getAccountId());
 
-	    int shoppingId = orderService.createOrder(account,orderInfo);
+		orderInfo.setShoppingUser(account.getAccountId());
 
-	    if (shoppingId == 0) {
-	        return "redirect:/cart";
-	    }
 
-	    boolean mailSent =mailService.sendOrderCompleteMail(orderInfo);
-	    
-	    redirectAttributes.addFlashAttribute("mailSent",mailSent);
-	    redirectAttributes.addFlashAttribute("shippingEmail",orderInfo.getShippingEmail());
-	    redirectAttributes.addFlashAttribute("shoppingId",shoppingId);
+		try {
+			int shoppingId = orderService.createOrder(account, orderInfo);
 
-	    return "redirect:/order/complete";
+			if (shoppingId == 0) {
+				redirectAttributes.addFlashAttribute("cartError", "カートに商品がありません。");
+
+				return "redirect:/cart";
+			}
+			boolean mailSent = mailService.sendOrderCompleteMail(orderInfo);
+
+			redirectAttributes.addFlashAttribute("mailSent", mailSent);
+			redirectAttributes.addFlashAttribute("shippingEmail", orderInfo.getShippingEmail());
+			redirectAttributes.addFlashAttribute("shoppingId", shoppingId);
+
+			return "redirect:/order/complete";
+		} catch (RuntimeException e) {
+			redirectAttributes.addFlashAttribute("cartError", "注文処理中にエラーが発生しました。");
+			return "redirect:/cart";
+		}
+
 	}
-	
+
 	@GetMapping("/order/complete")
 	public String showComplete(HttpSession session) {
 
-	    if (session.getAttribute("account") == null) {
-	        return "redirect:/login";
-	    }
+		if (session.getAttribute("account") == null) {
+			return "redirect:/login";
+		}
 
-	    return "order-complete";
+		return "order-complete";
 	}
 
 	//menu.jspからorder-infoへ遷移	
 	@GetMapping("/order/buy")
-	public String showOrderbuy(HttpSession session, Model model) {
+	public String showOrderbuy(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 
 		Account account = (Account) session.getAttribute("account");
 
 		if (account == null) {
 			return "redirect:/login";
 		}
-		
+
 		List<Cart> cartList = cartService.getCartList(account.getAccountId());
-		
+
 		if (cartList == null || cartList.isEmpty()) {
 			return "redirect:/cart";
-			}
-		
+		}
+
 		int shoppingTotalPrice = 0;
-		
+
 		for (Cart cart : cartList) {
 			Product product = productDAO.findById(Long.valueOf(cart.getProductId()));
-			
-			if (product != null) {
-				shoppingTotalPrice += product.getProductPrice() * cart.getCartQuantity();
-				}
+
+			if (product == null) {
+				redirectAttributes.addFlashAttribute(
+						"cartError",
+						"カート内の商品情報が見つかりません。"
+								+ "該当商品をカートから削除してください。");
+
+				return "redirect:/cart";
+			}
+
+			if (!product.isProductActive()) {
+				redirectAttributes.addFlashAttribute(
+						"cartError",
+						product.getProductName()
+								+ "は現在販売を停止しています。"
+								+ "カートから削除してください。");
+
+				return "redirect:/cart";
+			}
+
+			if (product.getProductStock() < cart.getCartQuantity()) {
+
+				redirectAttributes.addFlashAttribute(
+						"cartError",
+						product.getProductName()
+								+ "の在庫が不足しています。"
+								+ "現在の在庫数は"
+								+ product.getProductStock()
+								+ "個です。数量を変更してください。");
+
+				return "redirect:/cart";
+			}
+
+			shoppingTotalPrice += product.getProductPrice() * cart.getCartQuantity();
 		}
-		
+
 		int taxPrice = TaxUtil.inflictTax(shoppingTotalPrice);
 		int taxAndShoppingPrice = TaxUtil.inflictPriceAndTax(shoppingTotalPrice);
-		
-		
+
 		model.addAttribute("account", account);
 		model.addAttribute("cartList", cartList);
-		model.addAttribute("shoppingTotalPrice",shoppingTotalPrice);
+		model.addAttribute("shoppingTotalPrice", shoppingTotalPrice);
 		model.addAttribute("taxPrice", taxPrice);
-		model.addAttribute("taxAndShoppingPrice",taxAndShoppingPrice
-		);
-		
-		
-	return "order-info";
-}
+		model.addAttribute("taxAndShoppingPrice", taxAndShoppingPrice);
+
+		return "order-info";
+	}
 }
