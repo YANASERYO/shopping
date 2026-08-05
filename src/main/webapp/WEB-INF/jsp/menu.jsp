@@ -82,9 +82,7 @@
 </div>
   </main>
 <footer>
-	<div class="recruit">
-		<a href="${pageContext.request.contextPath}/recruit">採用情報</a>
-    </div>
+	
     <div class="copyright">
       <small>&copy; 2026 KINARI</small>
     </div>

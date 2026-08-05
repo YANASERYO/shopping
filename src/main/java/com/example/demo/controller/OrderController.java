@@ -7,9 +7,11 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.example.demo.dao.ProductDAO;
 import com.example.demo.model.Account;
@@ -17,6 +19,7 @@ import com.example.demo.model.Cart;
 import com.example.demo.model.OrderInfo;
 import com.example.demo.model.Product;
 import com.example.demo.service.CartService;
+import com.example.demo.service.MailService;
 import com.example.demo.service.OrderService;
 import com.example.demo.util.TaxUtil;
 
@@ -26,24 +29,23 @@ public class OrderController {
 	private final OrderService orderService;
 	private final CartService cartService;
 	private final ProductDAO productDAO;
+	private final MailService mailService;
 	
-	public OrderController(OrderService orderService,CartService cartService,ProductDAO productDAO){
+	public OrderController(OrderService orderService,CartService cartService,ProductDAO productDAO,MailService mailService){
 		this.orderService = orderService;
 		this.cartService = cartService;
 	    this.productDAO = productDAO;
+	    this.mailService = mailService;
 		}
 	
-	// 注文確定
+	// 次へ
 	@PostMapping("/order/confirm")
 	public String confirmOrder(
-			@RequestParam String shippingName,
-			@RequestParam String shippingPostalCode,
-			@RequestParam String shippingAddress,
-			@RequestParam String shippingPhone,
-			@RequestParam String shippingEmail,
-			@RequestParam String shippingPayment,
+
+			@ModelAttribute OrderInfo orderInfo,
+
 			HttpSession session,
-			RedirectAttributes redirectAttributes) {
+			Model model) {
 		
 		Account account = (Account) session.getAttribute("account");
 		
@@ -52,63 +54,73 @@ public class OrderController {
 			return "redirect:/login";
 		}
 		
-		if (shippingName == null || shippingName.isBlank()
-				|| shippingPostalCode == null || shippingPostalCode.isBlank()
-				|| shippingAddress == null || shippingAddress.isBlank()
-				|| shippingPhone == null || shippingPhone.isBlank()
-				|| shippingEmail == null || shippingEmail.isBlank()
-				|| shippingPayment == null || shippingPayment.isBlank()) {
-			redirectAttributes.addFlashAttribute("orderError","未入力の項目があります。");
-			
-		    return "redirect:/order/buy";
-		}
+
+		List<Cart> cartList =
+	            cartService.getCartList(account.getAccountId());
+
 		
-		if (!shippingPostalCode.matches("\\d{3}-?\\d{4}")) {
-			
-			redirectAttributes.addFlashAttribute("orderError","郵便番号は123-4567の形式で入力してください。");
-			return "redirect:/order/buy";
-		}
+		if (cartList == null || cartList.isEmpty()) {
+	        return "redirect:/cart";
+	    }
+
+	    int shoppingTotalPrice = 0;
 		
-		if (!shippingPhone.matches("[0-9-]{10,13}")) {
-			
-			redirectAttributes.addFlashAttribute("orderError","電話番号を正しい形式で入力してください。");
-			return "redirect:/order/buy";
-		}
-		
-		OrderInfo orderInfo = new OrderInfo();
-		orderInfo.setShoppingUser(account.getAccountId());
-		orderInfo.setShippingName(shippingName);
-		orderInfo.setShippingPostalCode(shippingPostalCode);
-		orderInfo.setShippingAddress(shippingAddress);
-		orderInfo.setShippingPhone(shippingPhone);
-		orderInfo.setShippingEmail(shippingEmail);
-		orderInfo.setShippingPayment(shippingPayment);
-		
-		int shoppingId;
-		try {
-		    shoppingId = orderService.createOrder(account,orderInfo);
-		} catch (RuntimeException e) {
-		    redirectAttributes.addFlashAttribute("orderError","注文を確定できませんでした。在庫状況をご確認のうえ、もう一度お試しください。"
-		    		);
-		    return "redirect:/order/buy";
-		}
-		
-		if (shoppingId == 0) {
-			redirectAttributes.addFlashAttribute("cartError","カートに商品がありません。");
-			return "redirect:/cart";
-		}
-		
-		redirectAttributes.addFlashAttribute("shoppingId",shoppingId);
-		return "redirect:/order/complete";
+		for (Cart cart : cartList) {
+	        shoppingTotalPrice +=
+	                cart.getProductPrice() * cart.getCartQuantity();
+	    }
+
+	    int taxPrice = TaxUtil.inflictTax(shoppingTotalPrice);
+	    int taxAndShoppingPrice =
+	            TaxUtil.inflictPriceAndTax(shoppingTotalPrice);
+
+	    model.addAttribute("cartList", cartList);
+	    model.addAttribute("orderInfo", orderInfo);
+	    model.addAttribute("shoppingTotalPrice", shoppingTotalPrice);
+	    model.addAttribute("taxPrice", taxPrice);
+	    model.addAttribute("taxAndShoppingPrice", taxAndShoppingPrice);
+
+	    return "order-confirm";
+
 	}
 	
 	// 注文完了画面
+	@PostMapping("/order/complete")
+
+	public String completeOrder(HttpSession session,OrderInfo orderInfo,RedirectAttributes redirectAttributes) {
+
+		Account account = (Account) session.getAttribute("account");
+
+	    if (account == null) {
+	        return "redirect:/login";
+	    }
+	    
+
+	    orderInfo.setShoppingUser(account.getAccountId());
+
+	    int shoppingId = orderService.createOrder(account,orderInfo);
+
+	    if (shoppingId == 0) {
+	        return "redirect:/cart";
+	    }
+
+	    boolean mailSent =mailService.sendOrderCompleteMail(orderInfo);
+	    
+	    redirectAttributes.addFlashAttribute("mailSent",mailSent);
+	    redirectAttributes.addFlashAttribute("shippingEmail",orderInfo.getShippingEmail());
+	    redirectAttributes.addFlashAttribute("shoppingId",shoppingId);
+
+	    return "redirect:/order/complete";
+	}
+	
 	@GetMapping("/order/complete")
 	public String showComplete(HttpSession session) {
-		if (session.getAttribute("account") == null) {
-			return "redirect:/login";
-		}
-		return "order-complete";
+
+	    if (session.getAttribute("account") == null) {
+	        return "redirect:/login";
+	    }
+
+	    return "order-complete";
 	}
 
 	//menu.jspからorder-infoへ遷移	
