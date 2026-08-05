@@ -30,6 +30,7 @@ public class OrderController {
 	private final ProductDAO productDAO;
 	private final MailService mailService;
 
+
 	public OrderController(OrderService orderService, CartService cartService, ProductDAO productDAO,
 			MailService mailService) {
 		this.orderService = orderService;
@@ -37,7 +38,6 @@ public class OrderController {
 		this.productDAO = productDAO;
 		this.mailService = mailService;
 	}
-
 	// 次へ
 	@PostMapping("/order/confirm")
 	public String confirmOrder(
@@ -54,15 +54,10 @@ public class OrderController {
 			return "redirect:/login";
 		}
 
-<<<<<<< HEAD
-		List<Cart> cartList =
-	            cartService.getCartList(account.getAccountId());
 
-		
-=======
 		List<Cart> cartList = cartService.getCartList(account.getAccountId());
 
->>>>>>> 38fed0b (不具合の修正)
+
 		if (cartList == null || cartList.isEmpty()) {
 			return "redirect:/cart";
 		}
@@ -75,6 +70,7 @@ public class OrderController {
 
 		int taxPrice = TaxUtil.inflictTax(shoppingTotalPrice);
 		int taxAndShoppingPrice = TaxUtil.inflictPriceAndTax(shoppingTotalPrice);
+
 
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("orderInfo", orderInfo);
@@ -107,15 +103,17 @@ public class OrderController {
 	// 注文完了画面
 	@PostMapping("/order/complete")
 
-	public String completeOrder(HttpSession session, OrderInfo orderInfo, RedirectAttributes redirectAttributes) {
+
+	public String completeOrder(HttpSession session,OrderInfo orderInfo,RedirectAttributes redirectAttributes) {
+
 		Account account = (Account) session.getAttribute("account");
 
-		if (account == null) {
-			return "redirect:/login";
-		}
+	    if (account == null) {
+	        return "redirect:/login";
+	    }
+	    
 
-
-		orderInfo.setShoppingUser(account.getAccountId());
+	    orderInfo.setShoppingUser(account.getAccountId());
 
 
 		try {
@@ -137,6 +135,15 @@ public class OrderController {
 			redirectAttributes.addFlashAttribute("cartError", "注文処理中にエラーが発生しました。");
 			return "redirect:/cart";
 		}
+
+
+	    boolean mailSent =mailService.sendOrderCompleteMail(orderInfo);
+	    
+	    redirectAttributes.addFlashAttribute("mailSent",mailSent);
+	    redirectAttributes.addFlashAttribute("shippingEmail",orderInfo.getShippingEmail());
+	    redirectAttributes.addFlashAttribute("shoppingId",shoppingId);
+
+	    return "redirect:/order/complete";
 
 	}
 
