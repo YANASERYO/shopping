@@ -36,7 +36,7 @@
     <a class="logout" href="${pageContext.request.contextPath}/logout">ログアウト</a>
     </div>
   </header>
-  <main>
+  <main class="product-list">
 
 <c:if test="${not empty cartMessage}">
 	<p class="message success-message">

@@ -7,7 +7,14 @@ body{
   margin:0;
   color: rgb(46, 26, 1);
   background: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
  
+}
+
+main {
+    flex: 1;
 }
 
 
@@ -144,9 +151,12 @@ form{
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center;
+  width: 100%;
 }
 
-.inputbox input {
+.inputbox input[type="text"],
+.inputbox input[type="password"] {
   width: 380px;
   height: 55px;
   padding-left: 18px;
@@ -206,8 +216,28 @@ hr{
   background-color: #ad8776;
 }
 
-input[type="checkbox"] {
-  transform: scale(0.4); /* 0.4倍のサイズ */
+/*input[type="checkbox"] {*/
+/*  transform: scale(0.4);  0.4倍のサイズ */
+/*}*/
+
+.password-check {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+}
+.password-check label {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+}
+.password-check input[type="checkbox"] {
+	margin: 0;
+}
+.login-error, .input-error {
+	text-align: center;
+	color: rgb(255, 0, 0);
+	font-weight: bold;
 }
 
 /*メニュー画面------------------------------------------*/
@@ -429,16 +459,19 @@ grid-row-gap: 0px;
 
 .cart-list {
 	overflow-x: auto;
+	
 }
 
 
 .cart-wrapper {
-	display: block;
+	display: flex;
 	justify-content: center;
-	align-items: flex-start;
+	flex-direction: column;
+	
 	gap: 4rem;
 	margin: 3rem auto;
 	width: 90%;
+	max-width: 1200px;
 }
 
 .cart-list table{
@@ -458,20 +491,16 @@ grid-row-gap: 0px;
 	width: 140px;
 	border-radius: 8px;
 }
+
 .cart-price {
-	width: 320px;
+	width: fit-content;
+	margin: 30px auto 0;
 	padding: 30px;
 	border-radius: 10px;
 	position: sticky;
 	top: 120px;
-}
-.cart-price {
-	width: 100%;
-	margin-top: 30px;
-	padding: 30px;
-	border-radius: 10px;
-	position: sticky;
-	top: 120px;
+	text-align:left;
+	font-size: 1.5rem;
 }
 
 .cart-edit-btn {
@@ -480,11 +509,11 @@ grid-row-gap: 0px;
 	color: #666;
 	cursor: pointer;
 }
-.cart-edit-btn:hover {
+.cart-edit-btn {
 	color: #030303;
 }
-.buy-btn {
-	width: 50%;
+.buy-btn, .next-btn, .order-btn {
+	width: 30%;
 	height: 55px;
 	border: none;
 	background-color: #8A9A5B;
@@ -492,11 +521,74 @@ grid-row-gap: 0px;
 	border-radius: 30px;
 	font-size: 1rem;
 }
-.buy-btn:hover {
+.buy-btn:hover,
+.next-btn:hover, 
+.order-btn:hover {
 	background-color: #d9d9d9;
 	color: #030303;
 }
+.not-in-the-cart {
+	text-align: center;
+	font-size: 2rem;
+}
+.cart-container {
+	min-height: 100vh;
+}
+/* 注文者情報入力-------------------------------------*/
+.order-form, 
+.account-edit-form {
+	width: 90%;
+	max-width: 500px;
+	margin: 3rem auto;
+	
+	
+}
+.order-form form,
+.account-edit-form form {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+.order-form p,
+.account-edit-form p {
+	width: 100%;
+	text-align: left;
+}
 
+.order-form input,
+.order-form select,
+.account-edit-form input,
+.account-edit-form select {
+	width: 100%;
+	max-width: 500px;
+	height: 45px;
+	padding: 0 1rem;
+	font-size: 16px;
+	box-sizing: border-box;
+}
+.order-form button,
+.order-form input[type="submit"],
+.account-edit-form button,
+.account-edit-form input[type="submit"] {
+	align-self: center;
+}
+.price-area {
+	text-align: center;
+	margin-top: 2rem;
+}
+.price-area p {
+	text-align: center;
+}
+
+/*注文内容の確認--------------------------------------*/
+.order-confirm {
+	width: 60%;
+	max-width: 600px;
+	margin: 3rem auto;
+	text-align: left;
+	padding: 0 2rem;
+	box-sizing: border-box;
+}
 
 
 /*注文完了画面----------------------------------------*/
@@ -516,7 +608,7 @@ grid-row-gap: 0px;
 	margin-top: 2rem;
 	
 }
-.link-btn a {
+.link-btn a, .back-btn {
 	border: none;
 	text-decoration: none;
 	color: #e5e5e5;
@@ -527,8 +619,25 @@ grid-row-gap: 0px;
 	
 	
 }
-.link-btn a:hover {
+.link-btn a:hover, 
+.back-btn:hover {
 	background-color: rgb(200, 152, 130);
+}
+
+.mail-error {
+	text-align: center;
+	font-weight: bold;
+	color: rgb(255, 0, 0);
+}
+
+/*アカウント編集-------------------------------*/
+.account-edit-form input[type="checkbox"] {
+  transform: scale(0.4);  /*0.4倍のサイズ */
+}
+
+/*購入履歴-------------------------------------*/
+.order-history {
+	padding: 2rem 4rem;
 }
 
 
@@ -633,7 +742,7 @@ grid-row-gap: 0px;
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
-	padding-right: 15rem;
+	
 }
 
 }
@@ -672,20 +781,28 @@ grid-row-gap: 0px;
   min-height: 100vh;
 }
 .hero-text h2 {
-	font-size: 2.5rem;
+	font-size: 3rem;
 }
 /*商品一覧*/
 .product-img {
-	width: 40%;
+	width: 400px;
 	height: auto;
 }
+.product-list {
+	padding: 2rem 4rem;
+}
+
 /*カート*/
 .cart-list {
 	overflow-x: initial;
+	width: 95%;
+	max-width: 1200px;
+	margin: 0 auto;
+	font-size: 1.2rem;
 }
 .cart-wrapper {
-	display: flex;
-	justify-content: center;
+	width: fit-content;
+	margin: 3rem auto;
 }
 
 }

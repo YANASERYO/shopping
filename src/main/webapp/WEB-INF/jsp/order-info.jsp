@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>注文者情報入力</title>
 <link rel="stylesheet"
       href="${pageContext.request.contextPath}/css/style.css">
@@ -39,6 +40,8 @@
   </header>
   <main>
 <h2>注文者情報入力</h2>
+
+<div class="order-form">
 <form action="${pageContext.request.contextPath}/order/confirm" method="post">
 	<p>
 		発送先氏名<br>
@@ -92,6 +95,8 @@
 			</option>
 		</select>
 	</p>
+	
+	<div class="price-area">
 	<p>
 		商品小計：${shoppingTotalPrice}円
 	</p>
@@ -101,9 +106,13 @@
 	<p>
 		税込合計：<strong>${taxAndShoppingPrice}円</strong>
 	</p>
-
-	<input type="submit" value="次へ">
+	</div>
+	
+	<input class="next-btn" type="submit" value="次へ">
+	
 </form>
+</div>
+
 <div class="link-btn">
 <p>
 	<a href="${pageContext.request.contextPath}/cart">
