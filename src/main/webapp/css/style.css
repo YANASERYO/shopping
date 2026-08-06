@@ -224,6 +224,7 @@ hr{
 	display: flex;
 	justify-content: center;
 	margin-top: 10px;
+	white-space: nowrap;
 }
 .password-check label {
 	display: flex;
@@ -245,14 +246,70 @@ hr{
 .roomimg{
 	position: relative;
 	
+	overflow: hidden;
+	
 }
 
-.roomimg img {
-	width: 100%;
-	height: auto;
+.hero-img {
+/*	width: 100%;*/
+/*	height: auto;*/
+/*	display: block;*/
+	
+	position: absolute;
+	top:0;
+	left:0;
+
+	width:100%;
+	height:100%;
+
+	object-fit:cover;
+
+	opacity:0;
+
+	animation: heroFade 14s infinite;
+	
+}
+
+.img1 {
+	
+	animation-delay: 0s;
+	
+}
+.img2 {
+	animation-delay: 7s;
+}
+.roomimg::before {
+	content: "";
 	display: block;
+	padding-top: 56%;
+	
 }
 
+
+@keyframes heroFade{
+
+    0%{
+        opacity:1;
+    }
+	40% {
+		opacity: 1;
+	}
+
+    50%{
+        opacity:0;
+    }
+	90% {
+		opacity: 0;
+	}
+	
+    100%{
+        opacity:1;
+    }
+	
+
+    
+
+}
 .hero-text {
 	position: absolute;
 	top:30%;
@@ -365,8 +422,6 @@ grid-row-gap: 0px;
 	font-weight: normal;
 }
 	
-	
-
 
 /*商品一覧--------------------------------------------*/
 
@@ -512,7 +567,11 @@ grid-row-gap: 0px;
 .cart-edit-btn {
 	color: #030303;
 }
-.buy-btn, .next-btn, .order-btn {
+.buy-btn,
+.next-btn,
+.order-btn,
+.create-btn,
+.edit-btn {
 	width: 30%;
 	height: 55px;
 	border: none;
@@ -520,10 +579,13 @@ grid-row-gap: 0px;
 	color: white;
 	border-radius: 30px;
 	font-size: 1rem;
+	margin-top: 2rem;
 }
 .buy-btn:hover,
 .next-btn:hover, 
-.order-btn:hover {
+.order-btn:hover,
+.create-btn:hover,
+.edit-btn:hover {
 	background-color: #d9d9d9;
 	color: #030303;
 }
@@ -536,7 +598,8 @@ grid-row-gap: 0px;
 }
 /* 注文者情報入力-------------------------------------*/
 .order-form, 
-.account-edit-form {
+.account-edit-form,
+.account-form {
 	width: 90%;
 	max-width: 500px;
 	margin: 3rem auto;
@@ -544,13 +607,15 @@ grid-row-gap: 0px;
 	
 }
 .order-form form,
-.account-edit-form form {
+.account-edit-form form,
+.account-form form {
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
 }
 .order-form p,
-.account-edit-form p {
+.account-edit-form p,
+.account-form p {
 	width: 100%;
 	text-align: left;
 }
@@ -558,7 +623,9 @@ grid-row-gap: 0px;
 .order-form input,
 .order-form select,
 .account-edit-form input,
-.account-edit-form select {
+.account-edit-form select,
+.account-form input,
+.account-form select {
 	width: 100%;
 	max-width: 500px;
 	height: 45px;
@@ -569,7 +636,9 @@ grid-row-gap: 0px;
 .order-form button,
 .order-form input[type="submit"],
 .account-edit-form button,
-.account-edit-form input[type="submit"] {
+.account-edit-form input[type="submit"],
+.account-form button,
+.account-form input[type="submit"] {
 	align-self: center;
 }
 .price-area {
@@ -608,7 +677,8 @@ grid-row-gap: 0px;
 	margin-top: 2rem;
 	
 }
-.link-btn a, .back-btn {
+.link-btn a,
+.back-btn{
 	border: none;
 	text-decoration: none;
 	color: #e5e5e5;
@@ -617,28 +687,73 @@ grid-row-gap: 0px;
 	padding: 1rem;
 	border-radius: 30px;
 	
-	
 }
 .link-btn a:hover, 
 .back-btn:hover {
 	background-color: rgb(200, 152, 130);
 }
 
-.mail-error {
-	text-align: center;
+.mail-error,
+.account-message,
+.error-message {
+	width: 100%;
+	text-align: center !important;
 	font-weight: bold;
 	color: rgb(255, 0, 0);
 }
 
-/*アカウント編集-------------------------------*/
-.account-edit-form input[type="checkbox"] {
-  transform: scale(0.4);  /*0.4倍のサイズ */
+.mail-message,
+.order-number {
+	text-align: center;
 }
+
+/*アカウント編集-------------------------------*/
+/*.account-edit-form input[type="checkbox"],*/
+/*.account-form input[type="checkbox"] {*/
+/*  transform: scale(0.4);  0.4倍のサイズ */
+/*}*/
 
 /*購入履歴-------------------------------------*/
 .order-history {
-	padding: 2rem 4rem;
+	padding: 2rem;
 }
+
+.not-order-history {
+	text-align: center;
+	font-size: 1.5rem;
+}
+.order-list {
+	flex-direction: column;
+	align-items: center;
+	
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2rem;
+	margin: 2rem auto;
+}
+.order-card {
+	width: 95%;
+	min-width: auto;
+	
+	padding: 25px;
+	border: 1px solid #ddd;
+	border-radius: 12px;
+	
+}
+.order-card table{
+	width: 100%;
+	margin-top: 20px;
+	border-collapse: collapse;
+}
+
+.order-card th,
+.order-card td {
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+	text-align: center;
+}
+
 
 
 /*JS用のcss*/
@@ -803,6 +918,19 @@ grid-row-gap: 0px;
 .cart-wrapper {
 	width: fit-content;
 	margin: 3rem auto;
+}
+
+/*購入履歴*/
+.order-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2rem;
+}
+
+.order-card {
+	width: calc(50% - 1rem);
+	min-width: 420px;
 }
 
 }

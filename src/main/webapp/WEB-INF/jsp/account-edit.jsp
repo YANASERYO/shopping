@@ -121,7 +121,7 @@
 		<div class="password-check">
     	<label for="inputCheckbox"><input id="inputCheckbox" type="checkbox"> パスワードを表示する</label>
     	</div>
-		<p>変更しない場合は空欄にしてください。</p>
+		<p class="account-message">変更しない場合は空欄にしてください。</p>
 
 		<input class="edit-btn" type="submit" value="更新">
 	</form>

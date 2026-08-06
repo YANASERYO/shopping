@@ -6,6 +6,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>注文完了｜KINARI</title>
 <link rel="stylesheet"
       href="${pageContext.request.contextPath}/css/style.css">
@@ -47,7 +48,7 @@
 
 
 <c:if test="${not empty shoppingId}">
-	<p>注文番号：<c:out value="${shoppingId}" /></p>
+	<p class="order-number">注文番号：<c:out value="${shoppingId}" /></p>
 </c:if>
 <c:choose>
     <c:when test="${mailSent}">

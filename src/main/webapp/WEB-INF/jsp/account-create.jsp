@@ -33,6 +33,8 @@
   </header>
   <main>
 	<h2>アカウント作成</h2>
+	<p class="account-message">※全ての項目を入力してください。</p>
+	<div class="account-form">
 	<form action="${pageContext.request.contextPath}/account-create" method="post">
 		<p>アカウントID<br><input type="text" name="accountId" required></p>
 		<p>パスワード<br><input type="password" name="accountPass" id="inputPassword" required></p>
@@ -62,11 +64,13 @@
 			    <option value="銀行振込">銀行振込</option>
 			</select>
 		</p>
-		<input type="submit" value="登録する">
+		<input class="create-btn" type="submit" value="登録する">
 	</form>
+	</div>
+	
 	<br>
 	<form action="${pageContext.request.contextPath}/login" method="get">
-	    <input type="submit" value="ログイン画面へ戻る">
+	    <input class="back-btn" type="submit" value="ログイン画面へ戻る">
 	</form>
 
 	<script>
