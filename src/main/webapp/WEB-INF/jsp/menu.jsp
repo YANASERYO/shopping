@@ -32,9 +32,10 @@
   <main class="menubackground">
 
 	<div class="roomimg">
-
-		<img alt="部屋の写真" src="images/roomimg.jpg">
-		
+ 		
+		<img alt="部屋の写真" src="images/roomimg.jpg" class="hero-img img1">
+		<img alt="部屋の写真" src="images/roomimg2.png" class="hero-img img2">
+	
 		<div class="hero-text">
 	    <h2 class="js-scroll-item">
 	        －自然と暮らす、心地よい毎日－
