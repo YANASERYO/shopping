@@ -218,7 +218,33 @@ public class AccountDAO {
 	    	}
 	    		
     }
-    
+
+//    	IDの重複に関して確認するメソッド
+	public boolean existsByAccountId(String accountId) {
+
+		String sql = """
+				SELECT 1
+				FROM accounts
+				WHERE account_id = ?
+				""";
+
+		try (
+				Connection conn = DBUtil.getConnection();
+				PreparedStatement pStmt = conn.prepareStatement(sql)) {
+
+			pStmt.setString(1, accountId);
+
+			try (ResultSet rs = pStmt.executeQuery()) {
+				return rs.next();
+			}
+
+		} catch (SQLException e) {
+			throw new RuntimeException(
+					"アカウントIDの確認に失敗しました。",
+					e);
+		}
+	}
+
 //    会員情報更新
     public boolean update(Account account) {
     		String sql = """
@@ -237,6 +263,7 @@ public class AccountDAO {
     		try (Connection conn = DBUtil.getConnection();
     		    	PreparedStatement pStmt = conn.prepareStatement(sql)
     		    	){
+    			pStmt.setString(8, account.getAccountId());
     			pStmt.setString(1, account.getAccountName());
     			pStmt.setString(2, account.getPostalCode());
     			pStmt.setString(3, account.getAccountAddress());
@@ -250,7 +277,6 @@ public class AccountDAO {
     			}
     			pStmt.setString(6, account.getEmail());
     			pStmt.setString(7, account.getPayment());
-    			pStmt.setString(8, account.getAccountId());
     			
     			int count = pStmt.executeUpdate();
     			

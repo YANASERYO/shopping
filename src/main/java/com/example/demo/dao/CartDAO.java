@@ -29,7 +29,8 @@ public class CartDAO {
 				c.cart_created_at,
 				p.product_name,
 				p.product_img_path,
-				p.product_price
+				p.product_price,
+				p.product_update_at
 				FROM cart c
 				INNER JOIN product p
 				ON c.product_id = p.product_id
@@ -56,6 +57,23 @@ public class CartDAO {
 							rs.getTimestamp("cart_created_at");
 					if(createdAt != null) {
 						cart.setCartCreatedAt(createdAt.toLocalDateTime());
+					}
+					
+					Timestamp productUpdateAt = rs.getTimestamp("product_update_at");
+					
+					if (productUpdateAt != null) {
+						cart.setProductUpdateAt(
+								productUpdateAt.toLocalDateTime());
+					}
+					
+					if (cart.getCartCreatedAt() != null
+							&& cart.getProductUpdateAt() != null) {
+						
+						boolean updatedAfterCart = cart.getProductUpdateAt().isAfter(
+								cart.getCartCreatedAt());
+						
+						cart.setProductUpdatedAfterCart(
+								updatedAfterCart);
 					}
 					
 					cartList.add(cart);

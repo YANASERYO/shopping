@@ -62,8 +62,13 @@
 	<p id="shippingPostalCodeMessage"></p>
 	<p>
 		発送先住所<br>
-		<input type="text" id="shippingAddress" name="shippingAddress" value="${account.accountAddress}" size="50" required>
+		<input type="text" id="shippingAddress" name="shippingAddress" value="${not empty orderInfo.shippingAddress ? orderInfo.shippingAddress : account.accountAddress}" size="50" required>
 	</p>
+	<c:if test="${not empty shippingAddressError}">
+		<p class="error-message">
+			<c:out value="${shippingAddressError}" />
+		</p>
+	</c:if>
 	<p>
 		電話番号<br>
 		<input type="text" name="shippingPhone" value="${account.accountPhone}" required>
@@ -119,9 +124,11 @@
 		カートへ戻る
 	</a>
 	<a href="${pageContext.request.contextPath}/menu">
+
 	メニューへ戻る
 	</a>
 </p>
+
 </div>
 </main>
 <footer>
