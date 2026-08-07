@@ -51,6 +51,9 @@
 </c:if>
 
 <h2 class="menutitle">ITEMS</h2>
+<p class="product-list-text">木のぬくもりを感じる家具を取り揃えました。
+お好みのカテゴリから、あなたにぴったりの一品をお選びください</p>
+<hr>
 <h3 class="subtitle">CATEGORY</h3>
 <div class="category-menu">
 <a href="#table">
@@ -153,7 +156,7 @@ Storage<br>
 	</c:when>
 	
 	<c:otherwise>
-		<p>在庫切れ</p>
+		<p class="not-item">現在在庫切れとなっております。再入荷まで今しばらくお待ちください。</p>
 	</c:otherwise>
 	
 </c:choose>
