@@ -46,6 +46,8 @@
 
 <p class="thankyou">ご注文ありがとうございました。</p>
 
+<img alt="カートのイラスト" src="${pageContext.request.contextPath}/images/cart.png" class="cart-img">
+
 
 <c:if test="${not empty shoppingId}">
 	<p class="order-number">注文番号：<c:out value="${shoppingId}" /></p>
