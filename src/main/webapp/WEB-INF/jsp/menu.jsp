@@ -32,9 +32,10 @@
   <main class="menubackground">
 
 	<div class="roomimg">
-
-		<img alt="部屋の写真" src="images/roomimg.jpg">
-		
+ 		
+		<img alt="部屋の写真" src="images/roomimg.jpg" class="hero-img img1">
+		<img alt="部屋の写真" src="images/roomimg2.png" class="hero-img img2">
+	
 		<div class="hero-text">
 	    <h2 class="js-scroll-item">
 	        －自然と暮らす、心地よい毎日－
@@ -57,26 +58,42 @@
 </div>
 <br>
 <div class="js-scroll-item">
+	<h3 class="menutitle">SERVICE</h3>
+	
+	<div class="service-contents">
+	<img alt="部屋の写真" src="images/roomimg3.png" class="service-roomimg">
+	
+	<div class="service-contents-text">
+	<p class="menutitleja">全国送料無料でお届けします</p>
+	<p class="menutext">家具は、暮らしの中で長く寄り添う大切な存在です。</p>
+  	<p class="menutext">KINARIでは、お客様に安心してお買い物を楽しんでいただけるよう、すべての商品を送料無料でお届けしております。</p>
+  	<p class="menutext">お気に入りの一品との出会いが、心地よい毎日の始まりとなりますように。</p>
+  	</div>
+  	</div>
+	
+</div>
+<br>
+<div class="js-scroll-item">
 
 	<h4 class="menutitle">MENU</h4>
 	<div class="menu-contents">
 	
-		<a class="menu1" href="${pageContext.request.contextPath}/products"><img src="images/menu1.png" alt="商品を選択する"></a>
-		<a class="menu2" href="${pageContext.request.contextPath}/cart"><img src="images/menu2.png" alt="ショッピングカートを見る"></a>
-		<a class="menu3" href="${pageContext.request.contextPath}/orders"><img src="images/menu3.png" alt="注文履歴を見る"></a>
-		<a class="menu4" href="${pageContext.request.contextPath}/account-edit"><img src="images/menu4.png" alt="会員情報の変更"></a>
+		<a class="menu1" href="${pageContext.request.contextPath}/products"><img src="images/menu1.png" alt="商品を選択する">商品を選択する</a>
+		<a class="menu2" href="${pageContext.request.contextPath}/cart"><img src="images/menu2.png" alt="ショッピングカートを見る">ショッピングカートを見る</a>
+		<a class="menu3" href="${pageContext.request.contextPath}/orders"><img src="images/menu3.png" alt="注文履歴を見る">注文履歴を見る</a>
+		<a class="menu4" href="${pageContext.request.contextPath}/account-edit"><img src="images/menu4.png" alt="会員情報の変更">会員情報の変更</a>
 	
 	</div>
 </div>
 <div class="recruit-link">
 	<hr>
 		<th>
-			<a class="recruit-linktext" href="${pageContext.request.contextPath}/company">会社概要<p>会社概要/代表からの御挨拶は<strong>こちら</strong>から</p></a>
+			<a class="recruit-linktext" href="${pageContext.request.contextPath}/company"><img src="images/aboutas-link.png" alt="会社概要"></a>
 		</th>
 	</hr>
 	<hr>
 		<th>
-			<a class="recruit-linktext" href="${pageContext.request.contextPath}/recruit">営業職採用情報<p>社員インタビュー、募集要項などは<strong>こちら</strong>から</p></a>
+			<a class="recruit-linktext" href="${pageContext.request.contextPath}/recruit"><img src="images/sales-link.png" alt="営業職採用情報"></a>
 		</th>
 	</hr>
 </div>

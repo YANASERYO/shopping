@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>アカウント編集 | KINARI</title>
 <link rel="stylesheet"
       href="${pageContext.request.contextPath}/css/style.css">
@@ -44,7 +45,8 @@
 <c:if test="${not empty accountEditError}">
 		<p>${accountEditError}</p>
 	</c:if>
-
+	
+	<div class="account-edit-form">
 	<form action="${pageContext.request.contextPath}/accountEdit" method="post">
 
 		<p>アカウントID<br>
@@ -114,12 +116,16 @@
 		</p>
 
 		<p>新しいパスワード<br>
-			<input type="password" name="accountPass">
+			<input type="password" name="accountPass" id="inputPassword">
 		</p>
-		<p>変更しない場合は空欄にしてください。</p>
+		<div class="password-check">
+    	<label for="inputCheckbox"><input id="inputCheckbox" type="checkbox"> パスワードを表示する</label>
+    	</div>
+		<p class="account-message">変更しない場合は空欄にしてください。</p>
 
 		<input class="edit-btn" type="submit" value="更新">
 	</form>
+	</div>
 	<div class="link-btn">
 		<a href="${pageContext.request.contextPath}/menu">
 		メニューへ戻る
@@ -136,6 +142,22 @@
 </footer>
 
 <script src="${pageContext.request.contextPath}/js/postal-code.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(event) {
+
+	  const targetElement = document.getElementById('inputPassword');
+	  const triggerElement = document.getElementById('inputCheckbox');
+
+	  triggerElement.addEventListener('change', function(event) {
+	    if ( this.checked ) {
+	      targetElement.setAttribute('type', 'text');
+	    } else {
+	      targetElement.setAttribute('type', 'password');
+	    }
+	  }, false);
+
+	}, false);
+  </script>
 
 </body>
 </html>

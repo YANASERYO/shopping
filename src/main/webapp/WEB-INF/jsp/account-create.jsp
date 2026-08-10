@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <title>アカウント作成 | KINARI</title>
@@ -33,9 +33,14 @@
   </header>
   <main>
 	<h2>アカウント作成</h2>
+	<p class="account-message">※全ての項目を入力してください。</p>
+	<div class="account-form">
 	<form action="${pageContext.request.contextPath}/account-create" method="post">
 		<p>アカウントID<br><input type="text" name="accountId" required></p>
-		<p>パスワード<br><input type="password" name="accountPass" required></p>
+		<p>パスワード<br><input type="password" name="accountPass" id="inputPassword" required></p>
+		<div class="password-check">
+    	<label for="inputCheckbox"><input id="inputCheckbox" type="checkbox"> パスワードを表示する</label>
+    	</div>
 		<p>氏名<br><input type="text" name="accountName" required></p>	
 		<p>郵便番号<br><input type="text" name="postalCode" id="postalCode" required></p>
 		<button type="button"
@@ -59,11 +64,13 @@
 			    <option value="銀行振込">銀行振込</option>
 			</select>
 		</p>
-		<input type="submit" value="登録する">
+		<input class="create-btn" type="submit" value="登録する">
 	</form>
+	</div>
+	
 	<br>
 	<form action="${pageContext.request.contextPath}/login" method="get">
-	    <input type="submit" value="ログイン画面へ戻る">
+	    <input class="back-btn" type="submit" value="ログイン画面へ戻る">
 	</form>
 
 	<script>
@@ -82,6 +89,22 @@
 </footer>
 
 <script src="${pageContext.request.contextPath}/js/postal-code.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(event) {
+
+	  const targetElement = document.getElementById('inputPassword');
+	  const triggerElement = document.getElementById('inputCheckbox');
+
+	  triggerElement.addEventListener('change', function(event) {
+	    if ( this.checked ) {
+	      targetElement.setAttribute('type', 'text');
+	    } else {
+	      targetElement.setAttribute('type', 'password');
+	    }
+	  }, false);
+
+	}, false);
+  </script>
 
 </body>
 </html>

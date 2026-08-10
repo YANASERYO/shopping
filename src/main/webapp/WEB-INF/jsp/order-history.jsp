@@ -7,6 +7,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>購入履歴 | KINARI</title>
 <link rel="stylesheet"
       href="${pageContext.request.contextPath}/css/style.css">
@@ -37,22 +38,27 @@
     <a class="logout" href="${pageContext.request.contextPath}/logout">ログアウト</a>
     </div>
   </header>
-  <main>
+  <main  class="order-history">
 <h2>購入履歴</h2>
 
 <c:choose>
     <c:when test="${empty detailList}">
-        <p>購入履歴はありません。</p>
+        <p class="not-order-history">購入履歴はありません。</p>
     </c:when>
     <c:otherwise>
+    
+    	<div class="order-list">
         <c:set var="previousShoppingId" value="" />
         <c:forEach var="detail" items="${detailList}">
             <c:if test="${previousShoppingId != detail.shoppingId}">
                 <c:if test="${not empty previousShoppingId}">
                     </tbody>
                     </table>
-                    <hr>
+                   </div>
+        
                 </c:if>
+        <div class="order-card">  
+                
                 <h3>
                     注文番号：${detail.shoppingId}
                 </h3>
@@ -70,7 +76,7 @@
 						value="${detail.shoppingTaxAndPrice}"
 						pattern="#,###" />円
 				</p>
-				<div>
+				<div class="shopping-info">
 					<h4>発送先情報</h4>
 					<p>
 						発送先氏名：${detail.shippingName}
@@ -121,6 +127,8 @@
         </c:forEach>
         </tbody>
         </table>
+        </div>
+        </div>
     </c:otherwise>
 </c:choose>
 <div class="link-btn">

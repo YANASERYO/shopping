@@ -39,9 +39,13 @@
     <a class="logout" href="${pageContext.request.contextPath}/logout">ログアウト</a>
     </div>
 </header>
+
+<main>
 <h2>注文内容確認</h2>
 
-<h3>商品内容</h3>
+<div class="order-confirm">
+
+<h3 class="menutitle">商品内容</h3>
 
 <c:forEach var="cart" items="${cartList}">
     <div>
@@ -60,7 +64,7 @@
 <p>消費税：${taxPrice}円</p>
 <p>税込合計：${taxAndShoppingPrice}円</p>
 
-<h3>発送先</h3>
+<h3 class="menutitle">発送先</h3>
 
 <p>氏名：${orderInfo.shippingName}</p>
 <p>郵便番号：${orderInfo.shippingPostalCode}</p>
@@ -68,6 +72,8 @@
 <p>電話番号：${orderInfo.shippingPhone}</p>
 <p>メールアドレス：${orderInfo.shippingEmail}</p>
 <p>支払い方法：${orderInfo.shippingPayment}</p>
+
+</div>
 
 <form action="${pageContext.request.contextPath}/order/complete"
       method="post">
@@ -96,15 +102,23 @@
            name="shippingPayment"
            value="${orderInfo.shippingPayment}">
 
-    <button type="submit">注文を確定する</button>
+    <button class="order-btn" type="submit">注文を確定する</button>
 </form>
 
 <br>
 
 <form action="${pageContext.request.contextPath}/order/buy"
       method="get">
-    <button type="submit">戻る</button>
+    <button class="back-btn" type="submit">戻る</button>
 </form>
+</main>
+
+<footer>
+    <div class="copyright">
+      <small>&copy; 2026 KINARI</small>
+    </div>
+
+</footer>
 
 </body>
 </html>
