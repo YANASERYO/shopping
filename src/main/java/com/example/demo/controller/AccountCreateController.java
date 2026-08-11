@@ -44,7 +44,7 @@ public class AccountCreateController {
 			@RequestParam String payment,
 			Model model) {
 //		テスト
-		System.out.println("birthday受信値：" + birthday);
+//		System.out.println("birthday受信値：" + birthday);
 		
 		accountId = accountId.trim();
 		
@@ -79,7 +79,6 @@ public class AccountCreateController {
 				if (parsedBirthday.isAfter(today)) {
 					model.addAttribute("birthdayError","生年月日に未来の日付は指定できません。");
 				
-					
 					return "account-create";
 				}
 				

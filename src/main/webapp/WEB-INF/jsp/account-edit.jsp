@@ -7,8 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>アカウント編集 | KINARI</title>
-<link rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet"href="${pageContext.request.contextPath}/css/style.css">
 <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/favicon.png">
 <!-- フォント -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,12 +41,15 @@
 
 <h2>アカウント編集</h2>
 
-<c:if test="${not empty accountEditError}">
+	<c:if test="${not empty accountEditMessage}">
+	    <p>${accountEditMessage}</p>
+	</c:if>
+	<c:if test="${not empty accountEditError}">
 		<p>${accountEditError}</p>
 	</c:if>
 	
 	<div class="account-edit-form">
-	<form action="${pageContext.request.contextPath}/accountEdit" method="post">
+	<form action="${pageContext.request.contextPath}/account-edit" method="post">
 
 		<p>アカウントID<br>
 			<input type="text" value="${account.accountId}" readonly>
@@ -131,7 +133,11 @@
 		メニューへ戻る
 		</a>
 	</div>
-
+	<div class="link-btn">
+		<a href="${pageContext.request.contextPath}/account-delete-confirm">
+	    アカウントを削除したい方はこちらから
+		</a>
+	</div>
 </main>
 
 <footer>

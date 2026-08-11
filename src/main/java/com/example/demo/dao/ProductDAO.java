@@ -58,9 +58,8 @@ public class ProductDAO {
 			product.setProductDescription(productDescription);
 			product.setProductCreatedAt(productCreatedAt);
 			product.setProductUpdateAt(productUpdateAt);
-			product.setProductActive(productActive);
-				
-				productList.add(product);
+			product.setProductActive(productActive);	
+			productList.add(product);
 			}
 			
 		} catch (SQLException e ) {

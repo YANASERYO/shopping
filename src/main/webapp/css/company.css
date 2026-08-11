@@ -1,612 +1,602 @@
 @charset "UTF-8";
 
-@charset "UTF-8";
-
 :root {
-    --company-main: #2e2923;
-    --company-sub: #756a5e;
-    --company-accent: #b78352;
-    --company-light-accent: #d6b38d;
-    --company-background: #f8f5f0;
-    --company-background-alt: #eee8df;
-    --company-white: #ffffff;
-    --company-border: #d8cfc4;
+	--company-main: #2e2923;
+	--company-sub: #756a5e;
+	--company-accent: #b78352;
+	--company-light-accent: #d6b38d;
+	--company-background: #f8f5f0;
+	--company-background-alt: #eee8df;
+	--company-white: #ffffff;
+	--company-border: #d8cfc4;
 }
 
 html {
-    scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    color: var(--company-main);
-    background-color: var(--company-background);
-    font-family: "Noto Sans JP", sans-serif;
-    line-height: 2;
+	margin: 0;
+	color: var(--company-main);
+	background-color: var(--company-background);
+	font-family: "Noto Sans JP", sans-serif;
+	line-height: 2;
 }
 
 .company-page {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .company-hero {
-    position: relative;
-    min-height: 620px;
-    display: flex;
-    align-items: center;
-    background-image:
-        url("../images/company-building.png");
-    background-position: center;
-    background-size: cover;
+	position: relative;
+	min-height: 620px;
+	display: flex;
+	align-items: center;
+	background-image:
+		url("../images/company-building.png");
+	background-position: center;
+	background-size: cover;
 }
 
 .company-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(
-            90deg,
-            rgba(28, 25, 22, 0.88) 0%,
-            rgba(28, 25, 22, 0.65) 45%,
-            rgba(28, 25, 22, 0.12) 100%
-        );
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(90deg,
+			rgba(28, 25, 22, 0.88) 0%,
+			rgba(28, 25, 22, 0.65) 45%,
+			rgba(28, 25, 22, 0.12) 100%);
 }
 
 .company-hero-inner {
-    position: relative;
-    z-index: 1;
-    width: min(1180px, calc(100% - 80px));
-    margin: 0 auto;
-    color: #ffffff;
+	position: relative;
+	z-index: 1;
+	width: min(1180px, calc(100% - 80px));
+	margin: 0 auto;
+	color: #ffffff;
 }
 
 .company-hero-label,
-.company-section-heading > p,
+.company-section-heading>p,
 .company-link-label {
-    margin: 0 0 16px;
-    color: var(--company-light-accent);
-    font-family: "Marcellus", serif;
-    font-size: 0.9rem;
-    letter-spacing: 0.25em;
+	margin: 0 0 16px;
+	color: var(--company-light-accent);
+	font-family: "Marcellus", serif;
+	font-size: 0.9rem;
+	letter-spacing: 0.25em;
 }
 
 .company-hero h2 {
-    margin: 0;
-    font-family: "Noto Sans JP", sans-serif;
-    font-size: clamp(3rem, 7vw, 6.3rem);
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: 0.08em;
+	margin: 0;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: clamp(3rem, 7vw, 6.3rem);
+	font-weight: 500;
+	line-height: 1.3;
+	letter-spacing: 0.08em;
 }
 
 .company-hero-en {
-    margin: 24px 0 0;
-    font-family: "Marcellus", serif;
-    font-size: 0.9rem;
-    letter-spacing: 0.16em;
+	margin: 24px 0 0;
+	font-family: "Marcellus", serif;
+	font-size: 0.9rem;
+	letter-spacing: 0.16em;
 }
 
 .company-hero-text {
-    max-width: 560px;
-    margin: 42px 0 0;
-    color: rgba(255, 255, 255, 0.88);
-    font-size: 1rem;
-    line-height: 2.1;
+	max-width: 560px;
+	margin: 42px 0 0;
+	color: rgba(255, 255, 255, 0.88);
+	font-size: 1rem;
+	line-height: 2.1;
 }
 
 .company-section {
-    padding: 130px 40px;
+	padding: 130px 40px;
 }
 
 .company-section-alt {
-    background-color: var(--company-background-alt);
+	background-color: var(--company-background-alt);
 }
 
 .company-section-heading {
-    width: min(1180px, 100%);
-    margin: 0 auto 65px;
-    text-align: center;
+	width: min(1180px, 100%);
+	margin: 0 auto 65px;
+	text-align: center;
 }
 
 .company-section-heading h3 {
-    position: relative;
-    margin: 0;
-    padding-bottom: 24px;
-    font-family: "Noto Sans JP", sans-serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 500;
-    letter-spacing: 0.12em;
+	position: relative;
+	margin: 0;
+	padding-bottom: 24px;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: clamp(2rem, 4vw, 3.2rem);
+	font-weight: 500;
+	letter-spacing: 0.12em;
 }
 
 .company-section-heading h3::after {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 56px;
-    height: 2px;
-    background-color: var(--company-accent);
-    content: "";
-    transform: translateX(-50%);
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 56px;
+	height: 2px;
+	background-color: var(--company-accent);
+	content: "";
+	transform: translateX(-50%);
 }
 
 .company-heading-left {
-    margin: 0 0 45px;
-    text-align: left;
+	margin: 0 0 45px;
+	text-align: left;
 }
 
 .company-heading-left h3::after {
-    left: 0;
-    transform: none;
+	left: 0;
+	transform: none;
 }
 
 .company-overview-layout {
-    width: min(1180px, 100%);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    gap: 75px;
-    align-items: center;
+	width: min(1180px, 100%);
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+	gap: 75px;
+	align-items: center;
 }
 
 .company-overview-image {
-    position: relative;
+	position: relative;
 }
 
 .company-overview-image::before {
-    position: absolute;
-    top: -22px;
-    left: -22px;
-    width: 70%;
-    height: 70%;
-    border: 1px solid var(--company-light-accent);
-    content: "";
+	position: absolute;
+	top: -22px;
+	left: -22px;
+	width: 70%;
+	height: 70%;
+	border: 1px solid var(--company-light-accent);
+	content: "";
 }
 
 .company-overview-image img {
-    position: relative;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    box-shadow: 0 24px 60px rgba(55, 45, 35, 0.14);
+	position: relative;
+	z-index: 1;
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	box-shadow: 0 24px 60px rgba(55, 45, 35, 0.14);
 }
 
 .company-overview-text p {
-    margin: 0 0 26px;
-    color: #514a42;
-    font-size: 0.98rem;
-    line-height: 2.25;
+	margin: 0 0 26px;
+	color: #514a42;
+	font-size: 0.98rem;
+	line-height: 2.25;
 }
 
 .company-overview-text p:first-child::first-letter {
-    float: left;
-    margin: 10px 10px 0 0;
-    color: var(--company-accent);
-    font-family: "Marcellus", serif;
-    font-size: 3.8rem;
-    line-height: 0.8;
+	float: left;
+	margin: 10px 10px 0 0;
+	color: var(--company-accent);
+	font-family: "Marcellus", serif;
+	font-size: 3.8rem;
+	line-height: 0.8;
 }
 
 .craft-layout {
-    width: min(1300px, 100%);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
-    align-items: stretch;
-    background-color: var(--company-white);
-    box-shadow: 0 25px 70px rgba(55, 45, 35, 0.1);
+	width: min(1300px, 100%);
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+	align-items: stretch;
+	background-color: var(--company-white);
+	box-shadow: 0 25px 70px rgba(55, 45, 35, 0.1);
 }
 
 .craft-text {
-    padding: 80px 70px;
+	padding: 80px 70px;
 }
 
-.craft-text > p {
-    margin: 0 0 24px;
-    color: #514a42;
-    line-height: 2.15;
+.craft-text>p {
+	margin: 0 0 24px;
+	color: #514a42;
+	line-height: 2.15;
 }
 
 .craft-text .craft-lead {
-    margin-bottom: 30px;
-    color: var(--company-main);
-    font-size: 1.15rem;
-    font-weight: 700;
+	margin-bottom: 30px;
+	color: var(--company-main);
+	font-size: 1.15rem;
+	font-weight: 700;
 }
 
 .craft-image {
-    min-height: 700px;
+	min-height: 700px;
 }
 
 .craft-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    min-height: 700px;
-    object-fit: cover;
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-height: 700px;
+	object-fit: cover;
 }
 
 .president-section {
-    background:
-        linear-gradient(
-            180deg,
-            #f8f5f0 0%,
-            #ffffff 100%
-        );
+	background:
+		linear-gradient(180deg,
+			#f8f5f0 0%,
+			#ffffff 100%);
 }
 
 .president-introduction {
-    width: min(1050px, 100%);
-    margin: 0 auto 90px;
-    display: grid;
-    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
-    align-items: center;
-    gap: 80px;
+	width: min(1050px, 100%);
+	margin: 0 auto 90px;
+	display: grid;
+	grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+	align-items: center;
+	gap: 80px;
 }
 
 .president-title {
-    padding-left: 25px;
-    border-left: 3px solid var(--company-accent);
+	padding-left: 25px;
+	border-left: 3px solid var(--company-accent);
 }
 
 .president-position {
-    margin: 0;
-    color: var(--company-sub);
-    font-size: 0.9rem;
-    letter-spacing: 0.15em;
+	margin: 0;
+	color: var(--company-sub);
+	font-size: 0.9rem;
+	letter-spacing: 0.15em;
 }
 
 .president-title h4 {
-    margin: 4px 0 30px;
-    font-size: 2.8rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
+	margin: 4px 0 30px;
+	font-size: 2.8rem;
+	font-weight: 500;
+	letter-spacing: 0.2em;
 }
 
 .president-catch {
-    margin: 0;
-    color: var(--company-main);
-    font-family: "Noto Sans JP", sans-serif;
-    font-size: clamp(1.45rem, 3vw, 2.3rem);
-    font-weight: 500;
-    line-height: 1.7;
-    letter-spacing: 0.08em;
+	margin: 0;
+	color: var(--company-main);
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: clamp(1.45rem, 3vw, 2.3rem);
+	font-weight: 500;
+	line-height: 1.7;
+	letter-spacing: 0.08em;
 }
 
 .president-image {
-    position: relative;
+	position: relative;
 }
 
 .president-image::after {
-    position: absolute;
-    right: -22px;
-    bottom: -22px;
-    width: 50%;
-    height: 55%;
-    border-right: 1px solid var(--company-accent);
-    border-bottom: 1px solid var(--company-accent);
-    content: "";
+	position: absolute;
+	right: -22px;
+	bottom: -22px;
+	width: 50%;
+	height: 55%;
+	border-right: 1px solid var(--company-accent);
+	border-bottom: 1px solid var(--company-accent);
+	content: "";
 }
 
 .president-image img {
-    position: relative;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    box-shadow: 0 25px 65px rgba(55, 45, 35, 0.16);
+	position: relative;
+	z-index: 1;
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	box-shadow: 0 25px 65px rgba(55, 45, 35, 0.16);
 }
 
 .president-message {
-    width: min(920px, 100%);
-    margin: 0 auto;
-    padding: 75px 85px;
-    background-color: #ffffff;
-    box-shadow: 0 20px 65px rgba(55, 45, 35, 0.08);
+	width: min(920px, 100%);
+	margin: 0 auto;
+	padding: 75px 85px;
+	background-color: #ffffff;
+	box-shadow: 0 20px 65px rgba(55, 45, 35, 0.08);
 }
 
 .president-message p {
-    margin: 0 0 32px;
-    color: #4d4740;
-    font-size: 0.98rem;
-    line-height: 2.35;
-    letter-spacing: 0.025em;
+	margin: 0 0 32px;
+	color: #4d4740;
+	font-size: 0.98rem;
+	line-height: 2.35;
+	letter-spacing: 0.025em;
 }
 
 .president-message h5 {
-    position: relative;
-    margin: 75px 0 34px;
-    padding: 0 0 14px 22px;
-    border-bottom: 1px solid var(--company-border);
-    color: var(--company-main);
-    font-size: 1.3rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
+	position: relative;
+	margin: 75px 0 34px;
+	padding: 0 0 14px 22px;
+	border-bottom: 1px solid var(--company-border);
+	color: var(--company-main);
+	font-size: 1.3rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
 }
 
 .president-message h5::before {
-    position: absolute;
-    top: 0.45em;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    background-color: var(--company-accent);
-    content: "";
-    transform: rotate(45deg);
+	position: absolute;
+	top: 0.45em;
+	left: 0;
+	width: 8px;
+	height: 8px;
+	background-color: var(--company-accent);
+	content: "";
+	transform: rotate(45deg);
 }
 
 .president-signature {
-    margin-top: 75px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    gap: 35px;
+	margin-top: 75px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	gap: 35px;
 }
 
 .president-signature p {
-    margin: 0;
-    color: var(--company-sub);
-    font-size: 0.85rem;
-    line-height: 1.8;
-    text-align: right;
+	margin: 0;
+	color: var(--company-sub);
+	font-size: 0.85rem;
+	line-height: 1.8;
+	text-align: right;
 }
 
 .president-signature img {
-    display: block;
-    width: min(250px, 38vw);
-    height: auto;
-    object-fit: contain;
+	display: block;
+	width: min(250px, 38vw);
+	height: auto;
+	object-fit: contain;
 }
 
 .company-link-section {
-    padding: 130px 40px;
-    color: #ffffff;
-    background:
-        linear-gradient(
-            rgba(38, 33, 28, 0.86),
-            rgba(38, 33, 28, 0.86)
-        ),
-        url("../images/company-craftsman.png") center 45% / cover;
-    text-align: center;
+	padding: 130px 40px;
+	color: #ffffff;
+	background:
+		linear-gradient(rgba(38, 33, 28, 0.86),
+			rgba(38, 33, 28, 0.86)),
+		url("../images/company-craftsman.png") center 45% / cover;
+	text-align: center;
 }
 
 .company-link-section h3 {
-    margin: 0;
-    font-size: clamp(1.8rem, 4vw, 3.2rem);
-    font-weight: 500;
-    line-height: 1.7;
-    letter-spacing: 0.1em;
+	margin: 0;
+	font-size: clamp(1.8rem, 4vw, 3.2rem);
+	font-weight: 500;
+	line-height: 1.7;
+	letter-spacing: 0.1em;
 }
 
-.company-link-section > p:not(.company-link-label) {
-    margin: 35px auto 0;
-    color: rgba(255, 255, 255, 0.8);
+.company-link-section>p:not(.company-link-label) {
+	margin: 35px auto 0;
+	color: rgba(255, 255, 255, 0.8);
 }
 
 .company-link-button {
-    display: inline-flex;
-    min-width: 260px;
-    margin-top: 45px;
-    padding: 17px 35px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ffffff;
-    color: #ffffff;
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    transition:
-        color 0.3s ease,
-        background-color 0.3s ease;
+	display: inline-flex;
+	min-width: 260px;
+	margin-top: 45px;
+	padding: 17px 35px;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #ffffff;
+	color: #ffffff;
+	text-decoration: none;
+	letter-spacing: 0.1em;
+	transition:
+		color 0.3s ease,
+		background-color 0.3s ease;
 }
 
 .company-link-button:hover {
-    color: var(--company-main);
-    background-color: #ffffff;
+	color: var(--company-main);
+	background-color: #ffffff;
 }
 
 .company-footer-inner {
-    width: min(1180px, calc(100% - 80px));
-    margin: 0 auto;
-    padding: 65px 0 45px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 40px;
+	width: min(1180px, calc(100% - 80px));
+	margin: 0 auto;
+	padding: 65px 0 45px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 40px;
 }
 
 .company-footer-logo {
-    margin: 0;
-    font-family: "Marcellus", serif;
-    font-size: 2.1rem;
-    letter-spacing: 0.2em;
+	margin: 0;
+	font-family: "Marcellus", serif;
+	font-size: 2.1rem;
+	letter-spacing: 0.2em;
 }
 
-.company-footer-brand > p:last-child {
-    margin: 12px 0 0;
-    color: #776f67;
-    font-size: 0.82rem;
+.company-footer-brand>p:last-child {
+	margin: 12px 0 0;
+	color: #776f67;
+	font-size: 0.82rem;
 }
 
 .company-footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 14px 30px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 14px 30px;
 }
 
 .company-footer-links a {
-    color: var(--company-main);
-    font-size: 0.85rem;
-    text-decoration: none;
+	color: var(--company-main);
+	font-size: 0.85rem;
+	text-decoration: none;
 }
 
 .company-footer-links a:hover {
-    color: var(--company-accent);
+	color: var(--company-accent);
 }
 
 .js-scroll-item {
-    opacity: 0;
-    transform: translateY(45px);
-    transition:
-        opacity 0.9s ease,
-        transform 0.9s ease;
+	opacity: 0;
+	transform: translateY(45px);
+	transition:
+		opacity 0.9s ease,
+		transform 0.9s ease;
 }
 
 .js-scroll-item.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+	opacity: 1;
+	transform: translateY(0);
 }
 
 @media (max-width: 960px) {
 
-    .company-hero {
-        min-height: 540px;
-    }
+	.company-hero {
+		min-height: 540px;
+	}
 
-    .company-hero-inner {
-        width: min(100% - 50px, 1180px);
-    }
+	.company-hero-inner {
+		width: min(100% - 50px, 1180px);
+	}
 
-    .company-section {
-        padding: 95px 30px;
-    }
+	.company-section {
+		padding: 95px 30px;
+	}
 
-    .company-overview-layout,
-    .president-introduction {
-        grid-template-columns: 1fr;
-    }
+	.company-overview-layout,
+	.president-introduction {
+		grid-template-columns: 1fr;
+	}
 
-    .company-overview-layout {
-        gap: 55px;
-    }
+	.company-overview-layout {
+		gap: 55px;
+	}
 
-    .president-introduction {
-        gap: 55px;
-    }
+	.president-introduction {
+		gap: 55px;
+	}
 
-    .president-title {
-        order: 2;
-    }
+	.president-title {
+		order: 2;
+	}
 
-    .president-image {
-        order: 1;
-    }
+	.president-image {
+		order: 1;
+	}
 
-    .craft-layout {
-        grid-template-columns: 1fr;
-    }
+	.craft-layout {
+		grid-template-columns: 1fr;
+	}
 
-    .craft-image {
-        min-height: auto;
-    }
+	.craft-image {
+		min-height: auto;
+	}
 
-    .craft-image img {
-        min-height: auto;
-        aspect-ratio: 4 / 3;
-    }
+	.craft-image img {
+		min-height: auto;
+		aspect-ratio: 4 / 3;
+	}
 
-    .president-message {
-        width: auto;
-        padding: 60px 55px;
-    }
+	.president-message {
+		width: auto;
+		padding: 60px 55px;
+	}
 
 }
 
 @media (max-width: 640px) {
 
-    .company-hero {
-        min-height: 520px;
-        background-position: 62% center;
-    }
+	.company-hero {
+		min-height: 520px;
+		background-position: 62% center;
+	}
 
-    .company-hero-overlay {
-        background:
-            linear-gradient(
-                rgba(28, 25, 22, 0.76),
-                rgba(28, 25, 22, 0.76)
-            );
-    }
+	.company-hero-overlay {
+		background:
+			linear-gradient(rgba(28, 25, 22, 0.76),
+				rgba(28, 25, 22, 0.76));
+	}
 
-    .company-hero-inner {
-        width: calc(100% - 40px);
-    }
+	.company-hero-inner {
+		width: calc(100% - 40px);
+	}
 
-    .company-hero h2 {
-        font-size: 2.5rem;
-    }
+	.company-hero h2 {
+		font-size: 2.5rem;
+	}
 
-    .company-hero-text br {
-        display: none;
-    }
+	.company-hero-text br {
+		display: none;
+	}
 
-    .company-section {
-        padding: 75px 20px;
-    }
+	.company-section {
+		padding: 75px 20px;
+	}
 
-    .company-section-heading {
-        margin-bottom: 45px;
-    }
+	.company-section-heading {
+		margin-bottom: 45px;
+	}
 
-    .company-section-heading h3 {
-        font-size: 1.8rem;
-    }
+	.company-section-heading h3 {
+		font-size: 1.8rem;
+	}
 
-    .company-overview-image::before,
-    .president-image::after {
-        display: none;
-    }
+	.company-overview-image::before,
+	.president-image::after {
+		display: none;
+	}
 
-    .craft-text {
-        padding: 50px 28px;
-    }
+	.craft-text {
+		padding: 50px 28px;
+	}
 
-    .president-title {
-        padding-left: 18px;
-    }
+	.president-title {
+		padding-left: 18px;
+	}
 
-    .president-title h4 {
-        font-size: 2.1rem;
-    }
+	.president-title h4 {
+		font-size: 2.1rem;
+	}
 
-    .president-message {
-        padding: 45px 25px;
-    }
+	.president-message {
+		padding: 45px 25px;
+	}
 
-    .president-message p {
-        font-size: 0.92rem;
-        line-height: 2.15;
-    }
+	.president-message p {
+		font-size: 0.92rem;
+		line-height: 2.15;
+	}
 
-    .president-message h5 {
-        margin-top: 58px;
-        font-size: 1.15rem;
-        line-height: 1.7;
-    }
+	.president-message h5 {
+		margin-top: 58px;
+		font-size: 1.15rem;
+		line-height: 1.7;
+	}
 
-    .president-signature {
-        align-items: flex-end;
-        flex-direction: column;
-        gap: 18px;
-    }
+	.president-signature {
+		align-items: flex-end;
+		flex-direction: column;
+		gap: 18px;
+	}
 
-    .president-signature img {
-        width: 220px;
-    }
+	.president-signature img {
+		width: 220px;
+	}
 
-    .company-link-section {
-        padding: 90px 25px;
-    }
+	.company-link-section {
+		padding: 90px 25px;
+	}
 
-    .company-footer-inner {
-        width: calc(100% - 40px);
-        align-items: flex-start;
-        flex-direction: column;
-    }
+	.company-footer-inner {
+		width: calc(100% - 40px);
+		align-items: flex-start;
+		flex-direction: column;
+	}
 
-    .company-footer-links {
-        justify-content: flex-start;
-    }
+	.company-footer-links {
+		justify-content: flex-start;
+	}
 
 }
