@@ -34,13 +34,24 @@
   <main>
 	<h2>アカウント作成</h2>
 	<p class="account-message">※全ての項目を入力してください。</p>
+	<c:if test="${not empty registerError}">
+		<p class="error-message">
+			<c:out value="${registerError}" />
+		</p>
+	</c:if>
 	<div class="account-form">
 	<form action="${pageContext.request.contextPath}/account-create" method="post">
 		<p>アカウントID<br><input type="text" name="accountId" required></p>
+		<c:if test="${not empty accountIdError}">
+				<p class="error-message">
+					<c:out value="${accountIdError}" />
+				</p>
+		</c:if>
 		<p>パスワード<br><input type="password" name="accountPass" id="inputPassword" required></p>
 		<div class="password-check">
     	<label for="inputCheckbox"><input id="inputCheckbox" type="checkbox"> パスワードを表示する</label>
     	</div>
+
 		<p>氏名<br><input type="text" name="accountName" required></p>	
 		<p>郵便番号<br><input type="text" name="postalCode" id="postalCode" required></p>
 		<button type="button"
@@ -55,6 +66,11 @@
 		<p>住所<br><input type="text" id="accountAddress" name="accountAddress" required></p>
 		<p>電話番号<br><input type="text" name="accountPhone" required></p>
 		<p>生年月日<br><input type="date" name="birthday" required></p>
+			<c:if test="${not empty birthdayError}">
+				<p class="error-message">
+					<c:out value="${birthdayError}" />
+				</p>
+			</c:if>
 		<p>メールアドレス<br><input type="email" name="email" required></p>
 		<p>支払い方法<br>
 			<select name="payment" required>
@@ -73,11 +89,7 @@
 	    <input class="back-btn" type="submit" value="ログイン画面へ戻る">
 	</form>
 
-	<script>
-	function clickEvent(){
-		alert('会員登録しました');
-		}
-	</script>
+
 	</main>
 
 

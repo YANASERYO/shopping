@@ -91,5 +91,11 @@
 
 	}, false);
   </script>
+<!--  account-delete-confirm.jsp でアカウント削除が成功した場合にアラートを表示-->
+  <c:if test="${accountDeleted}">
+    <script>
+        alert("アカウントを削除しました");
+    </script>
+</c:if>
 </body>
 </html>

@@ -51,14 +51,38 @@ public class AccountService {
 				accountId.trim());
 	}
 	
-//	会員情報更新
+	//	会員情報更新
 	public boolean update(Account account) {
-		if(account == null || isBlank(account.getAccountId())) {
+	
+		if (account == null
+				|| isBlank(account.getAccountId())
+				|| isBlank(account.getAccountName())) {
 			return false;
 		}
+	
+		// 入力された場合だけパスワードをハッシュ化
+		if (!isBlank(account.getAccountPass())) {
+			String encodedPassword = PassEncoderUtil.encode(
+					account.getAccountPass());
+	
+			account.setAccountPass(encodedPassword);
+		} else {
+			account.setAccountPass(null);
+		}
+	
 		return accountDAO.update(account);
 	}
 	
+//	取得
+	public Account findByAccountId(String accountId) {
+
+		if (isBlank(accountId)) {
+			return null;
+		}
+
+		return accountDAO.findByAccountId(accountId);
+	}
+
 ////	パスワードの変更
 //	public boolean updatePassword(
 //			String accountId,
