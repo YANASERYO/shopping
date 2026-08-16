@@ -143,7 +143,7 @@ public class AccountDAO {
 //    return result;
 //    }
 
-	// accountsTABLEにaccount_activeを追加し論理削除する退会処理の例
+	// accountsTABLEにaccount_activeを追加し論理削除する退会処理
 	public boolean deleteAccount(String accountId) {
 	
 		String sql = """
@@ -242,42 +242,91 @@ public class AccountDAO {
 		}
 	}
 
-	//    会員情報更新
+	// 会員情報更新
 	public boolean update(Account account) {
-		String sql = """
+
+		boolean updatePassword = account.getAccountPass() != null;
+
+		String sql = updatePassword ? """
 				UPDATE accounts
 				SET
-				account_name = ?,
-				postal_code = ?,
-				account_address = ?,
-				account_phone = ?,
-				birthday = ?,
-				email = ?,
-				payment = ?
+					account_name = ?,
+					account_pass = ?,
+					postal_code = ?,
+					account_address = ?,
+					account_phone = ?,
+					birthday = ?,
+					email = ?,
+					payment = ?
+				WHERE account_id = ?
+				""" : """
+				UPDATE accounts
+				SET
+					account_name = ?,
+					postal_code = ?,
+					account_address = ?,
+					account_phone = ?,
+					birthday = ?,
+					email = ?,
+					payment = ?
 				WHERE account_id = ?
 				""";
-		
-		try (Connection conn = DBUtil.getConnection();
+
+		try (
+				Connection conn = DBUtil.getConnection();
 				PreparedStatement pStmt = conn.prepareStatement(sql)) {
-			pStmt.setString(8, account.getAccountId());
-			pStmt.setString(1, account.getAccountName());
-			pStmt.setString(2, account.getPostalCode());
-			pStmt.setString(3, account.getAccountAddress());
-			pStmt.setString(4, account.getAccountPhone());
+			int parameterIndex = 1;
+
+			pStmt.setString(
+					parameterIndex++,
+					account.getAccountName());
+
+			// 新しいパスワードが入力された場合だけ更新
+			if (updatePassword) {
+				pStmt.setString(
+						parameterIndex++,
+						account.getAccountPass());
+			}
+
+			pStmt.setString(
+					parameterIndex++,
+					account.getPostalCode());
+
+			pStmt.setString(
+					parameterIndex++,
+					account.getAccountAddress());
+
+			pStmt.setString(
+					parameterIndex++,
+					account.getAccountPhone());
+
 			if (account.getBirthday() != null) {
 				pStmt.setDate(
-						5,
-						java.sql.Date.valueOf(account.getBirthday()));
+						parameterIndex++,
+						java.sql.Date.valueOf(
+								account.getBirthday()));
 			} else {
-				pStmt.setDate(5, null);
+				pStmt.setDate(
+						parameterIndex++,
+						null);
 			}
-			pStmt.setString(6, account.getEmail());
-			pStmt.setString(7, account.getPayment());
-			
+
+			pStmt.setString(
+					parameterIndex++,
+					account.getEmail());
+
+			pStmt.setString(
+					parameterIndex++,
+					account.getPayment());
+
+			pStmt.setString(
+					parameterIndex,
+					account.getAccountId());
+
 			int count = pStmt.executeUpdate();
-			
+
 			return count == 1;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

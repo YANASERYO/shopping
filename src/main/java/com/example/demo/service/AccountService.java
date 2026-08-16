@@ -82,22 +82,6 @@ public class AccountService {
 
 		return accountDAO.findByAccountId(accountId);
 	}
-
-////	パスワードの変更
-//	public boolean updatePassword(
-//			String accountId,
-//			String newPassword) {
-//		if(isBlank(accountId) || isBlank(newPassword)) {
-//			return false;
-//		}
-		
-////		エンコード
-//		String encodePassword =
-//				PassEncoderUtil.encode(newPassword);
-//		return accountDAO.updatePassword(
-//				accountId,
-//				encodePassword);
-//	}
 	
 //	退会
 	public boolean delete(String accountId) {
