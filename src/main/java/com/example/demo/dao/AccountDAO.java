@@ -10,16 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.Account;
 import com.example.demo.util.DBUtil;
 
-//accountNameとaccountPassでログインすることになってたので修正しました（柳瀬）
-
-//accountIdとaccountNameで読むようになってるので修正しました（柳瀬）
-
 //ログイン処理
-
-
 @Repository
 public class AccountDAO {
-
 	public Account findByAccountId(String accountId) {
 	    String sql = """
 	    		SELECT

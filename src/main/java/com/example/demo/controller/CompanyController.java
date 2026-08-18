@@ -12,3 +12,11 @@ public class CompanyController {
 	}
 
 }
+
+
+/*
+	index.jspからcompany.jspへ遷移するリンク
+	<a href="${pageContext.request.contextPath}/company">
+	採用情報
+	</a>
+*/

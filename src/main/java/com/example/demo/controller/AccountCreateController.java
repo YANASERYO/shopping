@@ -60,10 +60,7 @@ public class AccountCreateController {
 		
 		if (accountService.existsByAccountId(accountId)) {
 
-			model.addAttribute(
-					"accountIdError",
-					"このアカウントIDは既に使用されています。");
-
+			model.addAttribute("accountIdError", "このアカウントIDは既に使用されています。");
 			return "account-create";
 		}
 		
@@ -93,7 +90,7 @@ public class AccountCreateController {
 				return "account-create";
 			}
 		}
-
+		
 		Account account = new Account();
 		
 		account.setAccountId(accountId.trim());
@@ -112,9 +109,7 @@ public class AccountCreateController {
 		if (result) {
 			return "redirect:/login";
 		}
-		model.addAttribute(
-				"registerError",
-				"アカウントを登録できませんでした。" + "アカウントIDが既に使用されている可能性があります。");
+		model.addAttribute("registerError","アカウントを登録できませんでした。アカウントIDが既に使用されている可能性があります。");
 		
 		return "account-create";
 	}

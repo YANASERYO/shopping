@@ -70,12 +70,12 @@
 		</c:if>
 		<div class="policy-box" id="delete-policy">
 			<h3>アカウントを削除する前にご確認ください</h3>
-			<p>アカウントを削除すると、このアカウントでは ログインできなくなります。</p>
 			<p>登録されている会員情報も利用できなくなります。</p>
-			<p>注文履歴や購入履歴も削除されます。</p>
+
+			<p>注文履歴はシステム上保持されますが、退会後はこのアカウントから確認できなくなります。</p>
 			<p>削除したアカウントは復元できません。</p>
-			<p>アカウントを削除する前に、必要な情報は
-			バックアップを取ることをおすすめします。</p>
+			<p>アカウントを削除する前に、必要な情報はバックアップを取ることをおすすめします。</p>
+
 			<p>一度削除すると、同じIDでの再登録はできません。</p>
 			<p>この操作は取り消すことができません。</p>
 			<p>
@@ -99,24 +99,6 @@
 			<small>&copy; 2026 KINARI</small>
 		</div>
 	</footer>
-	<script>
-        const policy = document.getElementById('policy');
-        const agreeCheck = document.getElementById('agree-check');
-        const submitBtn = document.getElementById('submit-btn');
-
-
-        policy.addEventListener('scroll', () => {
-
-            if (policy.scrollTop + policy.clientHeight >= policy.scrollHeight - 2) {
-                agreeCheck.disabled = false;
-            }
-        });
-
-        // チェックボックスの状態に合わせてボタンの活性・非活性を切り替え
-        agreeCheck.addEventListener('change', () => {
-            submitBtn.disabled = !agreeCheck.checked;
-        });
-    </script>
 	<script>
 		const deleteConfirmed = document.getElementById("deleteConfirmed");
 		const deleteButton = document.getElementById("accountDeleteButton");

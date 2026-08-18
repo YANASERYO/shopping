@@ -21,6 +21,7 @@ public class AdminProductController {
 		this.productService = productService;
 	}
 	
+//	admin/でのproductList表示
 	@GetMapping("/admin/products")
 	public String showProductList(HttpSession session, Model model) {
 		

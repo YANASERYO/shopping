@@ -36,7 +36,7 @@ public class ProductEditController {
 		}
 		
 		if (!account.isAdmin()) {
-			return "redirect:/Menu";
+			return "redirect:/menu";
 		}
 		
 		Product product = productService.findById(id);
@@ -72,7 +72,7 @@ public class ProductEditController {
 		}
 		
 		if (!account.isAdmin()) {
-			return "redirect:/Menu";
+			return "redirect:/menu";
 		}
 		
 		if ("削除".equals(action)) {
