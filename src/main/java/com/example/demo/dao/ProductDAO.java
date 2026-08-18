@@ -179,7 +179,7 @@ public class ProductDAO {
 					 }
 			 }
 		 
-
+		 
 		 	// ResultSetからProductを作成する共通処理
 		 private Product createProduct(ResultSet rs)throws SQLException {
 			 Product product = new Product();
@@ -195,10 +195,10 @@ public class ProductDAO {
 			 product.setProductUpdateAt(rs.getObject("product_update_at",LocalDateTime.class));
 			 product.setProductActive(rs.getBoolean("product_active"));
 			 return product;
-
+			 
 		 }
 		
-
+		 
 		 
 		 
 		// 販売中の商品一覧を取得
@@ -235,7 +235,7 @@ public class ProductDAO {
 			 return productList;
 			 }
 		 
-
+		 
 		public boolean delete(Long productId) {
 		
 		    String sql = """
@@ -247,23 +247,21 @@ public class ProductDAO {
 		            """;
 		
 		    try (
-		            Connection conn = DBUtil.getConnection();
-		            PreparedStatement pStmt = conn.prepareStatement(sql)
-		    ) {
-		        pStmt.setLong(1, productId);
-		
-		        int count = pStmt.executeUpdate();
-		
-		        return count > 0;
-		
-		    } catch (SQLException e) {
-		        throw new RuntimeException(
-		                "商品の削除に失敗しました。",
-		                e
-		        );
-		    }
-		
+					Connection conn = DBUtil.getConnection();
+					PreparedStatement pStmt = conn.prepareStatement(sql)) {
+				pStmt.setLong(1, productId);
+				int count = pStmt.executeUpdate();
+				
+				return count > 0;
+				
+			} catch (SQLException e) {
+				throw new RuntimeException(
+						"商品の削除に失敗しました。",
+						e);
+			}
+		    
 		}
+	
 		
 		// 注文確定時に在庫を減らす
 		public boolean updateStockAfterOrder(Connection conn,int productId,int quantity)
@@ -272,7 +270,6 @@ public class ProductDAO {
 			String sql = """
 					UPDATE product
 					SET product_stock = product_stock - ?,
-					product_update_at = CURRENT_TIMESTAMP
 					WHERE product_id = ?
 					AND product_stock >= ?
 					AND product_active = true

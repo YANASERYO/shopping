@@ -13,10 +13,9 @@ public class RecruitController {
 	}
 
 	/*
-	 * index.jspからrecruit.jspへ遷移するリンク
-	 *
-	 * <a href="${pageContext.request.contextPath}/recruit">
-	 *     採用情報
-	 * </a>
+		index.jspからrecruit.jspへ遷移するリンク
+		<a href="${pageContext.request.contextPath}/recruit">
+		採用情報
+		</a>
 	 */
 }

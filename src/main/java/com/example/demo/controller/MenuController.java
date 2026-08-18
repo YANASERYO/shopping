@@ -40,7 +40,7 @@ public class MenuController {
 		return "menu";
 		
 	}
-
+	
 	// 商品を選択する→商品選択へ
 	@GetMapping("/products")
 	public String showProductList(HttpSession session, Model model) {
@@ -50,7 +50,7 @@ public class MenuController {
 			return "redirect:/login";
 		}
 		
-		List<Product> productList = productDAO.getActiveProducts(); // productDAOクラスで定義した全商品を取得する処理
+		List<Product> productList = productDAO.getActiveProducts(); // productDAOで定義した全商品を取得
 		
 		model.addAttribute("productList", productList);
 		
@@ -79,11 +79,10 @@ public class MenuController {
 		List<Detail> detailList = detailDAO.findByAccountId(account.getAccountId());
 		
 		model.addAttribute("detailList",detailList);
-
+		
 		return "order-history";
-
 	}
-
+	
 	// 会員情報の変更→会員情報変更へ
 	@GetMapping("/account-edit")
 	public String showAccountEdit(HttpSession session, Model model) {
@@ -94,10 +93,10 @@ public class MenuController {
 		}
 		// JSPでaccountという名前で会員データを扱えるようにする。
 		model.addAttribute("account", loginAccount);
-
+		
 		return "account-edit";
 	}
-
+	
 	@PostMapping("/account-edit")
 	public String updateMember(
 			@RequestParam String accountName,
@@ -110,15 +109,15 @@ public class MenuController {
 			@RequestParam(required = false) String accountPass,
 			HttpSession session,
 			Model model) {
-
+		
 		Account loginAccount = (Account) session.getAttribute("account");
-
+		
 		if (loginAccount == null) {
 			return "redirect:/login";
 		}
-
+		
 		Account updateAccount = new Account();
-
+		
 		// IDはフォームから受け取らず、ログイン情報から設定
 		updateAccount.setAccountId(loginAccount.getAccountId());
 		updateAccount.setAccountName(accountName);
@@ -129,22 +128,22 @@ public class MenuController {
 		updateAccount.setEmail(email);
 		updateAccount.setPayment(payment);
 		updateAccount.setAccountPass(accountPass);
-
+		
 		if (!accountService.update(updateAccount)) {
 			model.addAttribute(
 					"accountEditError",
 					"会員情報の更新に失敗しました。");
 			model.addAttribute("account", updateAccount);
-
+			
 			return "account-edit";
 		}
-
+		
 		// DBから最新情報を取り直してセッションを更新
 		Account refreshedAccount = accountService.findByAccountId(
 				loginAccount.getAccountId());
-
+		
 		session.setAttribute("account", refreshedAccount);
-
+		
 		return "redirect:/menu";
 	}
 	

@@ -60,7 +60,6 @@ public class OrderService {
 			// 自動コミットを無効
 			conn.setAutoCommit(false);
 			try {
-				// 注文ヘッダを登録
 				int shoppingId = orderInfoDAO.insert(conn, orderInfo);
 				
 				if (shoppingId == 0) {

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.Cart;
 import com.example.demo.model.OrderInfo;
 import com.example.demo.util.PriceUtil;
+import com.example.demo.util.TaxUtil;
 
 import shopMail.ShopMail;
 
@@ -21,11 +22,12 @@ public class MailService {
 		for (Cart cart : cartList) {
 			orderDetails += cart.getProductName() + " x " + cart.getCartQuantity() + "\n";}
 		
-		int taxPrice = (int) (orderInfo.getShoppingTotalPrice() * 0.1);
-		int taxAndShoppingPrice = orderInfo.getShoppingTotalPrice() + taxPrice;
+		int shoppingTotalPrice = orderInfo.getShoppingTotalPrice();
+		int taxPrice = TaxUtil.inflictTax(shoppingTotalPrice);
+		int taxAndShoppingPrice = TaxUtil.inflictPriceAndTax(shoppingTotalPrice);
 		
 		String subject = "【KINARI】ご注文ありがとうございました";
-
+		
 		String body =
 				"""
 				%s 様
@@ -73,11 +75,11 @@ public class MailService {
 				orderInfo.getShippingPhone(),
 				orderInfo.getShippingPayment(),
 				orderDetails,
-				PriceUtil.formatWithCommas(orderInfo.getShoppingTotalPrice()),
+				PriceUtil.formatWithCommas(shoppingTotalPrice),
 				PriceUtil.formatWithCommas(taxPrice),
 				PriceUtil.formatWithCommas(taxAndShoppingPrice));
 				
-
+		
 		try {
 			ShopMail.send(
 					GROUP_NUMBER,
@@ -86,9 +88,9 @@ public class MailService {
 					subject,
 					body,
 					TEXT_MAIL);
-
+			
 			return true;
-
+			
 		} catch (Exception e) {
 			System.err.println("注文完了メールの送信に失敗しました。");
 			e.printStackTrace();

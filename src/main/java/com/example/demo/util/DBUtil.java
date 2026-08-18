@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+//DB接続記述が面倒になったため作成
+
 public class DBUtil {
 	private static final String URL =
 			"jdbc:postgresql://localhost:5432/shopping";
