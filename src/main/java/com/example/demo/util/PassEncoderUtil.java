@@ -15,9 +15,7 @@ public class PassEncoderUtil {
 	}
 	
 //	入力とハッシュ値の比較
-	public static boolean matches(
-			String rawPassword,
-			String encodedPassword) {
+	public static boolean matches(String rawPassword, String encodedPassword) {
 		return ENCODER.matches(rawPassword,encodedPassword);
 	}
 

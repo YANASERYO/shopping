@@ -50,12 +50,9 @@
 <c:forEach var="cart" items="${cartList}">
     <div>
         <p>商品名：${cart.productName}</p>
-        <p>価格：${cart.productPrice}円</p>
         <p>購入数：${cart.cartQuantity}</p>
-        <p>
-            小計：
-            ${cart.productPrice * cart.cartQuantity}円
-        </p>
+        <p>価格：${cart.formattedProductPrice}円</p>
+		<p>小計：${cart.formattedProductTotal}円</p>
     </div>
     <hr>
 </c:forEach>

@@ -20,6 +20,7 @@ import com.example.demo.model.Product;
 import com.example.demo.service.CartService;
 import com.example.demo.service.MailService;
 import com.example.demo.service.OrderService;
+import com.example.demo.util.PriceUtil;
 import com.example.demo.util.TaxUtil;
 
 
@@ -76,9 +77,9 @@ public class OrderController {
 
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("orderInfo", orderInfo);
-		model.addAttribute("shoppingTotalPrice", shoppingTotalPrice);
-		model.addAttribute("taxPrice", taxPrice);
-		model.addAttribute("taxAndShoppingPrice", taxAndShoppingPrice);
+		model.addAttribute("shoppingTotalPrice", PriceUtil.formatWithCommas(shoppingTotalPrice));
+		model.addAttribute("taxPrice", PriceUtil.formatWithCommas(taxPrice));
+		model.addAttribute("taxAndShoppingPrice", PriceUtil.formatWithCommas(taxAndShoppingPrice));
 
 		String shippingAddress = orderInfo.getShippingAddress();
 
@@ -248,9 +249,9 @@ public class OrderController {
 		
 		model.addAttribute("account", account);
 		model.addAttribute("cartList", cartList);
-		model.addAttribute("shoppingTotalPrice", shoppingTotalPrice);
-		model.addAttribute("taxPrice", taxPrice);
-		model.addAttribute("taxAndShoppingPrice", taxAndShoppingPrice);
+		model.addAttribute("shoppingTotalPrice", PriceUtil.formatWithCommas(shoppingTotalPrice));
+		model.addAttribute("taxPrice", PriceUtil.formatWithCommas(taxPrice));
+		model.addAttribute("taxAndShoppingPrice", PriceUtil.formatWithCommas(taxAndShoppingPrice));
 		
 		return "order-info";
 	}

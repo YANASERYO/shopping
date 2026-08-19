@@ -269,7 +269,7 @@ public class ProductDAO {
 		{
 			String sql = """
 					UPDATE product
-					SET product_stock = product_stock - ?,
+					SET product_stock = product_stock - ?
 					WHERE product_id = ?
 					AND product_stock >= ?
 					AND product_active = true
