@@ -249,9 +249,11 @@ public class OrderController {
 		
 		model.addAttribute("account", account);
 		model.addAttribute("cartList", cartList);
+
 		model.addAttribute("shoppingTotalPrice", PriceUtil.formatWithCommas(shoppingTotalPrice));
 		model.addAttribute("taxPrice", PriceUtil.formatWithCommas(taxPrice));
 		model.addAttribute("taxAndShoppingPrice", PriceUtil.formatWithCommas(taxAndShoppingPrice));
+
 		
 		return "order-info";
 	}
